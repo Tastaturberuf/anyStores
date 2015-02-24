@@ -1,0 +1,32 @@
+<!-- indexer::stop -->
+<section class="<?php echo $this->class ?> block"<?php echo $this->cssID ?><?php if ($this->style): ?> style="<?php echo $this->style ?>"<?php endif ?>>
+
+	<?php if( $this->headline ): ?>
+		<<?php echo $this->hl ?>><?php echo $this->headline ?></<?php echo $this->hl ?>>
+	<?php endif ?>
+
+	<form method="post"<?php if ($this->formAction): ?> action="<?php echo $this->formAction ?>"<?php endif ?> id="<?php echo $this->formId ?>">
+        <div class="formbody">
+            <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId ?>">
+            <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+
+            <label for="<?php echo $this->searchId ?>" class="invisible"><?php echo $this->searchLabel ?></label>
+            <input type="text" class="text" id="<?php echo $this->searchId ?>" name="<?php echo $this->searchName ?>" value="<?php echo $this->searchValue ?>" placeholder="<?php echo $this->searchLabel ?>">
+
+            <?php if( count($this->countryOptions) > 1 ): ?>
+                <label for="<?php echo $this->countryId ?>" class="invisible"><?php echo $this->countryLabel ?></label>
+                <select id="<?php echo $this->countryId ?>" name="<?php echo $this->countryName ?>" class="select">
+                    <?php foreach( $this->countryOptions as $key => $name ): ?>
+                        <option value="<?php echo $key ?>" <?php if( $this->countryValue == $key ): ?> selected<?php endif ?>><?php echo $name ?></option>
+                    <?php endforeach ?>
+                </select>
+            <?php else: ?>
+                <input type="hidden" name="<?php echo $this->countryName ?>" value="<?php echo $this->countryValue ?>">
+            <?php endif ?>
+
+            <input type="submit" class="submit" value="<?php echo $this->submitValue ?>">
+        </div>
+	</form>
+
+</section>
+<!-- indexer::continue -->

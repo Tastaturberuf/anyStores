@@ -1,0 +1,14 @@
+<?php // with ♥ and Contao
+
+/**
+ * You can edit the behavior for the inserttag
+ *
+ * Example: Uncomment next line to disable the Google Map */
+# $this->store->gMap = null;
+
+?>
+<div class="mod_anystores_details insert-tag block">
+
+    <?php echo $this->store->parse(); ?>
+
+</div>
