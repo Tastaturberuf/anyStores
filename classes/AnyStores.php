@@ -73,10 +73,15 @@ class AnyStores
 
     /**
      * Wrap the different geo APIs
+     *
+     * @param string $strAddress The search string
+     * @param string $strCountry country code like DE
+     * @return array|bool return the latlon array or false 
      */
     public static function getLonLat($strAddress, $strCountry = null)
     {
-        $strClassName = \Config::get('anystores_geoApi');
+        // fallback if no API is set
+        $strClassName = \Config::get('anystores_geoApi') ? \Config::get('anystores_geoApi') : 'GoogleMaps';
 
         if ( class_exists($strClassName) )
         {
