@@ -34,7 +34,7 @@ class ModuleAnyStoresMap extends \Module // extends ModuleStoreLocatorList
         if( TL_MODE == 'BE' )
         {
 
-            $objTemplate = new BackendTemplate('be_wildcard');
+            $objTemplate = new \BackendTemplate('be_wildcard');
 
             $objTemplate->wildcard = '### '.utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['anystores_map'][0]).' ###';
             $objTemplate->title    = $this->headline;
