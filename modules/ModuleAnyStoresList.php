@@ -135,6 +135,9 @@ class ModuleAnyStoresList extends \Module
         }
 
         $this->Template->stores = $arrStores;
+
+        // set licence hint
+        $this->Template->licence = $GLOBALS['ANYSTORES_GEODATA_LICENCE_HINT'];
     }
 
 }

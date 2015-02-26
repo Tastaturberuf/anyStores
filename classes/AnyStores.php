@@ -76,7 +76,7 @@ class AnyStores
      *
      * @param string $strAddress The search string
      * @param string $strCountry country code like DE
-     * @return array|bool return the latlon array or false 
+     * @return array|bool return the latlon array or false
      */
     public static function getLonLat($strAddress, $strCountry = null)
     {
@@ -85,7 +85,12 @@ class AnyStores
 
         if ( class_exists($strClassName) )
         {
-            return $strClassName::getLonLat($strAddress, $strCountry);
+            $arrCoordinates = $strClassName::getLonLat($strAddress, $strCountry);
+
+            // set licence hint
+            $GLOBALS['ANYSTORES_GEODATA_LICENCE_HINT'] = $arrCoordinates['licence'];
+
+            return $arrCoordinates;
         }
 
         return false;
