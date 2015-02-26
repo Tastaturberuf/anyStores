@@ -39,6 +39,7 @@ $GLOBALS['TL_LANG']['anystores'] = array
     'postal'      => 'PLZ / Ort',
     'distance'    => 'Entfernung ca.',
     'phone'       => 'Telefon',
+    'mobile'      => 'Mobil',
     'fax'         => 'Fax',
     'email'       => 'E-Mail',
     'www'         => 'Internet',
@@ -56,6 +57,6 @@ $GLOBALS['TL_LANG']['anystores'] = array
     // import
     'head'  => 'Händler aus CSV importieren',
     'start' => 'Import starten',
-    'file'  => array('Datei auswählen','Die CSV-Datei muss mit dem UTF8-Zeichensatz kodiert und wie folgt aufgebaut sein: name, email, url, telefon, fax, strasse, plz, ort, ländercode (2-stellig)')
+    'file'  => array('Datei auswählen','Die CSV-Datei muss mit dem UTF8-Zeichensatz kodiert und wie folgt aufgebaut sein: name, email, url, telefon, mobil, fax, strasse, plz, ort, ländercode (2-stellig)')
 
 );

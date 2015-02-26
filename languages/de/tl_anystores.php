@@ -19,6 +19,7 @@ $GLOBALS['TL_LANG']['tl_anystores'] = array
     'email'          => array('E-Mail', 'E-Mail-Adresse zur Kontaktaufnahme'),
     'url'            => array('Webseite', 'Geben Sie die URL zur Webseite des Händlers an'),
     'phone'          => array('Telefon', 'Telefonnummer'),
+    'mobile'         => array('Mobil', 'Mobilfunknummer'),
     'fax'            => array('Fax', 'Faxnummer'),
     'street'         => array('Strasse', 'Name der Strasse und Hausnummer'),
     'postal'         => array('Postleitzahl', 'Postleitzahl'),

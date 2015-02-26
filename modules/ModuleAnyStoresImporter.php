@@ -73,7 +73,7 @@ class ModuleAnyStoresImporter extends \Backend {
 					$data[2] = ( $data[2] && strpos($data[2],'http') === FALSE ) ? 'http://'.$data[2] : $data[2];
 
 					try {
-						$this->Database->prepare("INSERT INTO `tl_anystores` (`pid`,`tstamp`,`name`,`email`,`url`,`phone`,`fax`,`street`,`postal`,`city`,`country`,`longitude`,`latitude`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)")->execute(
+						$this->Database->prepare("INSERT INTO `tl_anystores` (`pid`,`tstamp`,`name`,`email`,`url`,`phone`,`mobile`,`fax`,`street`,`postal`,`city`,`country`,`longitude`,`latitude`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)")->execute(
 							$pid
 						,	time()
 						,	$data[0]
@@ -84,7 +84,8 @@ class ModuleAnyStoresImporter extends \Backend {
 						,	$data[5]
 						,	$data[6]
 						,	$data[7]
-						,	strtolower($data[8])
+						,	$data[8]
+						,	strtolower($data[9])
 						,	$coords ? $coords['longitude'] : ''
 						,	$coords ? $coords['latitude'] : ''
 						);
