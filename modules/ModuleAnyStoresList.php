@@ -89,7 +89,7 @@ class ModuleAnyStoresList extends \Module
 
         if ( !$this->strSearchValue )
         {
-            $objStore = \AnyStoresModel::findPublishedByCategoryAndCountry(
+            $objStore = AnyStoresModel::findPublishedByCategoryAndCountry(
                 deserialize($this->anystores_categories),
                 $this->anystores_defaultCountry,
                 array('order'=>'postal')
