@@ -123,7 +123,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         '__selector__' => array('published'),
         'default' =>
         '
-            {common_legend},name,alias,phone,fax,url,target,email,logo,description;
+            {common_legend},name,alias,phone,mobile,fax,email,url,target,logo,description;
             {adress_legend},street,postal,city,country;
             {times_legend},opening_times;
             {geo_legend},geo_explain,longitude,map,latitude;
@@ -237,6 +237,20 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             'eval'      => array
             (
                 'rgxp'      => 'phone',
+                'maxlength' => 64,
+                'tl_class'  => 'w50'
+            ),
+            'sql' => "varchar(64) NOT NULL default ''"
+        ),
+        'mobile' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['mobile'],
+            'inputType' => 'text',
+            'exclude'   => true,
+            'search'    => true,
+            'eval'      => array
+            (
+                'rgxp'      => 'mobile',
                 'maxlength' => 64,
                 'tl_class'  => 'w50'
             ),

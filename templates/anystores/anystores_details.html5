@@ -25,6 +25,11 @@
               <span>{{label::anystores:phone}}:</span> <?php echo $this->phone; ?>
             </div>
         <?php endif; ?>
+        <?php if ( $this->mobile ): ?>
+            <div class="mobile">
+              <span>{{label::anystores:mobile}}:</span> <?php echo $this->mobile; ?>
+            </div>
+        <?php endif; ?>
         <?php if ( $this->fax ): ?>
             <div class="fax">
               <span>{{label::anystores:fax}}:</span> <?php echo $this->fax; ?>
