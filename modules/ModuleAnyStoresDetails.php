@@ -44,11 +44,8 @@ class ModuleAnyStoresDetails extends \Module
             return $objTemplate->parse();
         }
 
-        // Detail template fallback
-        if ( $this->anystores_detailTpl == '' )
-        {
-            $this->anystores_detailTpl = 'anystores_details';
-        }
+        // Fallback template
+        $this->anystores_detailTpl = ($this->anystores_detailTpl) ?: 'anystores_details';
 
         return parent::generate();
     }
@@ -65,76 +62,32 @@ class ModuleAnyStoresDetails extends \Module
         // Find published store from ID
         if ( ($objStore = AnyStoresModel::findPublishedByIdOrAlias($strAlias)) !== null )
         {
+            // load all details
+            $objStore->loadDetails();
+
             // Get referer for back button
             $objStore->referer = $this->getReferer();
 
-            // generate google map
-            $objStore->gMap = $this->generateGMap($lon, $lat);
+            // generate google map if template and geodata is set
+            if ( $this->anystores_mapTpl != '' && is_numeric($objStore->latitude) && is_numeric($objStore->longitude) )
+            {
+                $objMapTemplate = new \FrontendTemplate($this->anystores_mapTpl);
+                $objMapTemplate->setData($objStore->row());
+
+                $objStore->gMap = $objMapTemplate->parse();
+            }
 
             // Template
-            $objTemplate = new \FrontendTemplate($this->anystores_detailTpl);
-            $objTemplate->setData($objStore->loadDetails()->row());
+            $objDetailTemplate = new \FrontendTemplate($this->anystores_detailTpl);
+            $objDetailTemplate->setData($objStore->row());
 
-            $this->Template->store = $objTemplate->parse();
+            $this->Template->store = $objDetailTemplate->parse();
         }
         // store not found? throw 404
         //@todo make 404 sexy
         else
         {
             $this->_redirect404();
-        }
-    }
-
-    /**
-     *@todo!
-     *
-     * @param type $lon
-     * @param type $lat
-     */
-    protected function generateGMap($lon, $lat)
-    {
-        if ( $arrStore['latitude'] != '' && $arrStore['longitude'] != '' )
-        {
-            // include css
-            $GLOBALS['TL_CSS']['anystores'] = 'system/modules/anyStores/assets/css/style.css';
-
-            // static map
-            if ( $this->anystores_detailsMaptype == 'static' )
-            {
-                $arrStore['gMap'] = sprintf(
-                    '<img class="store-map-static" src="http://maps.google.com/maps/api/staticmap?center=%s,%s&amp;zoom=15&amp;size=%sx%s&amp;maptype=roadmap&amp;markers=color:red|label:|%s,%s&amp;sensor=false" alt="Google Maps" />',
-                    $arrStore['latitude'],
-                    $arrStore['longitude'],
-                    400,
-                    220,
-                    $arrStore['latitude'],
-                    $arrStore['longitude']
-                );
-            }
-            // dynamic map
-            else
-            {
-
-                $GLOBALS['TL_JAVASCRIPT'][] = 'https://maps.google.com/maps/api/js?sensor=false';
-                $arrStore['gMap'] = '<div id="map_canvas"></div>'."\n"
-                    .'<script type="text/javascript">'."\n"
-                    .'  function initSLGMap() {'."\n"
-                    .'      var latlng = new google.maps.LatLng('.$arrStore['latitude'].', '.$arrStore['longitude'].');'."\n"
-                    .'      var options = {'."\n"
-                    .'          zoom: 15'."\n"
-                    .'      ,   center: latlng'."\n"
-                    .'      ,   mapTypeId: google.maps.MapTypeId.ROADMAP'."\n"
-                    .'      };'."\n"
-                    .'      var map = new google.maps.Map(document.getElementById("map_canvas"),options);'."\n"
-                    .'      var marker = new google.maps.Marker({'."\n"
-                    .'          position: latlng'."\n"
-                    .'      ,   map: map'."\n"
-                    .'      ,   title: "'.$arrStore['name'].'"'."\n"
-                    .'      });'."\n"
-                    .'  } '."\n"
-                    .'  initSLGMap(); '."\n"
-                    .'</script>'."\n";
-            }
         }
     }
 

@@ -25,14 +25,13 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
     ',
     'anystores_list' => '
         {title_legend},name,headline,type;
-        {config_legend:hide},anystores_categories,anystores_defaultCountry,anystores_listLimit,anystores_allowEmptySearch,anystores_limitDistance,jumpTo;
+        {config_legend:hide},anystores_categories,jumpTo,anystores_defaultCountry,anystores_listLimit,anystores_allowEmptySearch,anystores_limitDistance;
         {template_legend:hide},customTpl,anystores_detailTpl;
         {expert_legend:hide},guests,cssID,space
     ',
     'anystores_details' => '
         {title_legend},name,headline,type;
-        {config_legend:hide},anystores_detailsMaptype;
-        {template_legend:hide},customTpl,anystores_detailTpl;
+        {template_legend:hide},customTpl,anystores_detailTpl,anystores_mapTpl;
         {expert_legend:hide},guests,cssID,space
     ',
     'anystores_map' => '
@@ -155,19 +154,6 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
         ),
         'sql' => "smallint(5) unsigned NOT NULL default '10'"
     ),
-    'anystores_detailsMaptype' => array
-    (
-        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_detailsMaptype'],
-        'exclude'   => true,
-        'inputType' => 'select',
-        //@todo try with reference	&$GLOBALS['TL_LANG'] (string)
-        'options'   => array
-        (
-            'static'  => &$GLOBALS['TL_LANG']['tl_module']['anystores_detailsMaptypes'][0],
-            'dynamic' => &$GLOBALS['TL_LANG']['tl_module']['anystores_detailsMaptypes'][1]
-        ),
-        'sql' => "char(7) NOT NULL default 'static'"
-    ),
     'anystores_detailTpl' => array
     (
         'label'            => &$GLOBALS['TL_LANG']['tl_module']['anystores_detailsTpl'],
@@ -176,6 +162,23 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
         'options_callback' => function()
         {
             return \Controller::getTemplateGroup('anystores_');
+        },
+        'eval' => array
+        (
+            'includeBlankOption' => true,
+            'chosen'             => true,
+            'tl_class'           => 'w50'
+        ),
+        'sql' => "varchar(64) NOT NULL default ''"
+    ),
+    'anystores_mapTpl' => array
+    (
+        'label'            => &$GLOBALS['TL_LANG']['tl_module']['anystores_mapTpl'],
+        'exclude'          => true,
+        'inputType'        => 'select',
+        'options_callback' => function()
+        {
+            return \Controller::getTemplateGroup('map_');
         },
         'eval' => array
         (

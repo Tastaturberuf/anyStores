@@ -11,26 +11,27 @@ xhr.send();*/
 
 locations = <?php echo $this->json; ?>;
 
-    function initialize() {
-        var mapOptions = {
-            zoom: 6,												// TODO konfigurierbar machen
-            center: new google.maps.LatLng(51.162930, 8.144886), 	// TODO konfigurierbar machen
-            streetViewControl: false,								// TODO konfigurierbar machen
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+function initialize()
+{
+    var mapOptions = {
+        zoom: 6,                                                // @todo konfigurierbar machen
+        center: new google.maps.LatLng(51.162930, 8.144886),    // @todo konfigurierbar machen
+        streetViewControl: false,                               // @todo konfigurierbar machen
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-        var markers = [];
-        var countloc = locations.length;
+    var markers = [];
+    var countloc = locations.length;
 
-        for (i = 0; i < countloc; i++) {
+    for (i = 0; i < countloc; i++) {
 
-            var loc     =   locations[i];
+        var loc     =   locations[i];
 
-            marker      =   new google.maps.Marker({
-                position: new google.maps.LatLng(loc.latitude, loc.longitude),
-                map: map
-            });
+        marker      =   new google.maps.Marker({
+            position: new google.maps.LatLng(loc.latitude, loc.longitude),
+            map: map
+        });
 
 
     var infowindow = new google.maps.InfoWindow();

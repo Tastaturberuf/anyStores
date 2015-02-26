@@ -190,7 +190,11 @@ class ModuleAnyStoresList extends \Module
         // Create store models from database result
         while ( $objResult->next() )
         {
-            $arrModels[] = new AnyStoresModel($objResult);
+            $objModel = AnyStoresModel::findByPk($objResult->id);
+            $objModel->distance = $objResult->distance;
+            $objModel->preventSaving();
+
+            $arrModels[] = $objModel;
         }
 
         // Return model collection

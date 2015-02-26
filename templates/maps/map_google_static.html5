@@ -1,0 +1,11 @@
+<?php
+    /* You can configure the image here */
+
+    // map zoom
+    $zoom = 15;
+    // image width
+    $width = 400;
+    // image height
+    $height = 220;
+?>
+<img class="map-static" src="https://maps.googleapis.com/maps/api/staticmap?center=<?php echo $this->latitude?>,<?php echo $this->longitude?>&amp;zoom=<?php echo $zoom;?>&amp;size=<?=$width?>x<?=$height?>&amp;maptype=roadmap&amp;markers=color:red|label:|<?php echo $this->latitude;?>,<?php echo $this->longitude;?>&amp;sensor=false" alt="Google Maps"/>

@@ -54,9 +54,8 @@ class ModuleAnyStoresMap extends \Module // extends ModuleStoreLocatorList
      */
     protected function compile()
     {
-        //@todo look for other include
-        $GLOBALS['TL_JAVASCRIPT'][] = 'http://maps.google.com/maps/api/js?language=de&amp;sensor=false';
-        $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/anyStores/assets/js/markerclusterer.js';
+        $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?sensor=false&amp;language='.$GLOBALS['TL_LANGUAGE'];
+        $GLOBALS['TL_JAVASCRIPT']['markerclusterer'] = 'system/modules/anyStores/assets/js/markerclusterer.js';
 
         // get published stores from categories
         $objStores = AnyStoresModel::findPublishedByCategory(deserialize($this->anystores_categories));

@@ -1,11 +1,11 @@
-.mod_anystores_details .map
+.anystores-details .map
 {
-    height:220px;
-    width:400px;
+    height: 220px;
+    width: 100%;
 }
 
-.mod_anystores_details #map_canvas
+.anystores-details .map-dynamic
 {
-    height:100%;
-    width:100%;
+    height: 100%;
+    width: 100%;
 }
