@@ -94,7 +94,13 @@ class ModuleAnyStoresList extends \Module
         }
         else
         {
-            $objStore = $this->getStoresFromSearch();
+            $objStore = AnyStoresModel::findPublishedByAdressAndCountryAndCategory(
+                $this->strSearchValue,
+                $this->strCountryValue,
+                deserialize($this->anystores_categories),
+                $this->anystores_listLimit,
+                ($this->anystores_limitDistance)?$this->anystores_maxDistance:null
+            );
         }
 
         if ( !$objStore )
@@ -129,73 +135,6 @@ class ModuleAnyStoresList extends \Module
         }
 
         $this->Template->stores = $arrStores;
-    }
-
-
-    /**
-     * @todo maybe put in model class function($this) return null|0|Collection
-     * @return \Model\Collection
-     */
-    protected function getStoresFromSearch()
-    {
-        $this->strCategories = implode(',', deserialize($this->anystores_categories));
-
-        // get coordninates from search value
-        $arrCoordinates = AnyStores::getLonLat($this->strSearchValue, $this->strCountryValue);
-
-        // return if no coordinates
-        if ( !$arrCoordinates )
-        {
-            $this->Template->error = $GLOBALS['TL_LANG']['anystores']['noCoods'];
-            return;
-        }
-
-        // get licence from api
-        $this->Template->licence = $arrCoordinates['licence'];
-
-        //@todo module config kilometers or miles
-        $objResult = \Database::getInstance()
-            ->prepare("
-                SELECT
-                    *,
-                    ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude ) ) ) ) AS distance
-                FROM
-                    tl_anystores
-                WHERE
-                    pid IN ($this->strCategories)
-                ".(($this->anystores_limitDistance) ? "HAVING distance < {$this->anystores_maxDistance} ": '')."
-                    AND country = ? AND
-                    ((start='' OR start<UNIX_TIMESTAMP()) AND (stop='' OR stop>UNIX_TIMESTAMP()) AND published=1)
-                ORDER BY
-                    distance
-            ")
-            ->limit($this->anystores_listLimit)
-            ->execute(
-                $arrCoordinates['latitude'],
-                $arrCoordinates['longitude'],
-                $arrCoordinates['latitude'],
-                $this->strCountryValue
-            );
-
-        // return if no stores found
-        if ( !$objResult->numRows )
-        {
-            $this->Template->error = $GLOBALS['TL_LANG']['anystores']['noResults'];
-            return;
-        }
-
-        // Create store models from database result
-        while ( $objResult->next() )
-        {
-            $objModel = AnyStoresModel::findByPk($objResult->id);
-            $objModel->distance = $objResult->distance;
-            $objModel->preventSaving();
-
-            $arrModels[] = $objModel;
-        }
-
-        // Return model collection
-        return new \Model\Collection($arrModels, 'tl_anystores');
     }
 
 }

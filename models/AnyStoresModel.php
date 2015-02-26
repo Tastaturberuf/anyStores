@@ -83,6 +83,82 @@ class AnyStoresModel extends \Model
     }
 
 
+    public static function findPublishedByAdressAndCountryAndCategory(
+        $strSearch, $strCountry, array $arrCategories, $intLimit=null, $intMaxDistance=null)
+    {
+        $t = static::$strTable;
+
+        $arrCoordinates = AnyStores::getLonLat($strSearch, $strCountry);
+
+        if ( !$arrCoordinates )
+        {
+            //@todo log
+            return;
+        }
+
+        $arrOptions = array
+        (
+            'fields' => array
+            (
+                "$t.id",
+                "( 6371 * acos( cos( radians(?) ) * cos( radians( $t.latitude ) ) * cos( radians( $t.longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( $t.latitude ) ) ) ) AS distance"
+            ),
+            'table'  => $t,
+            'column' => array
+            (
+                // Categories
+                "$t.pid IN(".implode(',', array_map('intval', $arrCategories)).")",
+                // Country
+                "$t.country=?",
+                // Published
+                "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1"
+            ),
+            'order' => "distance"
+        );
+
+        // Maximun distance
+        if ( is_numeric($intMaxDistance) )
+        {
+            $arrOptions['having'] = "distance < ".$intMaxDistance;
+        }
+
+        // Get query
+        $strQuery = \Model\QueryBuilder::find($arrOptions);
+
+        // replace * with additional fields
+        $strQuery = preg_replace('/\*/', implode(',', $arrOptions['fields']), $strQuery, 1);
+
+        $objResult = \Database::getInstance()
+            ->prepare($strQuery)
+            ->limit($intLimit)
+            ->execute(
+                $arrCoordinates['latitude'],
+                $arrCoordinates['longitude'],
+                $arrCoordinates['latitude'],
+                $strCountry
+            );
+
+        if ( !$objResult->numRows )
+        {
+            //@todo log
+            return;
+        }
+
+        // Create store models from database result
+        while ( $objResult->next() )
+        {
+            $objModel = AnyStoresModel::findByPk($objResult->id);
+            $objModel->distance = $objResult->distance;
+            $objModel->preventSaving();
+
+            $arrModels[] = $objModel;
+        }
+
+        // Return model collection
+        return new \Model\Collection($arrModels, 'tl_anystores');
+    }
+
+
     /**
      * Get the details from a store
      * @return \AnyStoresModel
