@@ -51,11 +51,8 @@ class ModuleAnyStoresList extends \Module
             return $objTemplate->parse();
         }
 
-        // Detail template fallback
-        if ( $this->anystores_detailTpl == '' )
-        {
-            $this->anystores_detailTpl = 'anystores_details';
-        }
+        // Fallback template
+        $this->anystores_detailTpl = ($this->anystores_detailTpl) ?: 'anystores_details';
 
         return parent::generate();
     }
@@ -78,7 +75,7 @@ class ModuleAnyStoresList extends \Module
         $this->strSearchKey    = $GLOBALS['TL_LANG']['anystores']['parameter']['search'];
         $this->strSearchValue  = \Input::get($this->strSearchKey);
         $this->strCountryKey   = $GLOBALS['TL_LANG']['anystores']['parameter']['country'];
-        $this->strCountryValue = \Input::get($this->strCountryKey);
+        $this->strCountryValue = (\Input::get($this->strCountryKey)) ?: $this->anystores_defaultCountry;
 
         // if no empty search is allowed
         if ( !$this->anystores_allowEmptySearch && !$this->strSearchValue && $this->strCountryValue )
@@ -91,7 +88,7 @@ class ModuleAnyStoresList extends \Module
         {
             $objStore = AnyStoresModel::findPublishedByCategoryAndCountry(
                 deserialize($this->anystores_categories),
-                $this->anystores_defaultCountry,
+                $this->strCountryValue,
                 array('order'=>'postal')
             );
         }
