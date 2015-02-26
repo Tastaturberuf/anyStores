@@ -250,7 +250,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             'search'    => true,
             'eval'      => array
             (
-                'rgxp'      => 'mobile',
+                'rgxp'      => 'phone',
                 'maxlength' => 64,
                 'tl_class'  => 'w50'
             ),
