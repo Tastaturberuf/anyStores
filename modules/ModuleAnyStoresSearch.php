@@ -3,8 +3,8 @@
 /**
  * anyStores for Contao Open Source CMS
  *
- * @copyright   2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
- *              2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
+ * @copyright   (c) 2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
+ *              (c) 2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
  * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
  *              Benny Born <benny.born@numero2.de>
  * @license     http://opensource.org/licenses/lgpl-3.0.html
@@ -57,9 +57,9 @@ class ModuleAnyStoresSearch extends \Module
         $strFormId = 'anystores_form_'.$this->id;
 
         // localized url parameter
-        $strSearchKey    = $GLOBALS['TL_LANG']['anystores']['parameter']['search'];
+        $strSearchKey    = $GLOBALS['TL_LANG']['anystores']['url_params']['search'];
         $strSearchValue  = \Input::post($strSearchKey);
-        $strCountryKey   = $GLOBALS['TL_LANG']['anystores']['parameter']['country'];
+        $strCountryKey   = $GLOBALS['TL_LANG']['anystores']['url_params']['country'];
         $strCountryValue = \Input::post($strCountryKey);
 
         // redirect if form was send

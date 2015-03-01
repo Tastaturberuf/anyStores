@@ -3,8 +3,8 @@
 /**
  * anyStores for Contao Open Source CMS
  *
- * @copyright   2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
- *              2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
+ * @copyright   (c) 2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
+ *              (c) 2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
  * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
  *              Benny Born <benny.born@numero2.de>
  * @license     http://opensource.org/licenses/lgpl-3.0.html
@@ -13,15 +13,9 @@
 
 
 /**
- * Legends
- */
-$GLOBALS['TL_LANG']['tl_module']['slmap_legend'] = 'Google Maps';
-
-
-/**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['anystores'] = array('anyStores', 'Händler-Listen verwalten und geographische Suche ermöglichen.');
+$GLOBALS['TL_LANG']['MOD']['anystores'] = array('anyStores', 'Standortlisten verwalten und geographische Suche ermöglichen.');
 
 
 /**
@@ -30,24 +24,21 @@ $GLOBALS['TL_LANG']['MOD']['anystores'] = array('anyStores', 'Händler-Listen ve
 array_insert($GLOBALS['TL_LANG']['FMD'], 0, array
 (
     'anystores'         => 'AnyStores',
-    'anystores_search'  => array('anyStores Suche', 'fügt eine Suchmaske ein.'),
-    'anystores_list'    => array('anyStores Liste', 'fügt eine Liste aller Händler zur Seite hinzu.'),
-    'anystores_details' => array('anyStores Details', 'zeigt Details zum ausgewählten Händler an.')
+    'anystores_search'  => array('anyStores Suche',   'Suchformular für Standorte.'),
+    'anystores_list'    => array('anyStores Liste',   'Suchergebnisliste oder einfache Liste der Standorte.'),
+    'anystores_details' => array('anyStores Details', 'Zeigt Details zum Standort an. Das Listenmodul muss auf dieses Modul weiterleiten.'),
+    'anystores_map'     => array('anyStores Karte',   'Übersicht der Standorte auf einer Karte.')
 ));
 
 
 array_insert($GLOBALS['TL_LANG']['tl_module'], 0, array
 (
     'anystores_defaultCountry'       => array('Standardland', 'In welchem Land sollen die Ergebnisse gesucht werden (falls der Benutzer kein anderes ausgewählt hat)?'),
-    'anystores_showFullCountryNames' => array('Ländernamen ausgeschrieben?', 'Sollen die Ländernamen in kompletter Länge und nicht als Kürzel angezeigt werden?'),
-
-    'anystores_categories'           => array('Händlerkategorien', 'Aus welchen Händlerlisten sollen Einträge angezeigt werden?'),
-    'anystores_listLimit'            => array('Anzahl der Ergebnisse', 'Wieviele Ergebnisse sollen maximal angezeigt werden?'),
-    'anystores_allowEmptySearch'     => array('Leersuche erlauben?', 'Soll der Benutzer eine leere Suchanfrage abschicken können um alle Ergebnisse angezeigt zu bekommen?'),
-
-    'anystores_limitDistance'        => array('Entfernung begrenzen', 'Einträge ab einer maximalen Entfernung nicht anzeigen.'),
+    'anystores_categories'           => array('Kategorie auswählen', 'Aus welcher Kategorie sollen Standorte angezeigt werden?'),
+    'anystores_listLimit'            => array('Anzahl der Standorte', 'Wieviele Standorte sollen maximal angezeigt werden?'),
+    'anystores_allowEmptySearch'     => array('Leersuche erlauben?', 'Soll der Benutzer eine leere Suchanfrage abschicken können um alle Standorte angezeigt zu bekommen?'),
+    'anystores_limitDistance'        => array('Entfernung begrenzen', 'Standorte ab einer maximalen Entfernung nicht anzeigen.'),
     'anystores_maxDistance'          => array('Maximale Entfernung', 'Die maximale Entfernung in km.'),
-
-    'anystores_detailsMaptype'       => array('Typ', 'Welche Art von Google Map soll angezeigt werden?'),
-    'anystores_detailsMaptypes'      => array('statisch', 'dynamisch')
+    'anystores_detailTpl'            => array('Standort-Template', 'Hier kann das Template für die einzelnen Standorte überschrieben werden. Sie können damit die Einträge des Listen- und Detail-Moduls ihren wünschen anpassen.'),
+    'anystores_mapTpl'               => array('Karten-Template', 'Hier kann das Template für die Standortkarte überschrieben werden.')
 ));

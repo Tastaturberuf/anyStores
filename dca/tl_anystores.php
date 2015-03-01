@@ -3,8 +3,8 @@
 /**
  * anyStores for Contao Open Source CMS
  *
- * @copyright   2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
- *              2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
+ * @copyright   (c) 2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
+ *              (c) 2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
  * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
  *              Benny Born <benny.born@numero2.de>
  * @license     http://opensource.org/licenses/lgpl-3.0.html
@@ -61,7 +61,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                 'class'      => 'header_edit_all',
                 'attributes' => 'onclick="Backend.getScrollOffset();"'
             ),
-            /*
+            /* @todo rewrite
             'importStores' => array
             (
                 'label'      => &$GLOBALS['TL_LANG']['tl_anystores']['importStores'],
@@ -297,6 +297,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             (
                 'mandatory' => true,
                 'maxlength' => 10,
+                'rgxp'      => 'alphanum',
                 'tl_class'  => 'w50'
             ),
             'sql' => "varchar(10) NOT NULL default ''"
@@ -429,7 +430,11 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'map' => array
         (
             'label'                => &$GLOBALS['TL_LANG']['tl_anystores']['latitude'],
-            'input_field_callback' => array('tl_anystores', 'showMap')
+            'input_field_callback' => array('tl_anystores', 'showMap'),
+            'eval' => array
+            (
+                'doNotShow' => true
+            )
         ),
         'geo_explain' => array
         (

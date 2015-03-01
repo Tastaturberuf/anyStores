@@ -3,8 +3,8 @@
 /**
  * anyStores for Contao Open Source CMS
  *
- * @copyright   2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
- *              2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
+ * @copyright   (c) 2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
+ *              (c) 2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
  * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
  *              Benny Born <benny.born@numero2.de>
  * @license     http://opensource.org/licenses/lgpl-3.0.html
@@ -15,12 +15,13 @@
 $GLOBALS['TL_LANG']['anystores'] = array
 (
 
-    // url parameter
-    'parameter' => array
+    // url params
+    'url_params' => array
     (
         'search'  => 'suche',
         'country' => 'land',
-        'store'   => 'haendler'
+        //@todo rename key to 'details'
+        'store'   => 'details'
     ),
 
     // days
@@ -54,7 +55,7 @@ $GLOBALS['TL_LANG']['anystores'] = array
     'noCoods'   => 'Der Ort ihrer Suchanfrage konnte nicht gefunden werden.',
 
     // import
-    'head'  => 'Händler aus CSV importieren',
+    'head'  => 'Standorte importieren',
     'start' => 'Import starten',
     'file'  => array('Datei auswählen','Die CSV-Datei muss mit dem UTF8-Zeichensatz kodiert und wie folgt aufgebaut sein: name, email, url, telefon, fax, strasse, plz, ort, ländercode (2-stellig)')
 

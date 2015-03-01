@@ -3,8 +3,8 @@
 /**
  * anyStores for Contao Open Source CMS
  *
- * @copyright   2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
- *              2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
+ * @copyright   (c) 2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
+ *              (c) 2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
  * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
  *              Benny Born <benny.born@numero2.de>
  * @license     http://opensource.org/licenses/lgpl-3.0.html
@@ -19,7 +19,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
 (
     'anystores_search' => '
         {title_legend},name,headline,type;
-        {config_legend:hide},jumpTo,anystores_defaultCountry,anystores_allowEmptySearch;
+        {config_legend:hide},jumpTo,anystores_allowEmptySearch;
         {template_legend:hide},customTpl;
         {expert_legend:hide},guests,cssID,space
     ',
@@ -156,7 +156,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     ),
     'anystores_detailTpl' => array
     (
-        'label'            => &$GLOBALS['TL_LANG']['tl_module']['anystores_detailsTpl'],
+        'label'            => &$GLOBALS['TL_LANG']['tl_module']['anystores_detailTpl'],
         'exclude'          => true,
         'inputType'        => 'select',
         'options_callback' => function()
