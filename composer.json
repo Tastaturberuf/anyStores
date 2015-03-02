@@ -1,0 +1,16 @@
+{
+    "name": "tastaturberuf-contao-modules/anystores",
+    "description": "Location management and geographic search",
+    "keywords": ["anytores", "storelocator", "stores"],
+    "type": "contao-module",
+    "homepage": "https://github.com/tastaturberuf-contao-modules/anyStores",
+    "licence": "LGPL-3.0+",
+
+    "require":
+    {
+        "php": ">=5.3",
+        "contao/core": ">=3.2,<4",
+        "contao-community-alliance/composer-installer": "*",
+        "menatwork/contao-multicolumnwizard": ">=3.2"
+    }
+}
