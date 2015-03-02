@@ -358,6 +358,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             'exclude'   => true,
             'eval'      => array
             (
+                'doNotShow'    => true,
                 'columnFields' => array
                 (
                     'weekday' => array
