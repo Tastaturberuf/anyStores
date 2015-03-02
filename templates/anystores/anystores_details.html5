@@ -69,6 +69,12 @@
         </div>
     <?php endif; ?>
 
+    <?php if ( $this->description ): ?>
+        <div class="description">
+            <?php echo $this->description; ?>
+        </div>
+    <?php endif; ?>
+
     <?php if ( $this->referer ): ?>
         <div class="back">
             <a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>">{{label::MSC:goBack}}</a>
