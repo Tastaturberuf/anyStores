@@ -104,7 +104,7 @@ class ModuleAnyStoresSearch extends \Module
         $this->Template->countryLabel = $GLOBALS['TL_LANG']['anystores']['country'];
         $this->Template->countryName  = $strCountryKey;
         $this->Template->countryId    = 'ctrl_country_'.$this->id;
-        $this->Template->countryValue = \Input::get($strCountryKey) ?: $this->anystores_defaultCountry;
+        $this->Template->countryValue = \Input::get($strCountryKey) ?: $GLOBALS['TL_LANGUAGE'];
 
         $this->Template->submitValue  = $GLOBALS['TL_LANG']['anystores']['search'];
     }

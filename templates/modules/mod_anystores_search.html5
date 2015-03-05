@@ -21,7 +21,7 @@
                     <?php endforeach ?>
                 </select>
             <?php else: ?>
-                <input type="hidden" name="<?php echo $this->countryName ?>" value="<?php echo $this->countryValue ?>">
+                <input type="hidden" name="<?php echo $this->countryName; ?>" value="<?php echo key($this->countryOptions[0]); ?>">
             <?php endif ?>
 
             <input type="submit" class="submit" value="<?php echo $this->submitValue ?>">
