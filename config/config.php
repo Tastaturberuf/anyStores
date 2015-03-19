@@ -15,7 +15,7 @@
  */
 $GLOBALS['BE_MOD']['content']['anystores'] = array
 (
-    'tables'       => array('tl_anystores_category', 'tl_anystores'),
+    'tables'       => array('tl_anystores_category', 'tl_anystores', 'tl_content'),
     'icon'         => 'system/modules/anyStores/assets/images/anystores.png',
     'stylesheet'   => 'system/modules/anyStores/assets/themes/default/backend.css',
     'importStores' => array( 'ModuleAnyStoresImporter', 'showImport' )

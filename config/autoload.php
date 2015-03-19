@@ -49,7 +49,6 @@ TemplateLoader::addFiles(array
 (
 	'map_google_static'       => 'system/modules/anyStores/templates/maps',
 	'map_google_dynamic'      => 'system/modules/anyStores/templates/maps',
-	'anystores_details_1'     => 'system/modules/anyStores/templates/anystores',
 	'anystores_details'       => 'system/modules/anyStores/templates/anystores',
 	'mod_anystores_list'      => 'system/modules/anyStores/templates/modules',
 	'mod_anystores_search'    => 'system/modules/anyStores/templates/modules',

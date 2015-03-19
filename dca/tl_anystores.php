@@ -21,6 +21,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
     (
         'dataContainer'     => 'Table',
         'ptable'            => 'tl_anystores_category',
+        'ctable'            => array('tl_content'),
         'enableVersioning'  => true,
         'onsubmit_callback' => array
         (
@@ -78,6 +79,12 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                 'label' => &$GLOBALS['TL_LANG']['tl_anystores']['edit'],
                 'href'  => 'act=edit',
                 'icon'  => 'edit.gif'
+            ),
+            'edit_description' => array
+            (
+                'label' => &$GLOBALS['TL_LANG']['tl_anystores']['edit_description'],
+                'href'  => 'table=tl_content',
+                'icon'  => 'system/modules/anyStores/assets/images/description.png'
             ),
             'copy' => array
             (

@@ -65,6 +65,17 @@ class ModuleAnyStoresDetails extends \Module
             // load all details
             $objStore->loadDetails();
 
+            // generate description
+            $objDescription = \ContentModel::findPublishedByPidAndTable($objStore->id, $objStore->getTable());
+
+            if ($objDescription !== null)
+            {
+                while ($objDescription->next())
+                {
+                	$objStore->description .= \Controller::getContentElement($objDescription->current());
+                }
+            }
+
             // Get referer for back button
             $objStore->referer = $this->getReferer();
 
@@ -80,6 +91,8 @@ class ModuleAnyStoresDetails extends \Module
             // Template
             $objDetailTemplate = new \FrontendTemplate($this->anystores_detailTpl);
             $objDetailTemplate->setData($objStore->row());
+
+
 
             $this->Template->store = $objDetailTemplate->parse();
         }

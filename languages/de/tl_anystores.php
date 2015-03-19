@@ -52,10 +52,11 @@ $GLOBALS['TL_LANG']['tl_anystores'] = array
     'new'          => array('Neuer Standort', 'Neuen Standort anlegen'),
 
     // Buttons
-    'edit'   => array('Standort bearbeiten', 'Standort mit der ID %s bearbeiten'),
-    'copy'   => array('Standort kopieren', 'Standort mit der ID %s kopieren'),
-    'delete' => array('Standort löschen', 'Standort mit der ID %s löschen'),
-    'coords' => array('Noch keine Geo-Koordinaten vorhanden!', 'Geo-Koordinaten vorhanden'),
-    'show'   => array('Details ansehen', 'Details des Standorts ID %s anzeigen'),
-    'toggle' => array('Standort veröffentlichen', 'Standort ID %s veröffentlichen/unveröffentlichen')
+    'edit'             => array('Standort bearbeiten', 'Standort mit der ID %s bearbeiten'),
+    'edit_description' => array('Standortbeschreibung bearbeiten', 'Standortbeschreibung von der ID %s bearbeiten'),
+    'copy'             => array('Standort kopieren', 'Standort mit der ID %s kopieren'),
+    'delete'           => array('Standort löschen', 'Standort mit der ID %s löschen'),
+    'coords'           => array('Noch keine Geo-Koordinaten vorhanden!', 'Geo-Koordinaten vorhanden'),
+    'show'             => array('Details ansehen', 'Details des Standorts ID %s anzeigen'),
+    'toggle'           => array('Standort veröffentlichen', 'Standort ID %s veröffentlichen/unveröffentlichen')
 );
