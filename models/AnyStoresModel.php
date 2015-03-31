@@ -30,6 +30,21 @@ class AnyStoresModel extends \Model
 
 
     /**
+     * Find all published
+     */
+    public static function findAllPublished()
+    {
+        $arrOptions = array
+        (
+            'column' => 'published',
+            'value'  => 1
+        );
+
+        return static::findAll($arrOptions);
+    }
+
+
+    /**
      * Find one published store by id or alias
      *
      * @param mixed $varId The numeric ID or alias name
