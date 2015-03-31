@@ -78,7 +78,7 @@ class ModuleAnyStoresSearch extends \Module
         }
 
         // render countries for the dropdown
-        if ( ($objCountries = AnyStoresModel::findAll(array('column' => 'published=1'))) !== null )
+        if ( ($objCountries = AnyStoresModel::findAllPublished()) !== null )
         {
             $arrCountries    = array_unique($objCountries->fetchEach('country'));
             $arrCountryNames = \System::getCountries();
