@@ -37,7 +37,7 @@ $GLOBALS['FE_MOD']['anystores'] = array
 /**
  * Register Hooks
  */
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][]  = array('AnyStoresInsertTags', 'replaceTags');
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][]  = array('AnyStoresHooks', 'replaceInsertTags');
 $GLOBALS['TL_HOOKS']['generateBreadcrumb'][] = array('AnyStoresHooks', 'generateBreadcrumb');
 
 
