@@ -28,6 +28,7 @@ ClassLoader::addClasses(array
 	'Tastaturberuf\AnyStores'               => 'system/modules/anyStores/classes/AnyStores.php',
 	'Tastaturberuf\OpenStreetMap'           => 'system/modules/anyStores/classes/API/OpenStreetMap.php',
 	'Tastaturberuf\GoogleMaps'              => 'system/modules/anyStores/classes/API/GoogleMaps.php',
+	'Tastaturberuf\AnyStoresHooks'          => 'system/modules/anyStores/classes/AnyStoresHooks.php',
 
 	// Models
 	'Tastaturberuf\AnyStoresCategoryModel'  => 'system/modules/anyStores/models/AnyStoresCategoryModel.php',

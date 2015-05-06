@@ -1,6 +1,12 @@
 anyStores changelog
 ===================
 
+Version 1.2.0
+-------------
+
+### New
+Added breadcrumb support
+
 Version 1.1.1-alpha
 -------------------
 
