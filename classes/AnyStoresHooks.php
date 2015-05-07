@@ -13,7 +13,7 @@
 namespace Tastaturberuf;
 
 
-class AnyStoresHooks
+class AnyStoresHooks extends \Controller
 {
 
     /**
@@ -74,6 +74,8 @@ class AnyStoresHooks
 
         $arrKeys = explode(':', $arrElements[1]);
 
+        $GLOBALS['TL_DEBUG'][_][] = $arrKeys;
+
         try
         {
             switch( $arrKeys[0] )
@@ -93,7 +95,9 @@ class AnyStoresHooks
 
                         // Parse module template
                         $strTemplate = $objModuleTemplate->parse();
-                        $strTemplate = $this->replaceInsertTags($strTemplate);
+                        $GLOBALS['TL_DEBUG'][_][] = $strTemplate;
+                        $strTemplate = parent::replaceInsertTags($strTemplate);
+                        $GLOBALS['TL_DEBUG'][_][] = $strTemplate;
 
                         return $strTemplate;
                     }
