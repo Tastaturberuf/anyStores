@@ -1,6 +1,15 @@
 anyStores changelog
 ===================
 
+Version 1.2.1
+-------------
+
+### Improve
+Improved filter by published in insert tags
+
+### Fixed
+Fixed insert tag errors
+
 Version 1.2.0
 -------------
 

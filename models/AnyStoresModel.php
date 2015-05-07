@@ -175,6 +175,36 @@ class AnyStoresModel extends \Model
 
 
     /**
+     * Return count for all published locations
+     * @return int
+     */
+    public static function countAllPublished()
+    {
+        $arrColumns[] = "(start='' OR start<UNIX_TIMESTAMP())";
+        $arrColumns[] = "(stop='' OR stop>UNIX_TIMESTAMP())";
+        $arrColumns[] = "published=1";
+
+        return static::countBy($arrColumns);
+    }
+
+
+    /**
+     * Return count for all published locations by pid
+     * @param int $intPid The category ID
+     * @return int
+     */
+    public static function countPublishedByPid($intPid)
+    {
+        $arrColumns[] = "(start='' OR start<UNIX_TIMESTAMP())";
+        $arrColumns[] = "(stop='' OR stop>UNIX_TIMESTAMP())";
+        $arrColumns[] = "published=1";
+        $arrColumns[] = "pid=?";
+
+        return static::countBy($arrColumns, $intPid);
+    }
+
+
+    /**
      * Get the details from a store
      * @return \AnyStoresModel
      */

@@ -74,8 +74,6 @@ class AnyStoresHooks extends \Controller
 
         $arrKeys = explode(':', $arrElements[1]);
 
-        $GLOBALS['TL_DEBUG'][_][] = $arrKeys;
-
         try
         {
             switch( $arrKeys[0] )
@@ -95,9 +93,7 @@ class AnyStoresHooks extends \Controller
 
                         // Parse module template
                         $strTemplate = $objModuleTemplate->parse();
-                        $GLOBALS['TL_DEBUG'][_][] = $strTemplate;
                         $strTemplate = parent::replaceInsertTags($strTemplate);
-                        $GLOBALS['TL_DEBUG'][_][] = $strTemplate;
 
                         return $strTemplate;
                     }
@@ -109,11 +105,11 @@ class AnyStoresHooks extends \Controller
 
                     if ( $arrKeys[1] == 'all' )
                     {
-                        return AnyStoresModel::countAll();
+                        return AnyStoresModel::countAllPublished();
                     }
                     else
                     {
-                        return AnyStoresModel::countBy('pid', $arrKeys[1]);
+                        return AnyStoresModel::countPublishedByPid($arrKeys[1]);
                     }
 
                 default:
