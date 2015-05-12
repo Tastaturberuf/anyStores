@@ -24,7 +24,6 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Classes
-	'Tastaturberuf\AnyStoresInsertTags'     => 'system/modules/anyStores/classes/AnyStoresInsertTags.php',
 	'Tastaturberuf\AnyStores'               => 'system/modules/anyStores/classes/AnyStores.php',
 	'Tastaturberuf\OpenStreetMap'           => 'system/modules/anyStores/classes/API/OpenStreetMap.php',
 	'Tastaturberuf\GoogleMaps'              => 'system/modules/anyStores/classes/API/GoogleMaps.php',
@@ -33,6 +32,9 @@ ClassLoader::addClasses(array
 	// Models
 	'Tastaturberuf\AnyStoresCategoryModel'  => 'system/modules/anyStores/models/AnyStoresCategoryModel.php',
 	'Tastaturberuf\AnyStoresModel'          => 'system/modules/anyStores/models/AnyStoresModel.php',
+
+	// Forms
+	'Tastaturberuf\FormStores'              => 'system/modules/anyStores/forms/FormStores.php',
 
 	// Modules
 	'Tastaturberuf\ModuleAnyStoresSearch'   => 'system/modules/anyStores/modules/ModuleAnyStoresSearch.php',
