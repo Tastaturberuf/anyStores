@@ -48,6 +48,40 @@ class AnyStoresHooks extends \Controller
 
 
     /**
+     * The "prepareFormData" hook is triggered after a form has been submitted.
+     * It passes the form data array, the form labels array and the form object
+     * as arguments and does not expect a return value. This way the data can be
+     * changed or extended, prior to execution of actions like email
+     * distribution or data storage.
+     *
+     * @param array $arrSubmitted
+     * @param array $arrLabels
+     * @param object $objForm
+     */
+    public function prepareFormData(&$arrSubmitted, $arrLabels, $objForm)
+    {
+        if ( !strlen($objForm->anystores_sendEmail) )
+        {
+            return;
+        }
+
+        $strKey = $objForm->anystores_sendEmail;
+
+        $objStore = AnyStoresModel::findPublishedByIdOrAlias($arrSubmitted[$strKey]);
+
+        if ( !$objStore )
+        {
+            return;
+        }
+
+        if ( strlen($objStore->email) )
+        {
+            $objForm->recipient .= ','.$objStore->email;
+        }
+    }
+
+
+    /**
      * The "replaceInsertTags" hook is triggered when an unknown insert tag is
      * found. It passes the insert tag as argument and expects the replacement
      * value or "false" as return value.

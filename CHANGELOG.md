@@ -1,6 +1,12 @@
 anyStores changelog
 ===================
 
+Version 1.3.0
+-------------
+
+### New
+Add option to send forms to the locations email
+
 Version 1.2.1
 -------------
 
