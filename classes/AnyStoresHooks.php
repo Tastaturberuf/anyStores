@@ -74,7 +74,7 @@ class AnyStoresHooks extends \Controller
             return;
         }
 
-        if ( strlen($objStore->email) )
+        if ( Validator::isEmail($objStore->email) )
         {
             $objForm->recipient .= ','.$objStore->email;
         }
