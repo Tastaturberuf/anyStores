@@ -18,7 +18,12 @@ class FormStores extends \FormSelectMenu
     public function __construct($arrAttributes = null)
     {
         parent::__construct($arrAttributes);
-        
+
+        if ( $this->anystores_categories === null )
+        {
+            return;
+        }
+
         $arrCategories = deserialize($this->anystores_categories);
         $arrOptions    = array('order'=>'postal');
 
