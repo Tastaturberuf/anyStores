@@ -75,7 +75,7 @@ class AnyStoresModel extends \Model
         $arrColumns   = array("$t.pid IN(".implode(',', array_map('intval', $arrCategories)).")");
         $arrColumns[] = "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1";
 
-        return static::findBy($arrColumns, $arrOptions);
+        return static::findBy($arrColumns, null, $arrOptions);
     }
 
 
