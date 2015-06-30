@@ -99,7 +99,7 @@ class AnyStoresModel extends \Model
 
 
     public static function findPublishedByAdressAndCountryAndCategory(
-        $strSearch, $strCountry, array $arrCategories, $intLimit=null, $intMaxDistance=null)
+        $strSearch, $strCountry = null, array $arrCategories, $intLimit=null, $intMaxDistance=null)
     {
         $t = static::$strTable;
 
@@ -107,7 +107,7 @@ class AnyStoresModel extends \Model
 
         if ( !$arrCoordinates )
         {
-            //@todo log
+            \System::log("Can't find coordinates for '{$strSearch}'", __METHOD__, TL_ERROR);
             return;
         }
 
@@ -123,13 +123,17 @@ class AnyStoresModel extends \Model
             (
                 // Categories
                 "$t.pid IN(".implode(',', array_map('intval', $arrCategories)).")",
-                // Country
-                "$t.country=?",
                 // Published
                 "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1"
             ),
             'order' => "distance"
         );
+
+        // Country
+        if ( $strCountry )
+        {
+            $arrOptions['column'][] = "$t.country=?";
+        }
 
         // Maximun distance
         if ( is_numeric($intMaxDistance) )
@@ -150,12 +154,13 @@ class AnyStoresModel extends \Model
                 $arrCoordinates['latitude'],
                 $arrCoordinates['longitude'],
                 $arrCoordinates['latitude'],
-                $strCountry
+                $strCountry ?: null
             );
 
         if ( !$objResult->numRows )
         {
-            //@todo log
+            die(dump($objResult));
+            \System::log("No results for '{$objResult->query}'", __METHOD__, TL_ERROR);
             return;
         }
 

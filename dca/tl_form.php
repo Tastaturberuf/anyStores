@@ -11,27 +11,69 @@
 
 
 /**
+ * Palettes
+ */
+$GLOBALS['TL_DCA']['tl_form']['palettes']['__selector__'][] = 'anystores_emailNearestStore';
+
+$GLOBALS['TL_DCA']['tl_form']['palettes']['default'] .= ';{anystores_legend},anystores_emailNearestStore';
+
+
+/**
  * Subpalettes
  */
+$GLOBALS['TL_DCA']['tl_form']['subpalettes']['anystores_emailNearestStore'] = 'anystores_categories';
+
 $GLOBALS['TL_DCA']['tl_form']['subpalettes']['sendViaEmail'] .= ',anystores_sendEmail';
 
 
 /**
  * Fields
  */
-$GLOBALS['TL_DCA']['tl_form']['fields']['anystores_sendEmail'] = array
+array_insert($GLOBALS['TL_DCA']['tl_form']['fields'], 0, array
 (
-    'label'            => &$GLOBALS['TL_LANG']['tl_form']['anystores_sendEmail'],
-    'exclude'          => true,
-    'inputType'        => 'select',
-    'options_callback' => array('tl_form_anystores', 'getFormFields'),
-    'eval'             => array
+    'anystores_sendEmail' => array
     (
-        'includeBlankOption' => true,
-        'tl_class'           => 'w50'
+        'label'            => &$GLOBALS['TL_LANG']['tl_form']['anystores_sendEmail'],
+        'exclude'          => true,
+        'inputType'        => 'select',
+        'options_callback' => array('tl_form_anystores', 'getFormFields'),
+        'eval'             => array
+        (
+            'includeBlankOption' => true,
+            'tl_class'           => 'w50'
+        ),
+        'sql' => "varchar(64) NOT NULL default ''"
     ),
-    'sql' => "varchar(64) NOT NULL default ''"
-);
+    'anystores_emailNearestStore' => array
+    (
+        'label'     => &$GLOBALS['TL_LANG']['tl_form']['anystores_emailNearestStore'],
+        'exclude'   => true,
+        'inputType' => 'checkbox',
+        'eval'      => array
+        (
+            'submitOnChange' => true
+        ),
+        'sql' => "char(1) NOT NULL default ''"
+    ),
+    'anystores_categories' => array
+    (
+        'label'            => &$GLOBALS['TL_LANG']['tl_form']['anystores_categories'],
+        'inputType'        => 'checkbox',
+        'options_callback' => function()
+        {
+            if ( ($objCategories = AnyStoresCategoryModel::findAll(array('order'=>'title'))) !== null )
+            {
+                return $objCategories->fetchEach('title');
+            }
+        },
+        'eval' => array
+        (
+            'mandatory' => true,
+            'multiple'  => true
+        ),
+        'sql' => "text NULL"
+    )
+));
 
 
 class tl_form_anystores

@@ -1,6 +1,13 @@
 anyStores changelog
 ===================
 
+Version 1.4.0
+-------------
+
+### New
+Add options in forms for sending a copy of the mail to the nearest location.
+Compatible with EFG.
+
 Version 1.3.0
 -------------
 

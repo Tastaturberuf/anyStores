@@ -82,6 +82,56 @@ class AnyStoresHooks extends \Controller
 
 
     /**
+     *
+     * @param type $arrSubmitted
+     * @param type $arrLabels
+     * @param type $objForm
+     */
+    public function emailNearestStore(&$arrSubmitted, $arrLabels, $objForm)
+    {
+        if ( $objForm->anystores_emailNearestStore == 1 )
+        {
+            // if there is no postal field
+            if ( !strlen($arrSubmitted['postal']) )
+            {
+                \System::log("No postal field for email nearest store", __METHOD__, TL_ERROR);
+                return;
+            }
+
+            $arrSearch[] = $arrSubmitted['street']  ?: null;
+            $arrSearch[] = $arrSubmitted['postal']  ?: null;
+            $arrSearch[] = $arrSubmitted['city']    ?: null;
+            $arrSearch[] = $arrSubmitted['country'] ?: null;
+
+            // drop empty arrays
+            $arrSearch = array_filter($arrSearch, 'count');
+
+            // query string
+            $strSearch = implode(', ', $arrSearch);
+
+            $objStore = AnyStoresModel::findPublishedByAdressAndCountryAndCategory(
+                $strSearch, null, deserialize($objForm->anystores_categories), 1
+            );
+
+            if ( !$objStore )
+            {
+                \System::log("No store found for email", __METHOD__, TL_ERROR);
+                return;
+            }
+
+            if ( \Validator::isEmail($objStore->email) )
+            {
+                // legagy contao
+                $objForm->recipient .= ','.$objStore->email;
+
+                // efg
+                $objForm->formattedMailRecipient .= ','.$objStore->email;
+            }
+        }
+    }
+
+
+    /**
      * The "replaceInsertTags" hook is triggered when an unknown insert tag is
      * found. It passes the insert tag as argument and expects the replacement
      * value or "false" as return value.
