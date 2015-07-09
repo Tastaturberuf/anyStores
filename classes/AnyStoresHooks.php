@@ -147,7 +147,7 @@ class AnyStoresHooks extends \Controller
      * @param string $strTag
      * @return bool | string
      */
-    public function replaceInsertTags($strTag)
+    public function replaceInsertTagsHook($strTag)
     {
         $arrElements = explode('::', $strTag);
 
@@ -177,7 +177,7 @@ class AnyStoresHooks extends \Controller
 
                         // Parse module template
                         $strTemplate = $objModuleTemplate->parse();
-                        $strTemplate = parent::replaceInsertTags($strTemplate);
+                        $strTemplate = $this->replaceInsertTags($strTemplate);
 
                         return $strTemplate;
                     }

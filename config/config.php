@@ -271,7 +271,7 @@ array_insert($GLOBALS['TL_MODELS'], 0, array
 $GLOBALS['TL_HOOKS']['generateBreadcrumb'][] = array('AnyStoresHooks', 'generateBreadcrumb');
 $GLOBALS['TL_HOOKS']['prepareFormData'][]    = array('AnyStoresHooks', 'emailNearestStore');
 $GLOBALS['TL_HOOKS']['prepareFormData'][]    = array('AnyStoresHooks', 'prepareFormData');
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][]  = array('AnyStoresHooks', 'replaceInsertTags');
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][]  = array('AnyStoresHooks', 'replaceInsertTagsHook');
 
 
 /**

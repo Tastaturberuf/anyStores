@@ -1,6 +1,15 @@
 anyStores changelog
 ===================
 
+Version 1.4.1
+-------------
+
+### Fixed
+Fatal error on Contao 3.5 when using insert tags
+
+### Fixed
+PHP notice (see #32)
+
 Version 1.4.0
 -------------
 
