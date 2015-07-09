@@ -86,10 +86,19 @@ class ModuleAnyStoresList extends \Module
 
         if ( !$this->strSearchValue )
         {
+            // order
+            if ( strlen($this->anystores_sortingOrder) )
+            {
+                $arrOptions = array
+                (
+                    'order' => $this->anystores_sortingOrder
+                );
+            }
+
             $objStore = AnyStoresModel::findPublishedByCategoryAndCountry(
                 deserialize($this->anystores_categories),
                 $this->strCountryValue,
-                array('order'=>'postal')
+                $arrOptions
             );
         }
         else

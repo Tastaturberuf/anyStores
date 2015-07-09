@@ -39,6 +39,7 @@ array_insert($GLOBALS['TL_LANG']['tl_module'], 0, array
     'anystores_allowEmptySearch' => array('Allow empty search?', 'Should the user be able to submit an empty search to see all results?'),
     'anystores_limitDistance'    => array('Limit distance', 'Do not show stores which exceed the maximum distance.'),
     'anystores_maxDistance'      => array('Max distance', 'The maximum distance in km.'),
-    'anystores_detailTpl'        => array('Details template', 'Chosse which template should be used to show details of the store'),
+    'anystores_sortingOrder'     => array('Sorting order', 'Choose your individual sorting order. Default: postal'),
+    'anystores_detailTpl'        => array('Details template', 'Choose which template should be used to show details of the store'),
     'anystores_mapTpl'           => array('Map template', 'Choose a template for the map.')
 ));

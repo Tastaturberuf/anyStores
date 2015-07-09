@@ -47,12 +47,14 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
  * Selector
  */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'][] = 'anystores_limitDistance';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'][] = 'anystores_allowEmptySearch';
 
 
 /**
  * Subpalettes
  */
-$GLOBALS['TL_DCA']['tl_module']['subpalettes']['anystores_limitDistance'] = 'anystores_maxDistance';
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['anystores_allowEmptySearch'] = 'anystores_sortingOrder';
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['anystores_limitDistance']    = 'anystores_maxDistance';
 
 
 /**
@@ -121,9 +123,23 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     	'default'   => true,
     	'eval'      => array
         (
-            'tl_class'  => 'w50 m12',
+            'submitOnChange' => true,
+            'tl_class'       => 'w50 m12',
         ),
         'sql' => "char(1) NOT NULL default ''"
+    ),
+    'anystores_sortingOrder' => array
+    (
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_sortingOrder'],
+        'exclude'   => true,
+        'inputType' => 'text',
+        'default'   => 'postal',
+        'eval'      => array
+        (
+            'maxlength' => 64,
+            'tl_class'  => 'w50'
+        ),
+        'sql' => "varchar(64) NOT NULL default ''"
     ),
     // hasDistanceLimit
     'anystores_limitDistance' => array

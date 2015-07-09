@@ -1,6 +1,15 @@
 anyStores changelog
 ===================
 
+Version 1.4.2
+-------------
+
+### New
+Add option to sort the list individual (see #31)
+
+### Fixed
+Make default country in list module optional
+
 Version 1.4.1
 -------------
 
