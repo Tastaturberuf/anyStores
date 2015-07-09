@@ -66,12 +66,11 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
         'exclude'   => true,
         'inputType' => 'select',
         'options'   => System::getCountries(),
-        'default'   => $GLOBALS['TL_LANGUAGE'],
         'eval'      => array
         (
-            'mandatory' => true,
-            'chosen'    => true,
-            'tl_class'  => 'w50'
+            'includeBlankOption' => true,
+            'chosen'             => true,
+            'tl_class'           => 'w50'
         ),
         'sql' => "varchar(2) NOT NULL default ''"
     ),

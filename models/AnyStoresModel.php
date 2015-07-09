@@ -86,13 +86,19 @@ class AnyStoresModel extends \Model
      * @param array $arrOptions An optional options array
      * @return \Model\Collection|null The model collection or null if the result is empty
      */
-    public static function findPublishedByCategoryAndCountry(array $arrCategories, $strCountry, array $arrOptions=array())
+    public static function findPublishedByCategoryAndCountry(array $arrCategories, $strCountry = null, array $arrOptions=array())
     {
         $t = static::$strTable;
 
         $arrColumns   = array("$t.pid IN(".implode(',', array_map('intval', $arrCategories)).")");
-        $arrColumns[] = "$t.country=?";
-        $arrColumns[] = "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1";
+        $arrColumns[] = "($t.start='' OR $t.start<UNIX_TIMESTAMP())";
+        $arrColumns[] = "($t.stop='' OR $t.stop>UNIX_TIMESTAMP())";
+        $arrColumns[] = "$t.published=1";
+
+        if ( $strCountry )
+        {
+            $arrColumns[] = "$t.country=?";
+        }
 
         return static::findBy($arrColumns, $strCountry, $arrOptions);
     }
