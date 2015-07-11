@@ -165,7 +165,6 @@ class AnyStoresModel extends \Model
 
         if ( !$objResult->numRows )
         {
-            die(dump($objResult));
             \System::log("No results for '{$objResult->query}'", __METHOD__, TL_ERROR);
             return;
         }
