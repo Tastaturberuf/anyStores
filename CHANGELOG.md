@@ -1,6 +1,12 @@
 anyStores changelog
 ===================
 
+Version 1.4.3
+-------------
+
+### Fixed
+Fixed search error in Contao 3.5
+
 Version 1.4.2
 -------------
 

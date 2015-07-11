@@ -257,7 +257,7 @@ class AnyStoresModel extends \Model
         }
 
         // Prevent from saving
-        $this->preventSaving();
+        $this->preventSaving(false);
         $this->blnDetailsLoaded = true;
 
         return $this;
