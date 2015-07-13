@@ -1,9 +1,9 @@
 {
     "name": "tastaturberuf/anystores",
     "description": "Location management and geographic search",
-    "keywords": ["anytores", "storelocator", "stores"],
+    "keywords": ["anytores", "storelocator", "stores", "geolocation", "location"],
     "type": "contao-module",
-    "homepage": "https://github.com/tastaturberuf-contao-modules/anyStores",
+    "homepage": "https://github.com/tastaturberuf/anyStores",
     "licence": "LGPL-3.0+",
 
     "require":
