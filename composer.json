@@ -1,5 +1,5 @@
 {
-    "name": "tastaturberuf-contao-modules/anystores",
+    "name": "tastaturberuf/anystores",
     "description": "Location management and geographic search",
     "keywords": ["anytores", "storelocator", "stores"],
     "type": "contao-module",
