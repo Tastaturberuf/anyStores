@@ -5,12 +5,26 @@
     "type": "contao-module",
     "homepage": "https://github.com/tastaturberuf/anyStores",
     "licence": "LGPL-3.0+",
-
+    "authors": [
+        {
+            "name": "Daniel Jahnsmüller",
+            "email": "mail@jahnsmueller.net",
+            "homepage": "jahnsmueller.net",
+            "role": "Developer"
+        }
+    ],
     "require":
     {
         "php": ">=5.3",
         "contao/core": ">=3.2,<4",
         "contao-community-alliance/composer-installer": "*",
         "menatwork/contao-multicolumnwizard": ">=3.2"
+    },
+    "extra": {
+        "contao": {
+            "sources": {
+                "": "system/modules/anystores"
+            }
+        }
     }
 }
