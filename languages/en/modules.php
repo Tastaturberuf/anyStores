@@ -15,7 +15,8 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['locations'] = array('Locations', 'Manage locations and search them using geodata.');
+$GLOBALS['TL_LANG']['MOD']['anystores_locations'] = array('Locations', 'Manage locations and search them using geodata.');
+$GLOBALS['TL_LANG']['MOD']['anystores_settings']  = array('Settings', 'Manage settings for anyStores.');
 
 
 /**
