@@ -41,14 +41,14 @@ $GLOBALS['BE_MOD']['anyStores'] = array
     'anystores_locations' => array
     (
         'tables'       => array('tl_anystores_category', 'tl_anystores', 'tl_content'),
-        'icon'         => 'system/modules/anyStores/assets/images/anystores.png',
+        'icon'         => 'system/modules/anyStores/assets/images/marker.png',
         'stylesheet'   => 'system/modules/anyStores/assets/themes/default/backend.css',
         'importStores' => array( 'ModuleAnyStoresImporter', 'showImport' )
     ),
     'anystores_settings' => array
     (
         'tables' => array('tl_anystores_settings'),
-        'icon'   => ''
+        'icon'   => 'system/modules/anyStores/assets/images/equalizer.png'
     )
 );
 
