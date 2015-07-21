@@ -36,12 +36,20 @@
  * have to be set. Take a look at the system/modules/core/config/config.php
  * file to see how back end modules are configured.
  */
-$GLOBALS['BE_MOD']['anyStores']['locations'] = array
+$GLOBALS['BE_MOD']['anyStores'] = array
 (
-    'tables'       => array('tl_anystores_category', 'tl_anystores', 'tl_content'),
-    'icon'         => 'system/modules/anyStores/assets/images/anystores.png',
-    'stylesheet'   => 'system/modules/anyStores/assets/themes/default/backend.css',
-    'importStores' => array( 'ModuleAnyStoresImporter', 'showImport' )
+    'anystores_locations' => array
+    (
+        'tables'       => array('tl_anystores_category', 'tl_anystores', 'tl_content'),
+        'icon'         => 'system/modules/anyStores/assets/images/anystores.png',
+        'stylesheet'   => 'system/modules/anyStores/assets/themes/default/backend.css',
+        'importStores' => array( 'ModuleAnyStoresImporter', 'showImport' )
+    ),
+    'anystores_settings' => array
+    (
+        'tables' => array('tl_anystores_settings'),
+        'icon'   => ''
+    )
 );
 
 

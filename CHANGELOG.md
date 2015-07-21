@@ -1,6 +1,15 @@
 anyStores changelog
 ===================
 
+Version 1.5.0
+-------------
+
+### Changed
+Change backend navigation
+
+### Changed
+OpenStreetView API is no longer experimental
+
 Version 1.4.3
 -------------
 
