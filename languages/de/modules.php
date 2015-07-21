@@ -15,7 +15,7 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['anystores'] = array('anyStores', 'Standortlisten verwalten und geographische Suche ermöglichen.');
+$GLOBALS['TL_LANG']['MOD']['locations'] = array('Standorte', 'Standortlisten verwalten und geographische Suche ermöglichen.');
 
 
 /**

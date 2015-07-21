@@ -36,7 +36,7 @@
  * have to be set. Take a look at the system/modules/core/config/config.php
  * file to see how back end modules are configured.
  */
-$GLOBALS['BE_MOD']['content']['anystores'] = array
+$GLOBALS['BE_MOD']['anyStores']['locations'] = array
 (
     'tables'       => array('tl_anystores_category', 'tl_anystores', 'tl_content'),
     'icon'         => 'system/modules/anyStores/assets/images/anystores.png',
