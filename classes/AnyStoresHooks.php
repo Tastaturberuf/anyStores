@@ -208,4 +208,56 @@ class AnyStoresHooks extends \Controller
         return false;
     }
 
+
+    public function getSearchablePages($arrPages, $intRootId, $bln=true, $strLanguage=null)
+    {
+        // get the root page object
+        $objRoot = \PageModel::findByPk($intRootId);
+
+        if ( !$objRoot )
+        {
+            \System::log('Can\'t get the root page', __METHOD__, TL_ERROR);
+            return $arrPages;
+        }
+
+
+        // check for sitemap enabled
+        if ( !$objRoot->anystores_sitemap )
+        {
+            return $arrPages;
+        }
+
+
+        // get the domain
+        $strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . ($objRoot->dns ?: \Environment::get('host')) . TL_PATH . '/';
+
+
+        // get the details page
+        $objPage = \PageModel::findByPk($objRoot->anystores_detailPage);
+
+        if ( !$objPage )
+        {
+            \System::log('Can\'t find the details page for anyStores', __METHOD__, TL_ERROR);
+            return $arrPages;
+        }
+
+
+        // get the locations
+        $objLocations = AnyStoresModel::findPublishedByCategory(deserialize($objRoot->anystores_categories));
+
+        if ( !$objLocations )
+        {
+            \System::log('Can\'t get the published locations', __METHOD__, TL_ERROR);
+            return $arrPages;
+        }
+
+        while ( $objLocations->next() )
+        {
+            $strAlias = \Controller::generateFrontendUrl($objLocations->row(), null, $strLanguage);
+            $arrPages[] = $strDomain.$objPage->alias.'/'.$strAlias;
+        }
+
+        return $arrPages;
+    }
+
 }

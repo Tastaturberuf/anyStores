@@ -4,6 +4,9 @@ anyStores changelog
 Version 1.5.0
 -------------
 
+### New
+Add support for locations to the sitemap
+
 ### Changed
 Change backend navigation
 
