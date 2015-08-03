@@ -1,6 +1,12 @@
 anyStores changelog
 ===================
 
+Version 1.5.1
+-------------
+
+### Fixed
+Namespace error
+
 Version 1.5.0
 -------------
 
