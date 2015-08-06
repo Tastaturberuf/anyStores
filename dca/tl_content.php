@@ -13,7 +13,7 @@
 /**
  * Dynamically add the permission check and parent table
  */
-if ( Input::get('do') == 'anystores' )
+if ( Input::get('do') == 'anystores_locations' )
 {
     $GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_anystores';
 }

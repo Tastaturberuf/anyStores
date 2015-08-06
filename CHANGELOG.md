@@ -7,6 +7,9 @@ Version 1.5.2
 ### Fixed
 Fixed recoverable error (see #36)
 
+### Fixed
+Fixed table error on locations description
+
 Version 1.5.1
 -------------
 
