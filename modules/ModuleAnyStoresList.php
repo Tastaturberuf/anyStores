@@ -87,12 +87,11 @@ class ModuleAnyStoresList extends \Module
         if ( !$this->strSearchValue )
         {
             // order
+            $arrOptions = array();
+
             if ( strlen($this->anystores_sortingOrder) )
             {
-                $arrOptions = array
-                (
-                    'order' => $this->anystores_sortingOrder
-                );
+                $arrOptions['order'] = $this->anystores_sortingOrder;
             }
 
             $objStore = AnyStoresModel::findPublishedByCategoryAndCountry(

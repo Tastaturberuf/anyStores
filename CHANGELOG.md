@@ -1,6 +1,12 @@
 anyStores changelog
 ===================
 
+Version 1.5.2
+-------------
+
+### Fixed
+Fixed recoverable error (see #36)
+
 Version 1.5.1
 -------------
 
