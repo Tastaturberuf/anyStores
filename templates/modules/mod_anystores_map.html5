@@ -46,7 +46,8 @@ function initialize()
     			(loc.url !="") 		? html += "<a href=\"" + loc.url  + "\">" + loc.url  + "</a><br>" : "";
     			(loc.email !="") 	? html += "<a href=\"mailto:" + loc.email  + "\">" + loc.email  + "</a><br>" : "";
     			(loc.href !="") 	? html += "<br><a href=\"" + loc.href + "\">{{label::anystores:more}}</a>" : "";
-
+   
+                html += '<div><div class="routinglink"><a href="https://www.google.com/maps/preview?saddr=&daddr=' + loc.latitude + ',' + loc.longitude + '&ie=UTF8&hl=de" onclick="window.open(this.href);return false;">Routenplanung</a>&nbsp;von&nbsp;Ihrer&nbsp;Adresse:<br><form action="http://maps.google.com/maps" method="get" target="_new"><input type="hidden" name="daddr" value="' + loc.latitude + ',' + loc.longitude + '"><input type="hidden" name="ie" value="UTF8"><input type="hidden" name="hl" value="de"><input type="text" class="text" name="saddr" /><input type="submit" class="submit" value="ok" /></form></div></div>';
 
 
                 return function() {
