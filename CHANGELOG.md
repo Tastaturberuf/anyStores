@@ -1,6 +1,10 @@
 anyStores changelog
 ===================
 
+## Version 1.5.3
+
+- Add field for changing the locations category (fix #9)
+
 Version 1.5.2
 -------------
 

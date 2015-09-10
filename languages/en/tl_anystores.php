@@ -15,6 +15,7 @@
 $GLOBALS['TL_LANG']['tl_anystores'] = array
 (
     // Fields
+    'pid'            => array('Category', 'Choose the locations category.'),
     'name'           => array('Name', ''),
     'alias'          => array('Alias', ''),
     'email'          => array('E-Mail', ''),

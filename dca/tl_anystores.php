@@ -130,7 +130,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         '__selector__' => array('published'),
         'default' =>
         '
-            {common_legend},name,alias,phone,fax,url,target,email,logo,description;
+            {common_legend},pid,name,alias,phone,fax,url,target,email,logo,description;
             {adress_legend},street,postal,city,country;
             {times_legend},opening_times;
             {geo_legend},geo_explain,longitude,map,latitude;
@@ -149,6 +149,15 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         ),
         'pid' => array
         (
+            'label'      => &$GLOBALS['TL_LANG']['tl_anystores']['pid'],
+            'exclude'    => true,
+            'inputType'  => 'select',
+            'foreignKey' => 'tl_anystores_category.title',
+            'eval'       => array
+            (
+                'mandatory' => true,
+                'tl_class'  => 'clr'
+            ),
             'sql' => "int(10) unsigned NOT NULL default '0'"
         ),
         'tstamp' => array

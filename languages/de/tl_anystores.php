@@ -15,6 +15,7 @@
 $GLOBALS['TL_LANG']['tl_anystores'] = array
 (
     // Fields
+    'pid'            => array('Kategorie', 'Kategorie des Standorts.'),
     'name'           => array('Name', 'Name des Standorts.'),
     'alias'          => array('Alias', 'Der Alias ist eine eindeutige Referenz, die anstelle der numerischen Artikel-ID aufgerufen werden kann.'),
     'email'          => array('E-Mail', 'E-Mail-Adresse des Standorts.'),
