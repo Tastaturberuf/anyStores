@@ -1,6 +1,10 @@
 anyStores changelog
 ===================
 
+## Version 1.6.0
+
+- Add title and meta description support (see #25)
+
 ## Version 1.5.3
 
 - Add field for changing the locations category (fix #9)

@@ -88,6 +88,18 @@ class ModuleAnyStoresDetails extends \Module
                 $objStore->gMap = $objMapTemplate->parse();
             }
 
+            // set meta title
+            if ( $objStore->metatitle )
+            {
+                $GLOBALS['objPage']->title = $objStore->metatitle;
+            }
+
+            // set meta description
+            if ( $objStore->metadescription )
+            {
+                $GLOBALS['objPage']->description = $objStore->metadescription;
+            }
+
             // Template
             $objDetailTemplate = new \FrontendTemplate($this->anystores_detailTpl);
             $objDetailTemplate->setData($objStore->row());

@@ -134,6 +134,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             {adress_legend},street,postal,city,country;
             {times_legend},opening_times;
             {geo_legend},geo_explain,longitude,map,latitude;
+            {seo_legend},metatitle,metadescription;
             {publish_legend},published
         '
     ),
@@ -512,6 +513,28 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                 'tl_class'   => 'w50 wizard'
             ),
             'sql' => "varchar(10) NOT NULL default ''"
+        ),
+        'metatitle' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['metatitle'],
+            'exclude'   => true,
+            'inputType' => 'text',
+            'eval'      => array
+            (
+                'maxlength' => 255
+            ),
+            'sql' => "varchar(255) NOT NULL default ''"
+        ),
+        'metadescription' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['metadescription'],
+            'exclude'   => true,
+            'inputType' => 'textarea',
+            'eval'      => array
+            (
+                'maxlength' => 255
+            ),
+            'sql' => "varchar(255) NOT NULL default ''"
         )
     )
 );
