@@ -90,6 +90,9 @@ class ModuleAnyStoresMap extends \Module // extends ModuleStoreLocatorList
             // Malformed UTF-8 characters, possibly incorrectly encoded
             //@todo maybe ->loadDetails() fix it
             $objStores->logo = null;
+
+            // encode email
+            $objStores->email = \String::encodeEmail($objStores->email);
         }
 
         // get all stores

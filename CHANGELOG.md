@@ -1,6 +1,10 @@
 anyStores changelog
 ===================
 
+## Version 1.6.1
+
+- Encode email in map module in the json part
+
 ## Version 1.6.0
 
 - Add title and meta description support (see #25)
