@@ -23,7 +23,7 @@
     "extra": {
         "contao": {
             "sources": {
-                "": "system/modules/anystores"
+                "": "system/modules/anyStores"
             }
         }
     }
