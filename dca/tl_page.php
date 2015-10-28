@@ -13,12 +13,7 @@
 /**
  * Palettes
  */
-$GLOBALS['TL_DCA']['tl_page']['palettes']['root'] = str_replace
-(
-    'createSitemap',
-    'createSitemap,anystores_sitemap',
-    $GLOBALS['TL_DCA']['tl_page']['palettes']['root']
-);
+$GLOBALS['TL_DCA']['tl_page']['palettes']['root'] .= ';{anystores_legend},anystores_sitemap';
 
 
 /**

@@ -1,6 +1,10 @@
 anyStores changelog
 ===================
 
+## Version 1.6.2
+
+- Put sitemap setting on the page palettes ending 
+
 ## Version 1.6.1
 
 - Encode email in map module in the json part

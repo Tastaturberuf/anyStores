@@ -12,7 +12,8 @@
 
 array_insert($GLOBALS['TL_LANG']['tl_page'], 0, array
 (
-    'anystores_sitemap' => array('Add anyStores', 'Check to integrate locations to the sitemap.'),
+    'anystores_legend'     => 'anyStores settings',
+    'anystores_sitemap'    => array('Add to sitemap', 'Check to integrate locations to the sitemap.'),
     'anystores_detailPage' => array('Detail page', 'Choose a site with an anyStores detail module.'),
     'anystores_categories' => array('Categories', 'Choose categories for the sitemap.')
 ));
