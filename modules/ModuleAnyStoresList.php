@@ -137,12 +137,16 @@ class ModuleAnyStoresList extends \Module
                 }
             }
 
-            $objTemplate->setData($objStore->current()->loadDetails()->row());
+            $arrStore = $objStore->current()->loadDetails()->row();
 
-            $arrStores[] = $objTemplate->parse();
+            $objTemplate->setData($arrStore);
+
+            $arrStores[]    = $objTemplate->parse();
+            $arrRawStores[] = $arrStore;
         }
 
-        $this->Template->stores = $arrStores;
+        $this->Template->stores    = $arrStores;
+        $this->Template->rawstores = $arrRawStores;
 
         // set licence hint
         $this->Template->licence = $GLOBALS['ANYSTORES_GEODATA_LICENCE_HINT'];

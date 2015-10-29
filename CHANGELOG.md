@@ -3,7 +3,13 @@ anyStores changelog
 
 ## Version 1.6.2
 
-- Put sitemap setting on the page palettes ending 
+### Fixed
+
+- Put sitemap setting on the page palettes ending
+
+### Changed
+
+- Add $this->rawstores to mod_anystores_list template
 
 ## Version 1.6.1
 
