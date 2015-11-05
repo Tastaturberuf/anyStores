@@ -28,7 +28,6 @@ class GoogleMaps
         // Google Geocoding API v3
         $strQuery = 'https://maps.googleapis.com/maps/api/geocode/json?'
             .'address='.rawurlencode($strAddress)
-            .'&sensor=false'
             .'&language='.$GLOBALS['TL_LANGUAGE'];
 
         if ( $strCountry )
