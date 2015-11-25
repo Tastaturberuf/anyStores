@@ -197,6 +197,7 @@ class AnyStoresHooks extends \Controller
                     }
 
                 default:
+                    \System::log('Invalid anyStores inserttag param: '.$$arrKeys[0], __METHOD__, TL_ERROR);
                     return false;
             }
         }

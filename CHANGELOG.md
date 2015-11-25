@@ -6,6 +6,7 @@ anyStores changelog
 ### Fixed
 
 - Put sitemap setting on the page palettes ending
+- Add error log when using invalid inserttag params
 
 ### Changed
 
