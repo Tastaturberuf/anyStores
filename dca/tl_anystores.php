@@ -131,7 +131,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'default' =>
         '
             {common_legend},pid,name,alias,phone,fax,url,target,email,logo,description;
-            {adress_legend},street,postal,city,country;
+            {adress_legend},country,street,street2,postal,city;
             {times_legend},opening_times;
             {geo_legend},geo_explain,longitude,map,latitude;
             {seo_legend},metatitle,metadescription;
@@ -146,7 +146,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
     (
         'id' => array
         (
-                'sql' => "int(10) unsigned NOT NULL auto_increment"
+            'sql' => "int(10) unsigned NOT NULL auto_increment"
         ),
         'pid' => array
         (
@@ -301,6 +301,19 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             ),
             'sql' => "varchar(64) NOT NULL default ''"
         ),
+        'street2' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['street2'],
+            'inputType' => 'text',
+            'exclude'   => true,
+            'search'    => true,
+            'eval'      => array
+            (
+                'maxlength' => 64,
+                'tl_class'  => 'w50'
+            ),
+            'sql' => "varchar(64) NOT NULL default ''"
+        ),
         'postal' => array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['postal'],
@@ -352,7 +365,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                 'mandatory' => true,
                 'maxlength' => 64,
                 'chosen'    => true,
-                'tl_class'  => 'w50'
+                #'tl_class'  => 'w50'
             ),
             'sql' => "varchar(2) NOT NULL default 'de'"
         ),

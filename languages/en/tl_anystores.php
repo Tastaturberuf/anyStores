@@ -23,6 +23,7 @@ $GLOBALS['TL_LANG']['tl_anystores'] = array
     'phone'           => array('Phone', ''),
     'fax'             => array('Fax', ''),
     'street'          => array('Street', ''),
+    'street2'         => array('Street info', 'Additional street information'),
     'postal'          => array('ZIP', ''),
     'city'            => array('City', ''),
     'country'         => array('Country', ''),

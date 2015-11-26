@@ -3,10 +3,14 @@ anyStores changelog
 
 ## Version 1.6.2
 
+### New
+
+- Add error log when using invalid inserttag params
+- Add additional street info field 'street2'
+
 ### Fixed
 
 - Put sitemap setting on the page palettes ending
-- Add error log when using invalid inserttag params
 
 ### Changed
 

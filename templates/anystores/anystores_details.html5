@@ -13,6 +13,9 @@
     <div class="address">
         <div class="name"><?php echo $this->name; ?></div>
         <div class="street"><?php echo $this->street; ?></div>
+        <?php if ($this->street2): ?>
+            <div class="street2"><?php echo $this->street2; ?></div>
+        <?php endif; ?>
         <div class="postal-city">
           <span class="postal"><?php echo $this->postal; ?></span> <span class="city"><?php echo $this->city; ?></span>
         </div>
