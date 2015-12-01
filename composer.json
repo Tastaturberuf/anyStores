@@ -20,6 +20,9 @@
         "contao-community-alliance/composer-installer": "*",
         "menatwork/contao-multicolumnwizard": ">=3.2"
     },
+    "replace": {
+        "contao-legacy/anystores": "self.version"
+    },
     "extra": {
         "contao": {
             "sources": {
