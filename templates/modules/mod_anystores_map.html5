@@ -1,80 +1,64 @@
 <script>
-    var map;
-
-/*var xhr = new XMLHttpRequest();
-xhr.open('GET', '/system/modules/storelocator_map/html/locations.json', true);
-xhr.onload = function() {
-    locations    =   this.responseText;
-};
-xhr.send();*/
-
-
-locations = <?php echo $this->json; ?>;
+var stores = <?php echo $this->json; ?>;
 
 function initialize()
 {
-    var mapOptions = {
-        zoom: 6,                                                // @todo konfigurierbar machen
-        center: new google.maps.LatLng(51.162930, 8.144886),    // @todo konfigurierbar machen
-        streetViewControl: false,                               // @todo konfigurierbar machen
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    // @todo konfigurierbar machen
+    var center = new google.maps.LatLng(51.162930, 8.144886);
+
+    // @todo konfigurierbar machen
+    var zoom = 6;
+
+    // @todo konfigurierbar machen
+    var streetview = false;
+
+    // @todo konfigurierbar machen
+    var maptype = google.maps.MapTypeId.ROADMAP;
+
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+        zoom: zoom,
+        center: center,
+        streetViewControl: streetview,
+        mapTypeId: maptype
+    });
 
     var markers = [];
-    var countloc = locations.length;
 
-    for (i = 0; i < countloc; i++) {
+    for (var i = 0; i < stores.length; i++) {
 
-        var loc     =   locations[i];
+        var store = stores[i];
 
-        marker      =   new google.maps.Marker({
-            position: new google.maps.LatLng(loc.latitude, loc.longitude),
-            map: map
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(store.latitude, store.longitude)
         });
 
+        var infowindow = new google.maps.InfoWindow();
 
-    var infowindow = new google.maps.InfoWindow();
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
 
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            var html = "<b><a href=\"" + store.href + "\">" + store.name + "</a></b><br>";
 
-                var html = "<b><a href=\"" + loc.href + "\">" + loc.name + "</a></b><br>";
+            (store.street !="") ? html += store.street  + "<br>" : "";
+            (store.city !="")   ? html += store.postal  + " " +  store.city  + "<br>" : "";
+            (store.phone !="")  ? html += store.phone  + "<br>" : "";
+            (store.url !="")    ? html += "<a href=\"" + store.url  + "\">" + store.url  + "</a><br>" : "";
+            (store.email !="")  ? html += "<a href=\"mailto:" + store.email  + "\">" + store.email  + "</a><br>" : "";
+            (store.href !="")   ? html += "<br><a href=\"" + store.href + "\">{{label::anystores:more}}</a>" : "";
 
-    			(loc.street !="") 	? html += loc.street  + "<br>" : "";
-    			(loc.city !="") 	? html += loc.postal  + " " +  loc.city  + "<br>" : "";
-    			(loc.phone !="") 	? html += loc.phone  + "<br>" : "";
-    			(loc.url !="") 		? html += "<a href=\"" + loc.url  + "\">" + loc.url  + "</a><br>" : "";
-    			(loc.email !="") 	? html += "<a href=\"mailto:" + loc.email  + "\">" + loc.email  + "</a><br>" : "";
-    			(loc.href !="") 	? html += "<br><a href=\"" + loc.href + "\">{{label::anystores:more}}</a>" : "";
-
-
-
-                return function() {
-                    infowindow.setContent(html);
-                    infowindow.open(map, marker);
-                }
-            })(marker, i));
-
-            markers.push(marker);
-
-        }
-        //set style options for marker clusters (these are the default styles)
-        mcOptions = {styles: [
-            {
-                height: 53,
-                url: "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m1.png",
-                width: 53
+            return function() {
+                infowindow.setContent(html);
+                infowindow.open(map, marker);
             }
-        ]};
-        var markerCluster = new MarkerClusterer(map, markers, mcOptions);
 
+        })(marker, i));
+
+        markers.push(marker);
     }
 
+    var markerCluster = new MarkerClusterer(map, markers);
+}
 
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
+google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-<section id="map-canvas" style="width: 500px; height: 500px;" class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
-</section>
+<section id="map-canvas" style="width: 500px; height: 500px;" class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>></section>
