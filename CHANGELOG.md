@@ -1,10 +1,13 @@
 anyStores changelog
 ===================
 
-## Version 1.6.2
+## Version 1.7.0
+
+changed template mod_anystores_map!
 
 ### New
 
+- Add configuration values to map module
 - Add error log when using invalid inserttag params
 - Add additional street info field 'street2'
 
@@ -14,6 +17,7 @@ anyStores changelog
 
 ### Changed
 
+- load module params and stores over ajax
 - Add $this->rawstores to mod_anystores_list template
 
 ## Version 1.6.1

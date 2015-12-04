@@ -9,9 +9,9 @@ function loadMap()
     oReq.addEventListener("error", transferFailed);
     oReq.addEventListener("abort", transferCanceled);
 
-    oReq.open("POST", anystores.stores.url);
+    oReq.open("POST", "system/modules/anyStores/ajax/ajax.php");
     oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    oReq.send(anystores.stores.params);
+    oReq.send("module="+anystores.module+"&REQUEST_TOKEN="+anystores.request_token);
 
     // progress on transfers from the server to the client (downloads)
     function updateProgress (oEvent) {
@@ -24,9 +24,7 @@ function loadMap()
     }
 
     function transferComplete(evt) {
-        console.log(evt);
-        stores = JSON.parse(this.responseText);
-        console.log(stores);
+        anystores = JSON.parse(this.responseText);
         initialize();
     }
 
@@ -43,17 +41,17 @@ function loadMap()
 function initialize()
 {
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
-        zoom: anystores.map.zoom,
-        center: new google.maps.LatLng(anystores.map.latitude, anystores.map.longitude),
-        streetViewControl: anystores.map.streetview,
-        mapTypeId: anystores.map.maptype
+        zoom: anystores.module.zoom,
+        center: new google.maps.LatLng(anystores.module.latitude, anystores.module.longitude),
+        streetViewControl: anystores.module.streetview,
+        mapTypeId: anystores.module.maptype
     });
 
     var markers = [];
 
-    for (var i = 0; i < stores.length; i++) {
+    for (var i = 0; i < anystores.stores.length; i++) {
 
-        var store = stores[i];
+        var store = anystores.stores[i];
 
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(store.latitude, store.longitude)
@@ -70,7 +68,7 @@ function initialize()
             (store.phone !="")  ? html += store.phone  + "<br>" : "";
             (store.url !="")    ? html += "<a href=\"" + store.url  + "\">" + store.url  + "</a><br>" : "";
             (store.email !="")  ? html += "<a href=\"mailto:" + store.email  + "\">" + store.email  + "</a><br>" : "";
-            (store.href !="")   ? html += "<br><a href=\"" + anystores.stores.href + store.href + "\">Mehr Informationen</a>" : "";
+            (store.href !="")   ? html += "<br><a href=\"" + store.href + "\">Mehr Informationen</a>" : "";
 
             return function() {
                 infowindow.setContent(html);

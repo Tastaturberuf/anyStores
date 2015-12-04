@@ -42,5 +42,10 @@ array_insert($GLOBALS['TL_LANG']['tl_module'], 0, array
     'anystores_maxDistance'      => array('Max distance', 'The maximum distance in km.'),
     'anystores_sortingOrder'     => array('Sorting order', 'Choose your individual sorting order. Default: postal'),
     'anystores_detailTpl'        => array('Details template', 'Choose which template should be used to show details of the store'),
-    'anystores_mapTpl'           => array('Map template', 'Choose a template for the map.')
+    'anystores_mapTpl'           => array('Map template', 'Choose a template for the map.'),
+    'anystores_latitude'         => array('Latitude', 'Default value for the map.'),
+    'anystores_longitude'        => array('Longitude', 'Default value for the map.'),
+    'anystores_zoom'             => array('Zoom level', 'Default zoom level for the map.'),
+    'anystores_maptype'          => array('Maptype', 'Default maptype.'),
+    'anystores_streetview'       => array('Enable StreetView', 'Switch StreetView on or off.')
 ));

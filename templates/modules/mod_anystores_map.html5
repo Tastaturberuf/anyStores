@@ -1,19 +1,7 @@
 <script>
 var anystores = {
-    "map": {
-        "latitude":   51.162930,
-        "longitude":  8.144886,
-        "zoom":       6,
-        "streetview": false,
-        "maptype":    google.maps.MapTypeId.ROADMAP
-    },
-    "stores": {
-        "categories": null,
-        "href":       "http://bliblablubb/",
-        "url":        "system/modules/anyStores/ajax/ajax.php",
-        "params":     "REQUEST_TOKEN={{REQUEST_TOKEN}}&action=findPublishedByCategory&categories=1,3"
-    }
+    "module": 4,
+    "request_token": '<?php echo REQUEST_TOKEN; ?>'
 };
-console.log(anystores);
 </script>
 <section id="map-canvas" style="width: 500px; height: 500px;" class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>></section>

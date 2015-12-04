@@ -34,13 +34,18 @@ array_insert($GLOBALS['TL_LANG']['FMD'], 0, array
 
 array_insert($GLOBALS['TL_LANG']['tl_module'], 0, array
 (
-    'anystores_defaultCountry'       => array('Standardland', 'In welchem Land sollen die Ergebnisse gesucht werden (falls der Benutzer kein anderes ausgewählt hat)?'),
-    'anystores_categories'           => array('Kategorie auswählen', 'Aus welcher Kategorie sollen Standorte angezeigt werden?'),
-    'anystores_listLimit'            => array('Anzahl der Standorte', 'Wieviele Standorte sollen maximal angezeigt werden?'),
-    'anystores_allowEmptySearch'     => array('Leersuche erlauben?', 'Soll der Benutzer eine leere Suchanfrage abschicken können um alle Standorte angezeigt zu bekommen?'),
-    'anystores_limitDistance'        => array('Entfernung begrenzen', 'Standorte ab einer maximalen Entfernung nicht anzeigen.'),
-    'anystores_maxDistance'          => array('Maximale Entfernung', 'Die maximale Entfernung in km.'),
-    'anystores_sortingOrder'         => array('Sortierreihenfolge', 'Legen Sie hier die individuelle Sortierung der Liste fest. Standard: postal'),
-    'anystores_detailTpl'            => array('Standort-Template', 'Hier kann das Template für die einzelnen Standorte überschrieben werden. Sie können damit die Einträge des Listen- und Detail-Moduls ihren wünschen anpassen.'),
-    'anystores_mapTpl'               => array('Karten-Template', 'Hier kann das Template für die Standortkarte überschrieben werden.')
+    'anystores_defaultCountry'   => array('Standardland', 'In welchem Land sollen die Ergebnisse gesucht werden (falls der Benutzer kein anderes ausgewählt hat)?'),
+    'anystores_categories'       => array('Kategorie auswählen', 'Aus welcher Kategorie sollen Standorte angezeigt werden?'),
+    'anystores_listLimit'        => array('Anzahl der Standorte', 'Wieviele Standorte sollen maximal angezeigt werden?'),
+    'anystores_allowEmptySearch' => array('Leersuche erlauben?', 'Soll der Benutzer eine leere Suchanfrage abschicken können um alle Standorte angezeigt zu bekommen?'),
+    'anystores_limitDistance'    => array('Entfernung begrenzen', 'Standorte ab einer maximalen Entfernung nicht anzeigen.'),
+    'anystores_maxDistance'      => array('Maximale Entfernung', 'Die maximale Entfernung in km.'),
+    'anystores_sortingOrder'     => array('Sortierreihenfolge', 'Legen Sie hier die individuelle Sortierung der Liste fest. Standard: postal'),
+    'anystores_detailTpl'        => array('Standort-Template', 'Hier kann das Template für die einzelnen Standorte überschrieben werden. Sie können damit die Einträge des Listen- und Detail-Moduls ihren wünschen anpassen.'),
+    'anystores_mapTpl'           => array('Karten-Template', 'Hier kann das Template für die Standortkarte überschrieben werden.'),
+    'anystores_latitude'         => array('Breitengrad', 'Breitengrad für die Ausgangsansicht.'),
+    'anystores_longitude'        => array('Längengrad', 'Längengrad für die Ausgangsansicht.'),
+    'anystores_zoom'             => array('Zoom-Level', 'Zoom-Level für die Ausgangsansicht.'),
+    'anystores_maptype'          => array('Kartentyp', 'Standard-Kartentyp.'),
+    'anystores_streetview'       => array('Streetview aktivieren', 'Streetview an/abschalten.')
 ));

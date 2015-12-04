@@ -36,7 +36,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
     ',
     'anystores_map' => '
         {title_legend},name,headline,type;
-        {config_legend:hide},anystores_categories,jumpTo;
+        {config_legend:hide},anystores_categories,jumpTo,anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_streetview;
         {template_legend:hide},customTpl;
         {expert_legend:hide},guests,cssID,space
     '
@@ -202,5 +202,71 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
             'tl_class'           => 'w50'
         ),
         'sql' => "varchar(64) NOT NULL default ''"
+    ),
+    'anystores_latitude' => array
+    (
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_latitude'],
+        'inputType' => 'text',
+        'eval'      => array
+        (
+            'mandatory' => true,
+            'default'   => 0,
+            'maxlength' => 64,
+            'tl_class'  => 'w50'
+        ),
+        'sql' => "varchar(64) NOT NULL default '0'"
+    ),
+    'anystores_longitude' => array
+    (
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_longitude'],
+        'inputType' => 'text',
+        'eval'      => array
+        (
+            'mandatory' => true,
+            'default'   => 0,
+            'maxlength' => 64,
+            'tl_class'  => 'w50'
+        ),
+        'sql' => "varchar(64) NOT NULL default '0'"
+    ),
+    'anystores_zoom' => array
+    (
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_zoom'],
+        'inputType' => 'select',
+        'options'   => range(1,18),
+        'eval'      => array
+        (
+            'default'   => 6,
+            'tl_class'  => 'w50'
+        ),
+        'sql' => "tinyint(2) unsigned NOT NULL default '6'"
+    ),
+    'anystores_streetview' => array
+    (
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_streetview'],
+        'inputType' => 'checkbox',
+        'eval'      => array
+        (
+            'tl_class'  => 'w50 m12'
+        ),
+        'sql' => "char(1) NOT NULL default ''"
+    ),
+    'anystores_maptype' => array
+    (
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_maptype'],
+        'inputType' => 'select',
+        'options'   => array
+        (
+            'roadmap',
+            'satellite',
+            'hybrid',
+            'terrain'
+        ),
+        'eval'      => array
+        (
+            'tl_class'  => 'w50'
+        ),
+        'sql' => "varchar(9) NOT NULL default 'roadmap'"
     )
+
 ));

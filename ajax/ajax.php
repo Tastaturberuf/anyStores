@@ -14,15 +14,62 @@ define('TL_MODE', 'FE');
 
 require '../../../initialize.php';
 
-$action     = \Input::post('action');
-$categories = explode(',', \Input::post('categories'));
+$intModuleId = (int) \Input::post('module');
 
-if ( $action === 'findPublishedByCategory' && count($categories) )
+if ( $intModuleId )
 {
-    $objStores = AnyStoresModel::findPublishedByCategory($categories);
+    // Find module
+    $objModule = \ModuleModel::findByPk($intModuleId);
 
-    if ( $objStores )
+    // Validate module
+    if ( !$objModule || $objModule->type !== 'anystores_map' )
     {
-        echo json_encode($objStores->fetchAll());
+        return;
     }
+
+    // Find stores
+    $objStores = AnyStoresModel::findPublishedByCategory(deserialize($objModule->anystores_categories));
+
+    if ( !$objStores )
+    {
+        return;
+    }
+
+    while( $objStores->next() )
+    {
+        // generate jump to
+        if ( $objModule->jumpTo )
+        {
+            if ( ($objLocation = \PageModel::findByPk($objModule->jumpTo)) !== null )
+            {
+                //@todo language parameter
+                $strStoreKey   = !$GLOBALS['TL_CONFIG']['useAutoItem'] ? '/store/' : '/';
+                $strStoreValue = $objStores->alias;
+
+                $objStores->href = \Controller::generateFrontendUrl(
+                    $objLocation->row(),
+                    $strStoreKey.$strStoreValue
+                );
+            }
+        }
+
+        // Encode email
+        $objStores->email = \String::encodeEmail($objStores->email);
+    }
+
+    $arrConfig = array
+    (
+        'module' => array
+        (
+            'latitude'   => (float)  $objModule->anystores_latitude,
+            'longitude'  => (float)  $objModule->anystores_longitude,
+            'zoom'       => (int)    $objModule->anystores_zoom,
+            'streetview' => (bool)   $objModule->anystores_streetview,
+            'maptype'    => (string) $objModule->anystores_maptype,
+        ),
+        'stores' => $objStores->fetchAll()
+    );
+
+    header('Content-Type: application/json');
+    echo json_encode($arrConfig);
 }
