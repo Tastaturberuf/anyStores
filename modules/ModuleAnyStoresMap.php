@@ -55,6 +55,7 @@ class ModuleAnyStoresMap extends \Module // extends ModuleStoreLocatorList
     protected function compile()
     {
         $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?sensor=false&amp;language='.$GLOBALS['TL_LANGUAGE'];
+        $GLOBALS['TL_JAVASCRIPT']['anystores']       = 'system/modules/anyStores/assets/js/anystores.js';
         $GLOBALS['TL_JAVASCRIPT']['markerclusterer'] = 'system/modules/anyStores/assets/js/markerclusterer.js';
 
         // get published stores from categories
