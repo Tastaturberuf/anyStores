@@ -3,6 +3,10 @@ anyStores changelog
 
 ## Version 1.7.2
 
+### New
+
+- Add hook 'anystores_getAjaxModule' when map module is loaded
+
 ### Changed
 
 - Remove the sensor parameter in google map urls

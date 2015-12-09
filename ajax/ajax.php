@@ -15,6 +15,7 @@ define('TL_MODE', 'FE');
 require '../../../initialize.php';
 
 $intModuleId = (int) \Input::post('module');
+$intModuleId = (int) \Input::get('module');
 
 if ( $intModuleId )
 {
@@ -25,6 +26,15 @@ if ( $intModuleId )
     if ( !$objModule || $objModule->type !== 'anystores_map' )
     {
         return;
+    }
+
+    // Hook to manipulate the module
+    if (isset($GLOBALS['TL_HOOKS']['anystores_getAjaxModule']) && is_array($GLOBALS['TL_HOOKS']['anystores_getAjaxModule']))
+    {
+        foreach ($GLOBALS['TL_HOOKS']['anystores_getAjaxModule'] as $callback)
+        {
+            \System::importStatic($callback[0])->{$callback[1]}($objModule);
+        }
     }
 
     // Find stores
