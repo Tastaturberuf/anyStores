@@ -3,9 +3,14 @@ anyStores changelog
 
 ## Version 1.7.1
 
+### New
+
+- Add field in map module for map height (remove hardcoded css style from template)
+
 ### Fixed
 
 - Fixed awkward error with map loading
+
 
 ## Version 1.7.0
 

@@ -36,7 +36,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
     ',
     'anystores_map' => '
         {title_legend},name,headline,type;
-        {config_legend:hide},anystores_categories,jumpTo,anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_streetview;
+        {config_legend:hide},anystores_categories,jumpTo,anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_mapheight,anystores_streetview;
         {template_legend:hide},customTpl;
         {expert_legend:hide},guests,cssID,space
     '
@@ -267,6 +267,19 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
             'tl_class'  => 'w50'
         ),
         'sql' => "varchar(9) NOT NULL default 'roadmap'"
+    ),
+    'anystores_mapheight' => array
+    (
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_mapheight'],
+        'inputType' => 'text',
+        'eval'      => array
+        (
+            'default'   => 500,
+            'maxlength' => 3,
+            'rgxp'      => 'digit',
+            'tl_class'  => 'w50'
+        ),
+        'sql' => "int(3) unsigned NOT NULL default '500'"
     )
 
 ));

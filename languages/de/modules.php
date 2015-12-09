@@ -47,5 +47,6 @@ array_insert($GLOBALS['TL_LANG']['tl_module'], 0, array
     'anystores_longitude'        => array('Längengrad', 'Längengrad für die Ausgangsansicht.'),
     'anystores_zoom'             => array('Zoom-Level', 'Zoom-Level für die Ausgangsansicht.'),
     'anystores_maptype'          => array('Kartentyp', 'Standard-Kartentyp.'),
-    'anystores_streetview'       => array('Streetview aktivieren', 'Streetview an/abschalten.')
+    'anystores_streetview'       => array('Streetview aktivieren', 'Streetview an/abschalten.'),
+    'anystores_mapheight'        => array('Kartenhöhe', 'Angabe in Pixel. Fügt dem Template das Style-Attribut hinzu.')
 ));

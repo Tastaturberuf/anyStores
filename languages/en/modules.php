@@ -47,5 +47,6 @@ array_insert($GLOBALS['TL_LANG']['tl_module'], 0, array
     'anystores_longitude'        => array('Longitude', 'Default value for the map.'),
     'anystores_zoom'             => array('Zoom level', 'Default zoom level for the map.'),
     'anystores_maptype'          => array('Maptype', 'Default maptype.'),
-    'anystores_streetview'       => array('Enable StreetView', 'Switch StreetView on or off.')
+    'anystores_streetview'       => array('Enable StreetView', 'Switch StreetView on or off.'),
+    'anystores_mapheight'        => array('Map height', 'In pixel. Add the style attribute to the template.')
 ));

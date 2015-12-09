@@ -4,4 +4,4 @@ var anystores = {
     "request_token": '<?php echo REQUEST_TOKEN; ?>'
 };
 </script>
-<section id="map-canvas" style="width: 500px; height: 500px;" class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>></section>
+<section id="map-canvas"<?php if ($this->anystores_mapheight): ?> style="height:<?php echo $this->anystores_mapheight; ?>px" <?php endif; ?>class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>></section>
