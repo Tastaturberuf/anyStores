@@ -1,6 +1,12 @@
 anyStores changelog
 ===================
 
+## Version 1.7.2
+
+### Changed
+
+- Remove the sensor parameter in google map urls
+
 ## Version 1.7.1
 
 ### New
