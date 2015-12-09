@@ -1,6 +1,12 @@
 anyStores changelog
 ===================
 
+## Version 1.7.1
+
+### Fixed
+
+- Fixed awkward error with map loading
+
 ## Version 1.7.0
 
 changed template mod_anystores_map!

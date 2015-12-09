@@ -1,6 +1,6 @@
 <script>
 var anystores = {
-    "module": 4,
+    "module": <?php echo $this->id; ?>,
     "request_token": '<?php echo REQUEST_TOKEN; ?>'
 };
 </script>
