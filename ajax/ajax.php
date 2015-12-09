@@ -15,7 +15,6 @@ define('TL_MODE', 'FE');
 require '../../../initialize.php';
 
 $intModuleId = (int) \Input::post('module');
-$intModuleId = (int) \Input::get('module');
 
 if ( $intModuleId )
 {
