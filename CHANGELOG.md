@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.7.2]
 ### Added
+- Set markers global, module, category and location based
 - Add hook 'anystores_getAjaxModule' when map module is loaded
 - Add getStoreFromUrl function
 

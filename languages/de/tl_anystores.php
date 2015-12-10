@@ -43,6 +43,7 @@ $GLOBALS['TL_LANG']['tl_anystores'] = array
     'stop'            => array('Anzeigen bis', 'Ein Datum bis wann der Standort angezeigt.'),
     'metatitle'       => array('Meta-Titel', htmlentities('Geben Sie den Inhalt für das <title>-Tag ein.')),
     'metadescription' => array('Meta-Beschreibung', htmlentities('Geben Sie den Inhalt für <meta content"description"> ein.')),
+    'marker'          => array('Marker', 'Setzt den Marker für diesen Standort. Überschreibt alle anderen Marker.'),
 
     // Legends
     'common_legend'  => 'Allgemein',

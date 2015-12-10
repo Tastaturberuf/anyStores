@@ -283,7 +283,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     ),
     'anystores_defaultMarker' => array
     (
-        'label'     => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_defaultMarker'],
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_defaultMarker'],
         'inputType' => 'fileTree',
         'eval'      => array
         (

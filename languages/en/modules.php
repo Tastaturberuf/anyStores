@@ -48,5 +48,6 @@ array_insert($GLOBALS['TL_LANG']['tl_module'], 0, array
     'anystores_zoom'             => array('Zoom level', 'Default zoom level for the map.'),
     'anystores_maptype'          => array('Maptype', 'Default maptype.'),
     'anystores_streetview'       => array('Enable StreetView', 'Switch StreetView on or off.'),
-    'anystores_mapheight'        => array('Map height', 'In pixel. Add the style attribute to the template.')
+    'anystores_mapheight'        => array('Map height', 'In pixel. Add the style attribute to the template.'),
+    'anystores_defaultMarker'    => array('Default marker', 'Can be overriden by category and location. Overrides global marker from settings.')
 ));

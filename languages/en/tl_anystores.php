@@ -43,6 +43,7 @@ $GLOBALS['TL_LANG']['tl_anystores'] = array
     'stop'            => array('Publish to', ''),
     'metatitle'       => array('Meta title', ''),
     'metadescription' => array('Meta description', ''),
+    'marker'          => array('Marker', 'Set the marker for this location. Overrides all other markers.'),
 
     // Legends
     'common_legend'  => 'Common',

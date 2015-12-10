@@ -38,6 +38,14 @@ if ( $intModuleId )
         }
     }
 
+    if ( \Validator::isBinaryUuid($objModule->anystores_defaultMarker) )
+    {
+        if ( ($objFile = \FilesModel::findByPk($objModule->anystores_defaultMarker)) !== null )
+        {
+            $objModule->anystores_defaultMarker = $objFile->path;
+        }
+    }
+
     // Find stores
     $objStores = AnyStoresModel::findPublishedByCategory(deserialize($objModule->anystores_categories));
 
@@ -71,6 +79,39 @@ if ( $intModuleId )
 
         // Encode opening times
         $objStores->opening_times = deserialize($objStores->opening_times);
+
+        // decode logo
+        if ( \Validator::isBinaryUuid($objStores->logo) )
+        {
+            if ( ($objFile = \FilesModel::findByPk($objStores->logo)) !== null )
+            {
+                $objStores->logo = $objFile->path;
+            }
+        }
+
+        // decode marker
+        if ( \Validator::isBinaryUuid($objStores->marker) )
+        {
+            if ( ($objFile = \FilesModel::findByPk($objStores->marker)) !== null )
+            {
+                $objStores->marker = $objFile->path;
+            }
+        }
+
+        // add category marker
+        //@todo make null
+        $objStores->categoryMarker = false;
+
+        if ( ($objCategory = Tastaturberuf\AnyStoresCategoryModel::findByPk($objStores->pid)) !== null )
+        {
+            if ( \Validator::isBinaryUuid($objCategory->defaultMarker) )
+            {
+                if ( ($objFile = \FilesModel::findByPk($objCategory->defaultMarker)) !== null )
+                {
+                    $objStores->categoryMarker = $objFile->path;
+                }
+            }
+        }
     }
 
     $arrConfig = array
@@ -79,17 +120,38 @@ if ( $intModuleId )
         'count'  => (int) $objStores->count(),
         'module' => array
         (
-            'latitude'   => (float)  $objModule->anystores_latitude,
-            'longitude'  => (float)  $objModule->anystores_longitude,
-            'zoom'       => (int)    $objModule->anystores_zoom,
-            'streetview' => (bool)   $objModule->anystores_streetview,
-            'maptype'    => (string) $objModule->anystores_maptype,
+            'latitude'      => (float)  $objModule->anystores_latitude,
+            'longitude'     => (float)  $objModule->anystores_longitude,
+            'zoom'          => (int)    $objModule->anystores_zoom,
+            'streetview'    => (bool)   $objModule->anystores_streetview,
+            'maptype'       => (string) $objModule->anystores_maptype,
+            'defaultMarker' => (string) $objModule->anystores_defaultMarker
         ),
         'stores' => $objStores->fetchAll()
     );
 
+    // decode global default marker
+    $arrConfig['global']['defaultMarker'] = null;
+
+    if ( \Validator::isUuid(\Config::get('anystores_defaultMarker')) )
+    {
+        if ( ($objFile = \FilesModel::findByPk(\Config::get('anystores_defaultMarker'))) !== null )
+        {
+            $arrConfig['global']['defaultMarker'] = $objFile->path;
+        }
+    }
+
+    $strJson = json_encode($arrConfig);
+
     header('Content-Type: application/json');
-    echo json_encode($arrConfig);
+    if ( $strJson )
+    {
+        echo $strJson;
+    }
+    else
+    {
+        echo json_encode(array('status' => json_last_error_msg()));
+    }
     exit();
 }
 else

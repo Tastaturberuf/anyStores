@@ -121,7 +121,7 @@ $GLOBALS['TL_DCA']['tl_anystores_category'] = array
         ),
         'defaultMarker' => array
         (
-            'label'     => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_defaultMarker'],
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores_category']['defaultMarker'],
             'inputType' => 'fileTree',
             'eval'      => array
             (

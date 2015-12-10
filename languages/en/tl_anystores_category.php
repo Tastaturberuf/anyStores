@@ -15,7 +15,8 @@
 $GLOBALS['TL_LANG']['tl_anystores_category'] = array
 (
     // Fields
-    'title' => array('Name', ''),
+    'title'         => array('Name', ''),
+    'defaultMarker' => array('Default marker for category', 'Overrides the modul marker and the global marker.'),
 
     // Legends
     'title_legend' => 'Common',

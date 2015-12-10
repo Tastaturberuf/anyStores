@@ -15,7 +15,8 @@
 $GLOBALS['TL_LANG']['tl_anystores_category'] = array
 (
     // Fields
-    'title' => array('Bezeichnung', 'Bitte einen Kategorienamen eingeben.'),
+    'title'         => array('Bezeichnung', 'Bitte einen Kategorienamen eingeben.'),
+    'defaultMarker' => array('Standard-Marker für die Kategorie', 'Überschreibt den Modul- und den globalen Marker.'),
 
     // Legends
     'title_legend' => 'Allgemein',

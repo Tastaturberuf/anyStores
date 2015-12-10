@@ -1,5 +1,3 @@
-var stores;
-
 function loadMap()
 {
     var oReq = new XMLHttpRequest();
@@ -56,6 +54,30 @@ function initialize()
             position: new google.maps.LatLng(store.latitude, store.longitude),
             title: store.name
         });
+
+        // set global marker
+        if ( anystores.global.defaultMarker )
+        {
+            marker.setIcon(anystores.global.defaultMarker);
+        }
+
+        // set module marker
+        if ( anystores.module.defaultMarker )
+        {
+            marker.setIcon(anystores.module.defaultMarker);
+        }
+
+        // set category marker
+        if ( store.categoryMarker )
+        {
+            marker.setIcon(store.categoryMarker)
+        }
+
+        // set location marker
+        if ( store.marker )
+        {
+            marker.setIcon(store.marker);
+        }
 
         var infowindow = new google.maps.InfoWindow();
 
