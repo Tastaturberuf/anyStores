@@ -32,11 +32,9 @@ if ( $intModuleId )
     // Hook to manipulate the module
     if (isset($GLOBALS['TL_HOOKS']['anystores_getAjaxModule']) && is_array($GLOBALS['TL_HOOKS']['anystores_getAjaxModule']))
     {
-        $strUrl = \Environment::get('ScriptUri').'?'.\Environment::get('QueryString');
-
         foreach ($GLOBALS['TL_HOOKS']['anystores_getAjaxModule'] as $callback)
         {
-            \System::importStatic($callback[0])->{$callback[1]}($objModule, $strUrl);
+            \System::importStatic($callback[0])->{$callback[1]}($objModule);
         }
     }
 
