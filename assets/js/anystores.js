@@ -48,12 +48,13 @@ function initialize()
 
     var markers = [];
 
-    for (var i = 0; i < anystores.stores.length; i++) {
-
+    for (var i = 0; i < anystores.stores.length; i++)
+    {
         var store = anystores.stores[i];
 
         var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(store.latitude, store.longitude)
+            position: new google.maps.LatLng(store.latitude, store.longitude),
+            title: store.name
         });
 
         var infowindow = new google.maps.InfoWindow();
