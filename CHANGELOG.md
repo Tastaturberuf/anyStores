@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Change log format to http://keepachangelog.com/
 - Remove the sensor parameter in google map urls
+- Change ajax method to GET
 
 ## [1.7.1]
 ### New

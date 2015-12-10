@@ -14,7 +14,7 @@ define('TL_MODE', 'FE');
 
 require '../../../initialize.php';
 
-$intModuleId = (int) \Input::post('module');
+$intModuleId = (int) \Input::get('module');
 
 if ( $intModuleId )
 {
@@ -24,7 +24,9 @@ if ( $intModuleId )
     // Validate module
     if ( !$objModule || $objModule->type !== 'anystores_map' )
     {
-        return;
+        header('Content-Type: application/json');
+        echo json_encode(array('status' => 'NO_VALID_MODULE'));
+        exit();
     }
 
     // Hook to manipulate the module
@@ -43,7 +45,9 @@ if ( $intModuleId )
 
     if ( !$objStores )
     {
-        return;
+        header('Content-Type: application/json');
+        echo json_encode(array('status' => 'NO_STORES'));
+        exit();
     }
 
     while( $objStores->next() )
@@ -66,10 +70,15 @@ if ( $intModuleId )
 
         // Encode email
         $objStores->email = \String::encodeEmail($objStores->email);
+
+        // Encode opening times
+        $objStores->opening_times = deserialize($objStores->opening_times);
     }
 
     $arrConfig = array
     (
+        'status' => 'OK',
+        'count'  => (int) $objStores->count(),
         'module' => array
         (
             'latitude'   => (float)  $objModule->anystores_latitude,
@@ -83,4 +92,11 @@ if ( $intModuleId )
 
     header('Content-Type: application/json');
     echo json_encode($arrConfig);
+    exit();
+}
+else
+{
+    header('Content-Type: application/json');
+    echo json_encode(array('status' => 'NO_PARAMS'));
+    exit();
 }
