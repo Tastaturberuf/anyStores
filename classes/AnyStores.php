@@ -107,7 +107,7 @@ class AnyStores
     {
         $strAlias = \Input::get('auto_item') ? \Input::get('auto_item') : \Input::get('store');
 
-        return AnyStoresModel::findbyAlias($strAlias);
+        return AnyStoresModel::findByAlias($strAlias);
     }
 
 }
