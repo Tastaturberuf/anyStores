@@ -1,7 +1,6 @@
 <script>
 var anystores = {
-    "module": <?php echo $this->id; ?>,
-    "request_token": '<?php echo REQUEST_TOKEN; ?>'
+    "module": <?php echo $this->id; ?>
 };
 </script>
 <section id="map-canvas"<?php if ($this->anystores_mapheight): ?> style="height:<?php echo $this->anystores_mapheight; ?>px" <?php endif; ?>class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>></section>

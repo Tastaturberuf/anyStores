@@ -9,8 +9,7 @@ function loadMap()
     oReq.addEventListener("error", transferFailed);
     oReq.addEventListener("abort", transferCanceled);
 
-    oReq.open("GET", "system/modules/anyStores/ajax/ajax.php?module="+anystores.module+"&REQUEST_TOKEN="+anystores.request_token);
-    oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    oReq.open("GET", "system/modules/anyStores/ajax/ajax.php?module="+anystores.module);
     oReq.send();
 
     // progress on transfers from the server to the client (downloads)
