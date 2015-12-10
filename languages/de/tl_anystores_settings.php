@@ -16,5 +16,6 @@ $GLOBALS['TL_LANG']['tl_anystores_settings'] = array
     'anystores_api_legend' => 'API-Einstellungen',
 
     // Fields
-    'anystores_geoApi' => array('Auswahl des API-Anbieters', 'Wählen Sie einen API-Anbieter aus der Liste.')
+    'anystores_geoApi'        => array('Auswahl des API-Anbieters', 'Wählen Sie einen API-Anbieter aus der Liste.'),
+    'anystores_defaultMarker' => array('Standard-Marker für alle Standorte', 'Kann im Modul, in der Kategorie und am Standort überschrieben werden.')
 );

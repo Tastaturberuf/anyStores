@@ -13,23 +13,23 @@
 $GLOBALS['TL_DCA']['tl_anystores_settings'] = array
 (
 
-	// Config
-	'config' => array
-	(
-		'dataContainer' => 'File',
-		'closed'        => true
-	),
+    // Config
+    'config' => array
+    (
+        'dataContainer' => 'File',
+        'closed'        => true
+    ),
 
-	// Palettes
-	'palettes' => array
-	(
-		'default' => '{anystores_api_legend},anystores_geoApi'
-	),
+    // Palettes
+    'palettes' => array
+    (
+        'default' => '{anystores_api_legend},anystores_geoApi,anystores_defaultMarker'
+    ),
 
-	// Fields
-	'fields' => array
-	(
-		'anystores_geoApi' => array
+    // Fields
+    'fields' => array
+    (
+        'anystores_geoApi' => array
         (
             'label' => $GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_geoApi'],
             'inputType' => 'select',
@@ -39,6 +39,19 @@ $GLOBALS['TL_DCA']['tl_anystores_settings'] = array
                 'GoogleMaps'    => 'Google Maps Geolocation API',
                 'OpenStreetMap' => 'OpenStreetMap Nominatim API'
             )
+        ),
+        'anystores_defaultMarker' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_defaultMarker'],
+            'inputType' => 'fileTree',
+            'eval'      => array
+            (
+                'files'      => true,
+                'fieldType'  => 'radio',
+                'extensions' => Config::get('validImageTypes'),
+            )
         )
-	)
+
+    )
+
 );

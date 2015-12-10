@@ -36,7 +36,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
     ',
     'anystores_map' => '
         {title_legend},name,headline,type;
-        {config_legend:hide},anystores_categories,jumpTo,anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_mapheight,anystores_streetview;
+        {config_legend:hide},anystores_categories,jumpTo,anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_mapheight,anystores_streetview,anystores_defaultMarker;
         {template_legend:hide},customTpl;
         {expert_legend:hide},guests,cssID,space
     '
@@ -280,6 +280,18 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
             'tl_class'  => 'w50'
         ),
         'sql' => "int(3) unsigned NOT NULL default '500'"
+    ),
+    'anystores_defaultMarker' => array
+    (
+        'label'     => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_defaultMarker'],
+        'inputType' => 'fileTree',
+        'eval'      => array
+        (
+            'files'      => true,
+            'fieldType'  => 'radio',
+            'extensions' => Config::get('validImageTypes'),
+        ),
+        'sql' => "binary(16) NULL"
     )
 
 ));

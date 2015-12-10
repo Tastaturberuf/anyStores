@@ -93,7 +93,7 @@ $GLOBALS['TL_DCA']['tl_anystores_category'] = array
 
     'palettes' => array
     (
-        'default' => '{title_legend},title'
+        'default' => '{title_legend},title,defaultMarker'
     ),
 
     'fields' => array
@@ -118,6 +118,18 @@ $GLOBALS['TL_DCA']['tl_anystores_category'] = array
                 'maxlength' => 64
             ),
             'sql' => "varchar(64) NOT NULL default ''"
+        ),
+        'defaultMarker' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_defaultMarker'],
+            'inputType' => 'fileTree',
+            'eval'      => array
+            (
+                'files'      => true,
+                'fieldType'  => 'radio',
+                'extensions' => Config::get('validImageTypes'),
+            ),
+            'sql' => "binary(16) NULL"
         )
     )
 );

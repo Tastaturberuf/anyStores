@@ -130,7 +130,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         '__selector__' => array('published'),
         'default' =>
         '
-            {common_legend},pid,name,alias,phone,fax,url,target,email,logo,description;
+            {common_legend},pid,name,alias,phone,fax,url,target,email,logo,marker,description;
             {adress_legend},country,street,street2,postal,city;
             {times_legend},opening_times;
             {geo_legend},geo_explain,longitude,map,latitude;
@@ -281,7 +281,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             'eval'      => array
             (
                 'filesOnly'  => true,
-                'extensions' => $GLOBALS['TL_CONFIG']['validImageTypes'],
+                'extensions' => Config::get('validImageTypes'),
                 'fieldType'  => 'radio',
                 'tl_class'   => 'clr'
             ),
@@ -548,6 +548,18 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                 'maxlength' => 255
             ),
             'sql' => "varchar(255) NOT NULL default ''"
+        ),
+        'marker' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_defaultMarker'],
+            'inputType' => 'fileTree',
+            'eval'      => array
+            (
+                'files'      => true,
+                'fieldType'  => 'radio',
+                'extensions' => Config::get('validImageTypes'),
+            ),
+            'sql' => "binary(16) NULL"
         )
     )
 );
