@@ -96,4 +96,18 @@ class AnyStores
         return false;
     }
 
+
+    /**
+     * Return the store model if available
+     *
+     * @since 1.7.2
+     * @return object AnyStoresModel | null
+     */
+    public static function getStoreFromUrl()
+    {
+        $strAlias = \Input::get('auto_item') ? \Input::get('auto_item') : \Input::get('store');
+
+        return AnyStoresModel::findbyAlias($strAlias);
+    }
+
 }

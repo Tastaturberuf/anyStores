@@ -6,6 +6,7 @@ anyStores changelog
 ### New
 
 - Add hook 'anystores_getAjaxModule' when map module is loaded
+- Add getStoreFromUrl function
 
 ### Changed
 
