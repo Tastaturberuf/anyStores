@@ -619,13 +619,18 @@ class tl_anystores extends Backend
             return;
 
         }
+        
+        // Get country name
+        $arrCountries = \System::getCountries();
 
         // find coordinates
         $arrCoords = AnyStores::getLonLat(
-            $dc->activeRecord->street.' '
-            .$dc->activeRecord->postal.' '
-            .$dc->activeRecord->city,
-            $dc->activeRecord->country
+            sprintf('%s, %s %s, %s',
+                $dc->activeRecord->street,
+                $dc->activeRecord->postal,
+                $dc->activeRecord->city,
+                $arrCountries[$dc->activeRecord->country]
+            )
         );
 
         if ( !empty($arrCoords) )
@@ -662,6 +667,7 @@ class tl_anystores extends Backend
      * @param string
      * @param string
      * @return array
+     * @deprecated 1.0
      */
     public function getCoordinates($street = NULL, $postal = NULL, $city = NULL, $country = NULL)
     {
