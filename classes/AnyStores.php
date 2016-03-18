@@ -15,62 +15,7 @@ namespace Tastaturberuf;
 
 class AnyStores
 {
-
-    /**
-     * @deprecated
-     */
-    public static function loadStoreDetails(array $arrStore, $jumpTo = null)
-    {
-        //load country names
-        //@todo load only once. not every time.
-        $arrCountryNames = \System::getCountries();
-
-        //full localized country name
-        //@todo rename country to countrycode in database
-        $arrStore['countrycode'] = $arrStore['country'];
-        $arrStore['country']     = $arrCountryNames[$arrStore['countrycode']];
-
-        // generate jump to
-        if ( $jumpTo )
-        {
-            if ( ($objLocation = \PageModel::findByPk($jumpTo)) !== null )
-            {
-                //@todo language parameter
-                $strStoreKey   = !$GLOBALS['TL_CONFIG']['useAutoItem'] ? '/store/' : '/';
-                $strStoreValue = $arrStore['alias'];
-
-                $arrStore['href'] = \Controller::generateFrontendUrl(
-                    $objLocation->row(),
-                    $strStoreKey.$strStoreValue
-                );
-            }
-        }
-
-        // opening times
-        $arrStore['opening_times'] = deserialize($arrStore['opening_times']);
-
-        // store logo
-        //@todo change size and properties in module
-        if ( $arrStore['logo'] )
-        {
-            if ( ($objLogo = \FilesModel::findByUuid($arrStore['logo'])) !== null )
-            {
-                $arrLogo = $objLogo->row();
-                $arrMeta = deserialize($arrLogo['meta']);
-                $arrLogo['meta'] = $arrMeta[$GLOBALS['TL_LANGUAGE']];
-
-                $arrStore['logo'] = $arrLogo;
-            }
-            else
-            {
-                $arrStore['logo'] = null;
-            }
-        }
-
-        return $arrStore;
-    }
-
-
+    
     /**
      * Wrap the different geo APIs
      *

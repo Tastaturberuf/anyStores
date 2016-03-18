@@ -661,21 +661,6 @@ class tl_anystores extends Backend
 
 
     /**
-     * Returns geographical coordinates
-     * @param string
-     * @param string
-     * @param string
-     * @param string
-     * @return array
-     * @deprecated 1.0
-     */
-    public function getCoordinates($street = NULL, $postal = NULL, $city = NULL, $country = NULL)
-    {
-        return StoreLocator::getCoordinates($street, $postal, $city, $country);
-    }
-
-
-    /**
      * Displays a little static Google Map with position of the address
      * @todo Make dynamic and change coordinates on click
      *
