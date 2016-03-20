@@ -3,7 +3,7 @@
 /**
  * anyStores for Contao Open Source CMS
  *
- * @copyright   (c) 2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
+ * @copyright   (c) 2014 - 2016 Tastaturberuf <mail@tastaturberuf.de>
  * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
  * @license     http://opensource.org/licenses/lgpl-3.0.html
  * @package     anyStores
@@ -26,13 +26,24 @@ class GoogleMaps
     public static function getLonLat($strAddress, $strCountry = null)
     {
         // Google Geocoding API v3
-        $strQuery = 'https://maps.googleapis.com/maps/api/geocode/json?'
-            .'address='.rawurlencode($strAddress)
-            .'&language='.$GLOBALS['TL_LANGUAGE'];
+        $strUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
+
+        $arrParams = array
+        (
+            'address'  => $strAddress,
+            'language' => $GLOBALS['TL_LANGUAGE']
+        );
+
+        if ( \Config::get('anystores_apiKey') )
+        {
+            $arrParams['key'] = \Config::get('anystores_apiKey');
+        }
+
+        $strQuery = $strUrl.'?'.http_build_query($arrParams, '', '&', PHP_QUERY_RFC1738);
 
         if ( $strCountry )
         {
-            $strQuery .= '&components=country:'.$strCountry;
+            $strQuery .= '&components=country:'.strtoupper($strCountry);
         }
 
         $objRequest = new \Request();
@@ -57,7 +68,7 @@ class GoogleMaps
                 case 'REQUEST_DENIED':
                 case 'INVALID_REQUEST':
                 default:
-                    \System::log("Google Maps API return error '{$objResponse->status}' for '{$strAddress}'", __METHOD__, TL_ERROR);
+                    \System::log("Google Maps API return error '{$objResponse->status}' for '{$strAddress}': {$objResponse->error_message}", __METHOD__, TL_ERROR);
                     return false;
             }
         }

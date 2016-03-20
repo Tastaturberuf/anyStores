@@ -2,11 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.8.0 Unreleased]
 ###Added
+- Google API key support
 ###Changed
 ###Deprecated
 ###Removed
+- deprecated functions
 ###Fixed
 ###Security
 
@@ -115,3 +117,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.1.0-alpha]
 ### New
 - Added content element support for location description (#11)
+
+---
+
+## [Unreleased]
+###Added
+###Changed
+###Deprecated
+###Removed
+###Fixed
+###Security

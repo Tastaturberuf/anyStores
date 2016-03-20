@@ -3,7 +3,7 @@
 /**
  * anyStores for Contao Open Source CMS
  *
- * @copyright   (c) 2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
+ * @copyright   (c) 2014 - 2016 Tastaturberuf <mail@tastaturberuf.de>
  *              (c) 2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
  * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
  *              Benny Born <benny.born@numero2.de>
@@ -462,7 +462,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'                => &$GLOBALS['TL_LANG']['tl_anystores']['latitude'],
             'input_field_callback' => array('tl_anystores', 'showMap'),
-            'eval' => array
+            'eval'                 => array
             (
                 'doNotShow' => true
             )
@@ -670,17 +670,19 @@ class tl_anystores extends Backend
     public function showMap(DataContainer $dc)
     {
         $strCoords = sprintf("%s,%s",
-                $dc->activeRecord->latitude,
-                $dc->activeRecord->longitude
+            $dc->activeRecord->latitude,
+            $dc->activeRecord->longitude
         );
 
         return sprintf(
-            '<div style="float: right; height: 139px; margin-right: 23px; overflow: hidden; width: 320px;">
-                <h3><label>%1$s</label></h3>
-                <img style="margin-top:1px;" src="http://maps.google.com/maps/api/staticmap?center=%2$s&zoom=16&size=320x139&maptype=roadmap&markers=color:red|label:|%2$s">
+            '<div class="w50">
+                <h3><label>%s</label></h3>
+                <img src="http://maps.google.com/maps/api/staticmap?center=%s&zoom=16&size=404x139&maptype=roadmap&markers=color:red|%s&key=%s">
             </div>',
             $GLOBALS['TL_LANG']['tl_anystores']['map'][0],
-            $strCoords
+            $strCoords,
+            $strCoords,
+            \Config::get('anystores_apiKey')
         );
     }
 
