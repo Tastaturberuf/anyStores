@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ###Added
 - Google API key support
 - add six free form fields for locations
+- add template support for Google Maps info windows <br>
+  IMPORTANT: To override templates put it in the templates root folder! The AJAX request has no layout object and can not find the template in other folders.
 
 ###Changed
 - change ajax request to new class FrontendAjax.php

@@ -83,14 +83,7 @@ function initialize()
 
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
 
-            var html = "<b><a href=\"" + store.href + "\">" + store.name + "</a></b><br>";
-
-            (store.street !="") ? html += store.street  + "<br>" : "";
-            (store.city !="")   ? html += store.postal  + " " +  store.city  + "<br>" : "";
-            (store.phone !="")  ? html += store.phone  + "<br>" : "";
-            (store.url !="")    ? html += "<a href=\"" + store.url  + "\">" + store.url  + "</a><br>" : "";
-            (store.email !="")  ? html += "<a href=\"mailto:" + store.email  + "\">" + store.email  + "</a><br>" : "";
-            (store.href !="")   ? html += "<br><a href=\"" + store.href + "\">Mehr Informationen</a>" : "";
+            var html = store.tiphtml;
 
             return function() {
                 infowindow.setContent(html);

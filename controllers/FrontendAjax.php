@@ -14,7 +14,7 @@
 namespace Tastaturberuf;
 
 
-class FrontendAjax
+class FrontendAjax extends \Controller
 {
 
     /**
@@ -109,6 +109,13 @@ class FrontendAjax
                     }
                 }
             }
+
+            // render html
+            $strTemplate = $objModule->anystores_detailTpl ?: 'anystores_details';
+            $objTemplate = new \FrontendTemplate($strTemplate);
+            $objTemplate->setData($objStores->current()->row());
+
+            $objStores->tiphtml = static::replaceInsertTags($objTemplate->parse());
         }
 
         $arrRespond = array
