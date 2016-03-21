@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ###Added
 - Google API key support
 ###Changed
+- change ajax request to new class FrontendAjax.php
 ###Deprecated
 ###Removed
 - deprecated functions
