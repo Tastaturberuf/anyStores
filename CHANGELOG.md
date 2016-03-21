@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.8.0 Unreleased]
 ###Added
 - Google API key support
+- add six free form fields for locations
 ###Changed
 - change ajax request to new class FrontendAjax.php
 ###Deprecated

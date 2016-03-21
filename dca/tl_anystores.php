@@ -134,6 +134,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             {adress_legend},country,street,street2,postal,city;
             {times_legend},opening_times;
             {geo_legend},geo_explain,longitude,map,latitude;
+            {freeform_legend},freeField1,freeField2,freeField3,freeField4,freeField5,freeField6;
             {seo_legend},metatitle,metadescription;
             {publish_legend},published
         '
@@ -560,6 +561,72 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                 'extensions' => Config::get('validImageTypes'),
             ),
             'sql' => "binary(16) NULL"
+        ),
+        'freeField1' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField1'],
+            'inputType' => 'text',
+            'eval'      => array
+            (
+                'maxlength' => 255,
+                'tl_class'  => 'w50'
+            ),
+            'sql' => "varchar(255) NOT NULL default ''"
+        ),
+        'freeField2' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField2'],
+            'inputType' => 'text',
+            'eval'      => array
+            (
+                'maxlength' => 255,
+                'tl_class'  => 'w50'
+            ),
+            'sql' => "varchar(255) NOT NULL default ''"
+        ),
+        'freeField3' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField3'],
+            'inputType' => 'text',
+            'eval'      => array
+            (
+                'maxlength' => 255,
+                'tl_class'  => 'w50'
+            ),
+            'sql' => "varchar(255) NOT NULL default ''"
+        ),
+        'freeField4' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField4'],
+            'inputType' => 'text',
+            'eval'      => array
+            (
+                'maxlength' => 255,
+                'tl_class'  => 'w50'
+            ),
+            'sql' => "varchar(255) NOT NULL default ''"
+        ),
+        'freeField5' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField5'],
+            'inputType' => 'text',
+            'eval'      => array
+            (
+                'maxlength' => 255,
+                'tl_class'  => 'w50'
+            ),
+            'sql' => "varchar(255) NOT NULL default ''"
+        ),
+        'freeField6' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField6'],
+            'inputType' => 'text',
+            'eval'      => array
+            (
+                'maxlength' => 255,
+                'tl_class'  => 'w50'
+            ),
+            'sql' => "varchar(255) NOT NULL default ''"
         )
     )
 );

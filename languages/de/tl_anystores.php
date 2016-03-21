@@ -44,13 +44,21 @@ $GLOBALS['TL_LANG']['tl_anystores'] = array
     'metatitle'       => array('Meta-Titel', htmlentities('Geben Sie den Inhalt für das <title>-Tag ein.')),
     'metadescription' => array('Meta-Beschreibung', htmlentities('Geben Sie den Inhalt für <meta content"description"> ein.')),
     'marker'          => array('Marker', 'Setzt den Marker für diesen Standort. Überschreibt alle anderen Marker.'),
+    'freeField1'      => array('Freifeld 1', 'Kann im Template mit <code style="font-size: 10px"> $this->freeField1</code> ausgegeben werden.'),
+    'freeField2'      => array('Freifeld 2', 'Kann im Template mit <code style="font-size: 10px">$this->freeField2</code> ausgegeben werden.'),
+    'freeField3'      => array('Freifeld 3', 'Kann im Template mit <code style="font-size: 10px">$this->freeField3</code> ausgegeben werden.'),
+    'freeField4'      => array('Freifeld 4', 'Kann im Template mit <code style="font-size: 10px">$this->freeField4</code> ausgegeben werden.'),
+    'freeField5'      => array('Freifeld 5', 'Kann im Template mit <code style="font-size: 10px">$this->freeField5</code> ausgegeben werden.'),
+    'freeField6'      => array('Freifeld 6', 'Kann im Template mit <code style="font-size: 10px">$this->freeField6</code> ausgegeben werden.'),
 
     // Legends
-    'common_legend'  => 'Allgemein',
-    'adress_legend'  => 'Adressdaten',
-    'geo_legend'     => 'Koordinaten',
-    'times_legend'   => 'Öffnungszeiten',
-    'publish_legend' => 'Veröffentlichen',
+    'common_legend'   => 'Allgemein',
+    'adress_legend'   => 'Adressdaten',
+    'geo_legend'      => 'Koordinaten',
+    'seo_legend'      => 'SEO-Einstellungen',
+    'times_legend'    => 'Öffnungszeiten',
+    'publish_legend'  => 'Veröffentlichen',
+    'freeform_legend' => 'Freitextfelder',
 
     // Global buttons
     'importStores' => array('CSV-Import', 'Standorte aus CSV-Datei importieren'),

@@ -44,13 +44,22 @@ $GLOBALS['TL_LANG']['tl_anystores'] = array
     'metatitle'       => array('Meta title', ''),
     'metadescription' => array('Meta description', ''),
     'marker'          => array('Marker', 'Set the marker for this location. Overrides all other markers.'),
+    'freeField1'      => array('free field 1', 'Access in template with <code style="font-size: 10px"> $this->freeField1</code>.'),
+    'freeField2'      => array('free field 2', 'Access in template with <code style="font-size: 10px"> $this->freeField1</code>.'),
+    'freeField3'      => array('free field 3', 'Access in template with <code style="font-size: 10px"> $this->freeField1</code>.'),
+    'freeField4'      => array('free field 4', 'Access in template with <code style="font-size: 10px"> $this->freeField1</code>.'),
+    'freeField5'      => array('free field 5', 'Access in template with <code style="font-size: 10px"> $this->freeField1</code>.'),
+    'freeField6'      => array('free field 6', 'Access in template with <code style="font-size: 10px"> $this->freeField1</code>.'),
 
     // Legends
-    'common_legend'  => 'Common',
-    'adress_legend'  => 'Address',
-    'geo_legend'     => 'Coordinates',
-    'times_legend'   => 'Opening times',
-    'publish_legend' => 'Publishing',
+    'common_legend'   => 'Common',
+    'adress_legend'   => 'Address',
+    'geo_legend'      => 'Coordinates',
+    'seo_legend'      => 'SEO settings',
+    'times_legend'    => 'Opening times',
+    'publish_legend'  => 'Publishing',
+    'freeform_legend' => 'Freeform fields',
+
 
     // Global buttons
     'importStores' => array('CSV-Import', ''),
