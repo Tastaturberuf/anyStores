@@ -37,7 +37,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
     'anystores_map' => '
         {title_legend},name,headline,type;
         {config_legend:hide},anystores_categories,jumpTo,anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_mapheight,anystores_streetview,anystores_defaultMarker;
-        {template_legend:hide},customTpl;
+        {template_legend:hide},customTpl,anystores_detailTpl;
         {expert_legend:hide},guests,cssID,space
     '
 ));
