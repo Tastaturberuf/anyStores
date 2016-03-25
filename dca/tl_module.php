@@ -271,7 +271,8 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     'anystores_mapheight' => array
     (
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_mapheight'],
-        'inputType' => 'text',
+        'inputType' => 'inputUnit',
+        'options'   => $GLOBALS['TL_CSS_UNITS'],
         'eval'      => array
         (
             'default'   => 500,
@@ -279,7 +280,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
             'rgxp'      => 'digit',
             'tl_class'  => 'w50'
         ),
-        'sql' => "int(3) unsigned NOT NULL default '500'"
+        'sql' => "varchar(255) NOT NULL default ''"
     ),
     'anystores_defaultMarker' => array
     (

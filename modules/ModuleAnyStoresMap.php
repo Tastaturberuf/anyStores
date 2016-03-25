@@ -55,6 +55,9 @@ class ModuleAnyStoresMap extends \Module
         $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?language='.$GLOBALS['TL_LANGUAGE'];
         $GLOBALS['TL_JAVASCRIPT']['anystores']       = 'system/modules/anyStores/assets/js/anystores.js';
         $GLOBALS['TL_JAVASCRIPT']['markerclusterer'] = 'system/modules/anyStores/assets/js/markerclusterer/markerclusterer_compiled.js';
+
+        // map height
+        $this->Template->mapHeight = deserialize($this->anystores_mapheight);
     }
 
 }

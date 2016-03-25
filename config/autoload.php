@@ -30,6 +30,7 @@ ClassLoader::addClasses(array
 	'Tastaturberuf\OpenStreetMap'           => 'system/modules/anyStores/classes/API/OpenStreetMap.php',
 
 	// Controllers
+	'Tastaturberuf\AnyStoresRunonce'        => 'system/modules/anyStores/controllers/AnyStoresRunonce.php',
 	'Tastaturberuf\FrontendAjax'            => 'system/modules/anyStores/controllers/FrontendAjax.php',
 
 	// Forms

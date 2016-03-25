@@ -8,10 +8,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - add six free form fields for locations
 - add template support for Google Maps info windows <br>
   IMPORTANT: To override templates put it in the templates root folder! The AJAX request has no layout object and can not find the template in other folders.
+- runonce.php support
 
 ###Changed
 - change ajax request to new class FrontendAjax.php
 - save latitude and longitude in float(10,6) instead varchar(10)
+- save map height in map module with InputUnit widget instead of pixel value
 
 ###Deprecated
 ###Removed
