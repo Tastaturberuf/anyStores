@@ -3,7 +3,7 @@
 /**
  * anyStores for Contao Open Source CMS
  *
- * @copyright   (c) 2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
+ * @copyright   (c) 2014 - 2016 Tastaturberuf <mail@tastaturberuf.de>
  *              (c) 2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
  * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
  *              Benny Born <benny.born@numero2.de>
@@ -214,7 +214,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
             'maxlength' => 64,
             'tl_class'  => 'w50'
         ),
-        'sql' => "varchar(64) NOT NULL default '0'"
+        'sql' => "float(10,6) NOT NULL"
     ),
     'anystores_longitude' => array
     (
@@ -227,7 +227,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
             'maxlength' => 64,
             'tl_class'  => 'w50'
         ),
-        'sql' => "varchar(64) NOT NULL default '0'"
+        'sql' => "float(10,6) NOT NULL"
     ),
     'anystores_zoom' => array
     (

@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ###Changed
 - change ajax request to new class FrontendAjax.php
+- save latitude and longitude in float(10,6) instead varchar(10)
 
 ###Deprecated
 ###Removed
