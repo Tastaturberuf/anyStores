@@ -17,6 +17,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - deprecated functions
 
 ###Fixed
+- generate sitemap and search index correctly
+
 ###Security
 
 ## [1.7.2]

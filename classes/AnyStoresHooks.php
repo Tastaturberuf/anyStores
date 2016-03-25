@@ -210,14 +210,32 @@ class AnyStoresHooks extends \Controller
     }
 
 
-    public function getSearchablePages($arrPages, $intRootId, $bln=true, $strLanguage=null)
+    public function getSearchablePages($arrPages, $intRootId=null, $bln=true, $strLanguage=null)
     {
+        if ( !$intRootId )
+        {
+            $objRoots = \PageModel::findPublishedRootPages();
+
+            if ( !$objRoots )
+            {
+                \System::log("Can't get any root page", __METHOD__, TL_ERROR);
+                return $arrPages;
+            }
+
+            while ( $objRoots->next() )
+            {
+                $arrPages = $this->getSearchablePages($arrPages, $objRoots->id, $bln, $objRoots->language );
+            }
+
+            return $arrPages;
+        }
+
         // get the root page object
         $objRoot = \PageModel::findByPk($intRootId);
 
         if ( !$objRoot )
         {
-            \System::log('Can\'t get the root page', __METHOD__, TL_ERROR);
+            \System::log("Can't get the root page", __METHOD__, TL_ERROR);
             return $arrPages;
         }
 
@@ -238,7 +256,7 @@ class AnyStoresHooks extends \Controller
 
         if ( !$objPage )
         {
-            \System::log('Can\'t find the details page for anyStores', __METHOD__, TL_ERROR);
+            \System::log("Can't find the details page", __METHOD__, TL_ERROR);
             return $arrPages;
         }
 
@@ -248,7 +266,7 @@ class AnyStoresHooks extends \Controller
 
         if ( !$objLocations )
         {
-            \System::log('Can\'t get the published locations', __METHOD__, TL_ERROR);
+            \System::log("Can't get the published locations", __METHOD__, TL_ERROR);
             return $arrPages;
         }
 
