@@ -66,11 +66,11 @@ $GLOBALS['TL_LANG']['tl_anystores'] = array
     'new'          => array('New location', ''),
 
     // Buttons
-    'edit'             => array('Edit location', 'Edit location with ID %s'),
-    'edit_description' => array('Edit location description', 'Edit location description with ID %s'),
-    'copy'             => array('Copy location', 'Copy location with ID %s'),
-    'delete'           => array('Delete location', 'Delete location with ID %s'),
-    'coords'           => array('No Coordinates available!', 'Coordinates available'),
-    'show'             => array('Show details', 'Show details from location with ID %s'),
-    'toggle'           => array('Publish location', 'Publish or unpublish location with ID %s')
+    'edit'    => array('Edit location', 'Edit location with ID %s'),
+    'content' => array('Edit location description', 'Edit location description with ID %s'),
+    'copy'    => array('Copy location', 'Copy location with ID %s'),
+    'delete'  => array('Delete location', 'Delete location with ID %s'),
+    'coords'  => array('No Coordinates available!', 'Coordinates available'),
+    'show'    => array('Show details', 'Show details from location with ID %s'),
+    'toggle'  => array('Publish location', 'Publish or unpublish location with ID %s')
 );

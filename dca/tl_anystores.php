@@ -76,28 +76,32 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'edit' => array
             (
-                'label' => &$GLOBALS['TL_LANG']['tl_anystores']['edit'],
-                'href'  => 'act=edit',
-                'icon'  => 'edit.gif'
+                'label'           => &$GLOBALS['TL_LANG']['tl_anystores']['edit'],
+                'href'            => 'act=edit',
+                'icon'            => 'edit.gif',
+                'button_callback' => array('tl_anystores', 'generateEditButton')
             ),
-            'edit_description' => array
+            'content' => array
             (
-                'label' => &$GLOBALS['TL_LANG']['tl_anystores']['edit_description'],
-                'href'  => 'table=tl_content',
-                'icon'  => 'system/modules/anyStores/assets/images/description.png'
+                'label'           => &$GLOBALS['TL_LANG']['tl_anystores']['content'],
+                'href'            => 'table=tl_content',
+                'icon'            => 'system/modules/anyStores/assets/images/description.png',
+                'button_callback' => array('tl_anystores', 'generateContentButton')
             ),
             'copy' => array
             (
-                'label' => &$GLOBALS['TL_LANG']['tl_anystores']['copy'],
-                'href'  => 'act=copy',
-                'icon'  => 'copy.gif'
+                'label'           => &$GLOBALS['TL_LANG']['tl_anystores']['copy'],
+                'href'            => 'act=copy',
+                'icon'            => 'copy.gif',
+                'button_callback' => array('tl_anystores', 'generateCopyButton')
             ),
             'delete' => array
             (
-                'label'      => &$GLOBALS['TL_LANG']['tl_anystores']['delete'],
-                'href'       => 'act=delete',
-                'icon'       => 'delete.gif',
-                'attributes' => 'onclick="if (!confirm(\''.$GLOBALS['TL_LANG']['MSC']['deleteConfirm'].'\')) return false; Backend.getScrollOffset();"'
+                'label'           => &$GLOBALS['TL_LANG']['tl_anystores']['delete'],
+                'href'            => 'act=delete',
+                'icon'            => 'delete.gif',
+                'attributes'      => 'onclick="if (!confirm(\''.$GLOBALS['TL_LANG']['MSC']['deleteConfirm'].'\')) return false; Backend.getScrollOffset();"',
+                'button_callback' => array('tl_anystores', 'generateDeleteButton')
             ),
             'coords' => array
             (
@@ -108,7 +112,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                     'system/modules/anyStores/assets/images/coords0.png',
                     'system/modules/anyStores/assets/images/coords1.png'
                 ),
-                'button_callback' => array('tl_anystores', 'coordsButton')
+                'button_callback' => array('tl_anystores', 'generateCoordsButton')
             ),
             'show' => array
             (
@@ -436,6 +440,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'longitude' => array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['longitude'],
+            'exclude'   => true,
             'inputType' => 'text',
             'search'    => true,
             'eval'      => array
@@ -449,6 +454,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'latitude' => array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['latitude'],
+            'exclude'   => true,
             'inputType' => 'text',
             'search'    => true,
             'eval'      => array
@@ -462,6 +468,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'map' => array
         (
             'label'                => &$GLOBALS['TL_LANG']['tl_anystores']['latitude'],
+            'exclude'              => true,
             'input_field_callback' => array('tl_anystores', 'showMap'),
             'eval'                 => array
             (
@@ -471,6 +478,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'geo_explain' => array
         (
             'label'                => &$GLOBALS['TL_LANG']['tl_anystores']['latitude'],
+            'exclude'              => true,
             'input_field_callback' => function()
             {
                 return '<div class="tl_help">'.$GLOBALS['TL_LANG']['tl_anystores']['geo_explain'][0].'</div>';
@@ -553,6 +561,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'marker' => array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['marker'],
+            'exclude'   => true,
             'inputType' => 'fileTree',
             'eval'      => array
             (
@@ -565,6 +574,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'freeField1' => array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField1'],
+            'exclude'   => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -576,6 +586,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'freeField2' => array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField2'],
+            'exclude'   => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -587,6 +598,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'freeField3' => array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField3'],
+            'exclude'   => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -598,6 +610,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'freeField4' => array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField4'],
+            'exclude'   => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -609,6 +622,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'freeField5' => array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField5'],
+            'exclude'   => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -620,6 +634,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'freeField6' => array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField6'],
+            'exclude'   => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -644,28 +659,143 @@ class tl_anystores extends Backend
         $this->import('BackendUser', 'User');
     }
 
+
     /**
-     * Generates button to show if coordinates are available
-     * @param array
-     * @param srting
-     * @param array
-     * @param string
-     * @param mixed
-     * @param array
+     * Generates the edit button
+     *
+     * @param $arrRow
+     * @param $strHref
+     * @param $strLabel
+     * @param $strTitle
+     * @param $strIcon
+     * @param $strAttributes
+     * @param $strTable
+     * @param $arrRootsId
+     * @param $arrChildrecords
+     * @param $blnCircularReference
+     * @param $strPrevious
+     * @param $strNext
+     * @param $dc
+     *
      * @return string
      */
-    public function coordsButton($row = NULL, $href = NULL, $label = NULL, $title = NULL, $icon = NULL, $attributes = NULL)
+    public function generateEditButton($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes, $strTable, $arrRootsId, $arrChildrecords, $blnCircularReference, $strPrevious, $strNext, $dc)
     {
-        $objEntry = NULL;
-        $objEntry = $this->Database->prepare("SELECT latitude, longitude FROM tl_anystores WHERE id = ?")
-            ->limit(1)
-            ->execute($row['id']);
+        if ( in_array($arrRow['pid'], (array) $this->User->anystores_categories) && in_array('edit', (array) $this->User->anystores_permissions) || $this->User->isAdmin )
+        {
+            return '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ';
+        }
+    }
 
-        $icon = ($objEntry->latitude || $objEntry->longitude) ? $icon[1] : $icon[0];
-        $label = ($objEntry->latitude || $objEntry->longitude) ? $label[1] : $label[0];
 
-        return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon,
-                        $label).'</a> ';
+    /**
+     * Generate the content button
+     *
+     * @param $arrRow
+     * @param $strHref
+     * @param $strLabel
+     * @param $strTitle
+     * @param $strIcon
+     * @param $strAttributes
+     * @param $strTable
+     * @param $arrRootsId
+     * @param $arrChildrecords
+     * @param $blnCircularReference
+     * @param $strPrevious
+     * @param $strNext
+     * @param $dc
+     *
+     * @return string
+     */
+    public function generateContentButton($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes, $strTable, $arrRootsId, $arrChildrecords, $blnCircularReference, $strPrevious, $strNext, $dc)
+    {
+        if ( in_array($arrRow['pid'], (array) $this->User->anystores_categories) && in_array('content', (array) $this->User->anystores_permissions) || $this->User->isAdmin )
+        {
+            return '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ';
+        }
+    }
+
+
+    /**
+     * Generate the copy button
+     *
+     * @param $arrRow
+     * @param $strHref
+     * @param $strLabel
+     * @param $strTitle
+     * @param $strIcon
+     * @param $strAttributes
+     * @param $strTable
+     * @param $arrRootsId
+     * @param $arrChildrecords
+     * @param $blnCircularReference
+     * @param $strPrevious
+     * @param $strNext
+     * @param $dc
+     *
+     * @return string
+     */
+    public function generateCopyButton($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes, $strTable, $arrRootsId, $arrChildrecords, $blnCircularReference, $strPrevious, $strNext, $dc)
+    {
+        if ( in_array($arrRow['pid'], (array) $this->User->anystores_categories) && in_array('create', (array) $this->User->anystores_permissions) || $this->User->isAdmin )
+        {
+            return '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ';
+        }
+    }
+
+    /**
+     * Generates the delete button
+     *
+     * @param $arrRow
+     * @param $strHref
+     * @param $strLabel
+     * @param $strTitle
+     * @param $strIcon
+     * @param $strAttributes
+     * @param $strTable
+     * @param $arrRootsId
+     * @param $arrChildrecords
+     * @param $blnCircularReference
+     * @param $strPrevious
+     * @param $strNext
+     * @param $dc
+     *
+     * @return string
+     */
+    public function generateDeleteButton($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes, $strTable, $arrRootsId, $arrChildrecords, $blnCircularReference, $strPrevious, $strNext, $dc)
+    {
+        if ( in_array($arrRow['pid'], (array) $this->User->anystores_categories) && in_array('delete', (array) $this->User->anystores_permissions) || $this->User->isAdmin )
+        {
+            return '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ';
+        }
+    }
+
+    /**
+     * Generate coordinates button and show if coords available
+     *
+     * @todo add function to get the coords
+     * @param $arrRow
+     * @param $strHref
+     * @param $strLabel
+     * @param $strTitle
+     * @param $strIcon
+     * @param $strAttributes
+     * @param $strTable
+     * @param $arrRootsId
+     * @param $arrChildrecords
+     * @param $blnCircularReference
+     * @param $strPrevious
+     * @param $strNext
+     * @param $dc
+     *
+     * @return string
+     */
+    public function generateCoordsButton($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes, $strTable, $arrRootsId, $arrChildrecords, $blnCircularReference, $strPrevious, $strNext, $dc)
+    {
+        $icon  = ($arrRow['latitude'] && $arrRow['longitude']) ? $strIcon[1] : $strIcon[0];
+        $label = ($arrRow['latitude'] && $arrRow['longitude']) ? $GLOBALS['TL_LANG']['tl_anystores']['coords'][1] : $GLOBALS['TL_LANG']['tl_anystores']['coords'][0];
+
+        return Image::getHtml($icon, $label, 'title="'.$label.'"');
     }
 
 
@@ -822,7 +952,7 @@ class tl_anystores extends Backend
         }
 
         // Check permissions AFTER checking the tid, so hacking attempts are logged
-        if (!$this->User->hasAccess('tl_anystores::published', 'alexf'))
+        if ( !$this->User->hasAccess('tl_anystores::published', 'alexf') || !in_array($arrRow['pid'], (array) $this->User->anystores_categories) )
         {
             return '';
         }
