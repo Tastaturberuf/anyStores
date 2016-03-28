@@ -23,6 +23,10 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         'ptable'            => 'tl_anystores_category',
         'ctable'            => array('tl_content'),
         'enableVersioning'  => true,
+        'onload_callback'   => array
+        (
+            array('tl_anystores', 'checkPermission')
+        ),
         'onsubmit_callback' => array
         (
             array('tl_anystores', 'fillCoordinates'),
@@ -125,7 +129,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                 'label'           => &$GLOBALS['TL_LANG']['tl_anystores']['toggle'],
                 'icon'            => 'visible.gif',
                 'attributes'      => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-                'button_callback' => array('tl_anystores', 'toggleIcon')
+                'button_callback' => array('tl_anystores', 'generatePublishButton')
             ),
         )
     ),
@@ -647,6 +651,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
 );
 
 
+/**
+ * Class tl_anystores
+ */
 class tl_anystores extends Backend
 {
 
@@ -681,10 +688,7 @@ class tl_anystores extends Backend
      */
     public function generateEditButton($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes, $strTable, $arrRootsId, $arrChildrecords, $blnCircularReference, $strPrevious, $strNext, $dc)
     {
-        if ( in_array($arrRow['pid'], (array) $this->User->anystores_categories) && in_array('edit', (array) $this->User->anystores_permissions) || $this->User->isAdmin )
-        {
-            return '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ';
-        }
+        return $this->User->canEditFieldsOf('tl_anystores') ? '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $strIcon)).' ';
     }
 
 
@@ -709,10 +713,7 @@ class tl_anystores extends Backend
      */
     public function generateContentButton($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes, $strTable, $arrRootsId, $arrChildrecords, $blnCircularReference, $strPrevious, $strNext, $dc)
     {
-        if ( in_array($arrRow['pid'], (array) $this->User->anystores_categories) && in_array('content', (array) $this->User->anystores_permissions) || $this->User->isAdmin )
-        {
-            return '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ';
-        }
+        return $this->User->canEditFieldsOf('tl_content') && $this->User->hasAccess('create', 'anystores_permissions') ? '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $strIcon)).' ';
     }
 
 
@@ -737,10 +738,7 @@ class tl_anystores extends Backend
      */
     public function generateCopyButton($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes, $strTable, $arrRootsId, $arrChildrecords, $blnCircularReference, $strPrevious, $strNext, $dc)
     {
-        if ( in_array($arrRow['pid'], (array) $this->User->anystores_categories) && in_array('create', (array) $this->User->anystores_permissions) || $this->User->isAdmin )
-        {
-            return '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ';
-        }
+        return $this->User->canEditFieldsOf('tl_anystores') ? '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $strIcon)).' ';
     }
 
     /**
@@ -764,10 +762,7 @@ class tl_anystores extends Backend
      */
     public function generateDeleteButton($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes, $strTable, $arrRootsId, $arrChildrecords, $blnCircularReference, $strPrevious, $strNext, $dc)
     {
-        if ( in_array($arrRow['pid'], (array) $this->User->anystores_categories) && in_array('delete', (array) $this->User->anystores_permissions) || $this->User->isAdmin )
-        {
-            return '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ';
-        }
+        return $this->User->hasAccess('delete', 'anystores_permissions') ? '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $strIcon)).' ';
     }
 
     /**
@@ -792,11 +787,121 @@ class tl_anystores extends Backend
      */
     public function generateCoordsButton($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes, $strTable, $arrRootsId, $arrChildrecords, $blnCircularReference, $strPrevious, $strNext, $dc)
     {
-        $icon  = ($arrRow['latitude'] && $arrRow['longitude']) ? $strIcon[1] : $strIcon[0];
-        $label = ($arrRow['latitude'] && $arrRow['longitude']) ? $GLOBALS['TL_LANG']['tl_anystores']['coords'][1] : $GLOBALS['TL_LANG']['tl_anystores']['coords'][0];
+        $icon  = ($arrRow['latitude'] != 0.000000 && $arrRow['longitude'] != 0.000000 ) ? $strIcon[1] : $strIcon[0];
+        $label = ($arrRow['latitude'] != 0.000000 && $arrRow['longitude'] != 0.000000 ) ? $GLOBALS['TL_LANG']['tl_anystores']['coords'][1] : $GLOBALS['TL_LANG']['tl_anystores']['coords'][0];
 
         return Image::getHtml($icon, $label, 'title="'.$label.'"');
     }
+
+
+    /**
+     * Check permissions to edit
+     */
+    public function checkPermission()
+    {
+        if ( $this->User->isAdmin )
+        {
+            return;
+        }
+
+        // Set the root IDs
+        if ( !is_array($this->User->anystores_categories) || empty($this->User->anystores_categories) )
+        {
+            $root = array(0);
+        }
+        else
+        {
+            $root = $this->User->anystores_categories;
+        }
+
+        $id = strlen(Input::get('id')) ? Input::get('id') : CURRENT_ID;
+
+        // Check current action
+        switch (Input::get('act'))
+        {
+            case 'paste':
+                // Allow
+                break;
+
+            case 'create':
+                if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
+                {
+                    $this->log('Not enough permissions to create locations in category ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
+                    $this->redirect('contao/main.php?act=error');
+                }
+                break;
+
+            case 'cut':
+            case 'copy':
+                if (!in_array(Input::get('pid'), $root))
+                {
+                    $this->log('Not enough permissions to '.Input::get('act').' location ID "'.$id.'" to category ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
+                    $this->redirect('contao/main.php?act=error');
+                }
+            // NO BREAK STATEMENT HERE
+
+            case 'edit':
+            case 'show':
+            case 'delete':
+            case 'toggle':
+                $objArchive = $this->Database->prepare("SELECT pid FROM tl_anystores WHERE id=?")
+                    ->limit(1)
+                    ->execute($id);
+
+                if ($objArchive->numRows < 1)
+                {
+                    $this->log('Invalid location ID "'.$id.'"', __METHOD__, TL_ERROR);
+                    $this->redirect('contao/main.php?act=error');
+                }
+
+                if (!in_array($objArchive->pid, $root))
+                {
+                    $this->log('Not enough permissions to '.Input::get('act').' location ID "'.$id.'" of category ID "'.$objArchive->pid.'"', __METHOD__, TL_ERROR);
+                    $this->redirect('contao/main.php?act=error');
+                }
+                break;
+
+            case 'select':
+            case 'editAll':
+            case 'deleteAll':
+            case 'overrideAll':
+            case 'cutAll':
+            case 'copyAll':
+                if (!in_array($id, $root))
+                {
+                    $this->log('Not enough permissions to access category ID "'.$id.'"', __METHOD__, TL_ERROR);
+                    $this->redirect('contao/main.php?act=error');
+                }
+
+                $objArchive = $this->Database->prepare("SELECT id FROM tl_anystores WHERE pid=?")
+                    ->execute($id);
+
+                if ($objArchive->numRows < 1)
+                {
+                    $this->log('Invalid category ID "'.$id.'"', __METHOD__, TL_ERROR);
+                    $this->redirect('contao/main.php?act=error');
+                }
+
+                $session = $this->Session->getData();
+                $session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $objArchive->fetchEach('id'));
+                $this->Session->setData($session);
+                break;
+
+            default:
+                if (strlen(Input::get('act')))
+                {
+                    $this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
+                    $this->redirect('contao/main.php?act=error');
+                }
+                elseif (!in_array($id, $root))
+                {
+                    $this->log('Not enough permissions to access category ID ' . $id, __METHOD__, TL_ERROR);
+                    $this->redirect('contao/main.php?act=error');
+                }
+                break;
+        }
+    }
+
 
 
     /**
@@ -943,7 +1048,7 @@ class tl_anystores extends Backend
      * @param string
      * @return string
      */
-    public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+    public function generatePublishButton($row, $href, $label, $title, $icon, $attributes)
     {
         if (strlen(Input::get('tid')))
         {
@@ -952,7 +1057,7 @@ class tl_anystores extends Backend
         }
 
         // Check permissions AFTER checking the tid, so hacking attempts are logged
-        if ( !$this->User->hasAccess('tl_anystores::published', 'alexf') || !in_array($arrRow['pid'], (array) $this->User->anystores_categories) )
+        if ( !$this->User->hasAccess('tl_anystores::published', 'alexf') || !$this->User->hasAccess($row['pid'], 'anystores_categories') )
         {
             return '';
         }

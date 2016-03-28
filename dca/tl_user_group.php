@@ -13,14 +13,13 @@
 /**
  * Palettes
  */
-$GLOBALS['TL_DCA']['tl_user']['palettes']['extend'] .= ';{anystores_legend},anystores_categories,anystores_permissions';
-$GLOBALS['TL_DCA']['tl_user']['palettes']['custom'] .= ';{anystores_legend},anystores_categories,anystores_permissions';
+$GLOBALS['TL_DCA']['tl_user_group']['palettes']['default'] .= ';{anystores_legend},anystores_categories,anystores_permissions';
 
 
 /**
  * Fields
  */
-array_insert($GLOBALS['TL_DCA']['tl_user']['fields'], 0, array
+array_insert($GLOBALS['TL_DCA']['tl_user_group']['fields'], 0, array
 (
     'anystores_categories' => array
     (

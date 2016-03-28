@@ -296,3 +296,10 @@ $GLOBALS['TL_HOOKS']['replaceInsertTags'][]  = array('AnyStoresHooks', 'replaceI
  * keywords so it can handle them properly.
  */
 $GLOBALS['TL_AUTO_ITEM'][] = 'store';
+
+
+/**
+ * PERMISSIONS
+ */
+$GLOBALS['TL_PERMISSIONS'][] = 'anystores_categories';
+$GLOBALS['TL_PERMISSIONS'][] = 'anystores_permissions';
