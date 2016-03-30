@@ -22,8 +22,13 @@ class FrontendAjax extends \Controller
      *
      * @param int $intModuleId
      */
-    public static function run($intModuleId)
+    public static function run($intModuleId, $strToken)
     {
+        if ( !static::validateRequestToken($intModuleId, $strToken) )
+        {
+            static::respond(array('status' => 'error', 'message' => 'Invalid request token'));
+        }
+
         $objModule = \ModuleModel::findByPk($intModuleId);
 
         if (!$objModule || $objModule->type !== 'anystores_map')
@@ -144,6 +149,23 @@ class FrontendAjax extends \Controller
         }
 
         static::respond($arrRespond);
+    }
+
+
+    protected static function validateRequestToken($intModuleId, $strToken)
+    {
+        $objSession = \Session::getInstance();
+
+        $arrTokens = $objSession->get('anystores_token');
+
+        $blnReturn = ($arrTokens[$intModuleId] === $strToken);
+
+        // reset token
+        unset($arrTokens[$intModuleId]);
+
+        $objSession->set('anystores_token', $arrTokens);
+
+        return $blnReturn;
     }
 
 

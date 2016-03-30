@@ -17,4 +17,4 @@ define('TL_MODE', 'FE');
 
 require '../../../initialize.php';
 
-FrontendAjax::run(\Input::get('module'));
+FrontendAjax::run(\Input::get('module'), \Input::get('token'));

@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - generate sitemap and search index correctly
 
 ###Security
+- add single time tokens for ajax map requests
 
 ## [1.7.2]
 ### Added
