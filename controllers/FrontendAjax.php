@@ -42,10 +42,9 @@ class FrontendAjax extends \Controller
 
         if (\Validator::isBinaryUuid($objModule->anystores_defaultMarker))
         {
-            if (($objFile = \FilesModel::findByPk($objModule->anystores_defaultMarker)) !== null)
-            {
-                $objModule->anystores_defaultMarker = $objFile->path;
-            }
+            $objFile = \FilesModel::findByPk($objModule->anystores_defaultMarker);
+            
+            $objModule->anystores_defaultMarker = ($objFile) ? $objFile->path : null;
         }
 
         // Find stores
@@ -80,30 +79,29 @@ class FrontendAjax extends \Controller
             // decode logo
             if (\Validator::isBinaryUuid($objStores->logo))
             {
-                if (($objFile = \FilesModel::findByPk($objStores->logo)) !== null)
-                {
-                    $objStores->logo = $objFile->path;
-                }
+                $objFile = \FilesModel::findByPk($objStores->logo);
+                
+                $objStores->logo = ($objFile) ? $objFile->path : null;
             }
 
             // decode marker
             if (\Validator::isBinaryUuid($objStores->marker))
             {
-                if (($objFile = \FilesModel::findByPk($objStores->marker)) !== null)
-                {
-                    $objStores->marker = $objFile->path;
-                }
+                $objFile = \FilesModel::findByPk($objStores->marker);
+                
+                $objStores->marker = ($objFile) ? $objFile->path : null;
             }
 
             // add category marker
-            //@todo make null
-            $objStores->categoryMarker = false;
+            $objStores->categoryMarker = null;
 
             if (($objCategory = AnyStoresCategoryModel::findByPk($objStores->pid)) !== null)
             {
                 if (\Validator::isBinaryUuid($objCategory->defaultMarker))
                 {
-                    if (($objFile = \FilesModel::findByPk($objCategory->defaultMarker)) !== null)
+                    $objFile = \FilesModel::findByPk($objCategory->defaultMarker);
+                    
+                    if ($objFile)
                     {
                         $objStores->categoryMarker = $objFile->path;
                     }
