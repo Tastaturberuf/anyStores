@@ -72,9 +72,10 @@ class ModuleAnyStoresList extends \Module
 
         // localized url parameter
         //@todo use $GLOBALS['TL_URL_PARAMS']...
-        $this->strSearchKey    = $GLOBALS['TL_LANG']['anystores']['url_params']['search'];
+        $this->strSearchKey    = $GLOBALS['TL_LANG']['anystores']['url_params']['search'] ?: 'search';
         $this->strSearchValue  = \Input::get($this->strSearchKey);
-        $this->strCountryKey   = $GLOBALS['TL_LANG']['anystores']['url_params']['country'];
+
+        $this->strCountryKey   = $GLOBALS['TL_LANG']['anystores']['url_params']['country'] ?: 'country';
         $this->strCountryValue = (\Input::get($this->strCountryKey)) ?: $this->anystores_defaultCountry;
 
         // if no empty search is allowed

@@ -29,21 +29,11 @@ $GLOBALS['TL_DCA']['tl_form_field']['palettes']['stores'] =
  */
 $GLOBALS['TL_DCA']['tl_form_field']['fields']['anystores_categories'] = array
 (
-    'label'            => &$GLOBALS['TL_LANG']['tl_form_field']['anystores_categories'],
-    'exclude'          => true,
-    'inputType'        => 'checkbox',
-    'options_callback' => function()
-    {
-        $objCategories = AnyStoresCategoryModel::findAll(array('order' => 'title'));
-
-        if ( $objCategories === null )
-        {
-            return;
-        }
-
-        return $objCategories->fetchEach('title');
-    },
-    'eval' => array
+    'label'     => &$GLOBALS['TL_LANG']['tl_form_field']['anystores_categories'],
+    'exclude'   => true,
+    'inputType' => 'checkbox',
+    'options'   => AnyStoresDcaHelper::getCategories(),
+    'eval'      => array
     (
         'mandatory' => true,
         'multiple'  => true

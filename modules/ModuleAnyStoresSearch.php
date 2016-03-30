@@ -57,10 +57,12 @@ class ModuleAnyStoresSearch extends \Module
         $strFormId = 'anystores_form_'.$this->id;
 
         // localized url parameter
-        $strSearchKey    = $GLOBALS['TL_LANG']['anystores']['url_params']['search'];
+        $strSearchKey    = $GLOBALS['TL_LANG']['anystores']['url_params']['search'] ?: 'search';
         $strSearchValue  = \Input::post($strSearchKey);
-        $strCountryKey   = $GLOBALS['TL_LANG']['anystores']['url_params']['country'];
+
+        $strCountryKey   = $GLOBALS['TL_LANG']['anystores']['url_params']['country'] ?: 'country';
         $strCountryValue = \Input::post($strCountryKey);
+
 
         // redirect if form was send
         if ( \Input::post('FORM_SUBMIT') == $strFormId && ($this->anystores_allowEmptySearch || !empty($strSearchValue)) )

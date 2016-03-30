@@ -25,6 +25,7 @@ ClassLoader::addClasses(array
 (
 	// Classes
 	'Tastaturberuf\AnyStores'               => 'system/modules/anyStores/classes/AnyStores.php',
+	'Tastaturberuf\AnyStoresDcaHelper'      => 'system/modules/anyStores/classes/AnyStoresDcaHelper.php',
 	'Tastaturberuf\AnyStoresHooks'          => 'system/modules/anyStores/classes/AnyStoresHooks.php',
 	'Tastaturberuf\GoogleMaps'              => 'system/modules/anyStores/classes/API/GoogleMaps.php',
 	'Tastaturberuf\OpenStreetMap'           => 'system/modules/anyStores/classes/API/OpenStreetMap.php',

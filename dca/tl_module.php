@@ -19,13 +19,13 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
 (
     'anystores_search' => '
         {title_legend},name,headline,type;
-        {config_legend:hide},jumpTo,anystores_allowEmptySearch;
+        {config_legend},jumpTo,anystores_allowEmptySearch;
         {template_legend:hide},customTpl;
         {expert_legend:hide},guests,cssID,space
     ',
     'anystores_list' => '
         {title_legend},name,headline,type;
-        {config_legend:hide},anystores_categories,jumpTo,anystores_defaultCountry,anystores_listLimit,anystores_allowEmptySearch,anystores_limitDistance;
+        {config_legend},anystores_categories,jumpTo,anystores_defaultCountry,anystores_listLimit,anystores_allowEmptySearch,anystores_limitDistance;
         {template_legend:hide},customTpl,anystores_detailTpl;
         {expert_legend:hide},guests,cssID,space
     ',
@@ -36,7 +36,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
     ',
     'anystores_map' => '
         {title_legend},name,headline,type;
-        {config_legend:hide},anystores_categories,jumpTo,anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_mapheight,anystores_streetview,anystores_defaultMarker;
+        {config_legend},anystores_categories,jumpTo,anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_mapheight,anystores_streetview,anystores_defaultMarker,anystores_showSearchResults;
         {template_legend:hide},customTpl,anystores_detailTpl;
         {expert_legend:hide},guests,cssID,space
     '
@@ -78,21 +78,11 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     ),
     'anystores_categories' => array
     (
-        'label'            => &$GLOBALS['TL_LANG']['tl_module']['anystores_categories'],
-        'exclude'          => true,
-        'inputType'        => 'checkbox',
-        'options_callback' => function()
-        {
-            $objCategories = AnyStoresCategoryModel::findAll(array('order' => 'title'));
-
-            if ( $objCategories === null )
-            {
-                return;
-            }
-
-            return $objCategories->fetchEach('title');
-        },
-        'eval' => array
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_categories'],
+        'exclude'   => true,
+        'inputType' => 'checkbox',
+        'options'   => AnyStoresDcaHelper::getCategories(),
+        'eval'      => array
         (
             'mandatory' => true,
             'multiple'  => true
@@ -118,10 +108,10 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     'anystores_allowEmptySearch' => array
     (
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_allowEmptySearch'],
-        'exclude'   => true,
-    	'inputType' => 'checkbox',
-    	'default'   => true,
-    	'eval'      => array
+        'exclude'   => true,    
+        'inputType' => 'checkbox', 
+        'default'   => true, 
+        'eval'      => array
         (
             'submitOnChange' => true,
             'tl_class'       => 'w50 m12',
@@ -171,14 +161,11 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     ),
     'anystores_detailTpl' => array
     (
-        'label'            => &$GLOBALS['TL_LANG']['tl_module']['anystores_detailTpl'],
-        'exclude'          => true,
-        'inputType'        => 'select',
-        'options_callback' => function()
-        {
-            return \Controller::getTemplateGroup('anystores_');
-        },
-        'eval' => array
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_detailTpl'],
+        'exclude'   => true,
+        'inputType' => 'select',
+        'options'   => Controller::getTemplateGroup('anystores_'),
+        'eval'      => array
         (
             'includeBlankOption' => true,
             'chosen'             => true,
@@ -188,14 +175,11 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     ),
     'anystores_mapTpl' => array
     (
-        'label'            => &$GLOBALS['TL_LANG']['tl_module']['anystores_mapTpl'],
-        'exclude'          => true,
-        'inputType'        => 'select',
-        'options_callback' => function()
-        {
-            return \Controller::getTemplateGroup('map_');
-        },
-        'eval' => array
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_mapTpl'],
+        'exclude'   => true,
+        'inputType' => 'select',
+        'options'   => Controller::getTemplateGroup('map_'),
+        'eval'      => array
         (
             'includeBlankOption' => true,
             'chosen'             => true,
@@ -206,6 +190,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     'anystores_latitude' => array
     (
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_latitude'],
+        'exclude'   => true,
         'inputType' => 'text',
         'eval'      => array
         (
@@ -219,6 +204,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     'anystores_longitude' => array
     (
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_longitude'],
+        'exclude'   => true,
         'inputType' => 'text',
         'eval'      => array
         (
@@ -232,6 +218,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     'anystores_zoom' => array
     (
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_zoom'],
+        'exclude'   => true,
         'inputType' => 'select',
         'options'   => range(1,18),
         'eval'      => array
@@ -244,6 +231,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     'anystores_streetview' => array
     (
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_streetview'],
+        'exclude'   => true,
         'inputType' => 'checkbox',
         'eval'      => array
         (
@@ -254,6 +242,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     'anystores_maptype' => array
     (
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_maptype'],
+        'exclude'   => true,
         'inputType' => 'select',
         'options'   => array
         (
@@ -271,6 +260,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     'anystores_mapheight' => array
     (
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_mapheight'],
+        'exclude'   => true,
         'inputType' => 'inputUnit',
         'options'   => $GLOBALS['TL_CSS_UNITS'],
         'eval'      => array
@@ -285,6 +275,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     'anystores_defaultMarker' => array
     (
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_defaultMarker'],
+        'exclude'   => true,
         'inputType' => 'fileTree',
         'eval'      => array
         (
@@ -293,6 +284,17 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
             'extensions' => Config::get('validImageTypes'),
         ),
         'sql' => "binary(16) NULL"
+    ),
+    'anystores_showSearchResults' => array
+    (
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_showSearchResults'],
+        'exclude'   => true,
+        'inputType' => 'checkbox',
+        'eval'      => array
+        (
+            'tl_class'  => 'w50 m12'
+        ),
+        'sql' => "char(1) NOT NULL default ''"
     )
 
 ));
