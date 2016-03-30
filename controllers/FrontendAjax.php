@@ -99,7 +99,7 @@ class FrontendAjax extends \Controller
             {
                 if (\Validator::isBinaryUuid($objCategory->defaultMarker))
                 {
-                    $objFile = \FilesModel::findByPk($objCategory->defaultMarker)
+                    $objFile = \FilesModel::findByPk($objCategory->defaultMarker);
                     
                     if ($objFile)
                     {
