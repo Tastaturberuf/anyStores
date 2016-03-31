@@ -60,22 +60,7 @@ class ModuleAnyStoresMap extends \Module
         // map height
         $this->Template->mapHeight = deserialize($this->anystores_mapheight);
         
-        $this->Template->anystores_token = $this->generateRequestToken();
-    }
-
-
-    protected function generateRequestToken()
-    {
-        // get session
-        $objSession = \Session::getInstance();
-
-        // generate token
-        $arrTokens            = $objSession->get('anystores_token');
-        $arrTokens[$this->id] = md5(uniqid(mt_rand(), true));
-
-        $objSession->set('anystores_token', $arrTokens);
-
-        return $arrTokens[$this->id];
+        $this->Template->anystores_token = FrontendAjax::generateRequestToken($this->id);
     }
 
 }

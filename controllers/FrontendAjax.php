@@ -152,20 +152,32 @@ class FrontendAjax extends \Controller
     }
 
 
+    public static function generateRequestToken($intModuleId)
+    {
+        // get session
+        $objSession = \Session::getInstance();
+
+        // generate token
+        $arrTokens            = $objSession->get('anystores_token');
+
+        if ( empty($arrTokens[$intModuleId]) )
+        {
+            $arrTokens[$intModuleId] = md5(uniqid(mt_rand(), true));
+
+            $objSession->set('anystores_token', $arrTokens);
+        }
+
+        return $arrTokens[$intModuleId];
+    }
+
+
     protected static function validateRequestToken($intModuleId, $strToken)
     {
         $objSession = \Session::getInstance();
 
         $arrTokens = $objSession->get('anystores_token');
 
-        $blnReturn = ($arrTokens[$intModuleId] === $strToken);
-
-        // reset token
-        unset($arrTokens[$intModuleId]);
-
-        $objSession->set('anystores_token', $arrTokens);
-
-        return $blnReturn;
+        return ($arrTokens[$intModuleId] === $strToken);
     }
 
 
