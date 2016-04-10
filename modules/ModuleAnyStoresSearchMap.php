@@ -124,6 +124,15 @@ class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
         {
             $this->Template->stores = $strJson;
         }
+
+        // center the map
+        $arrCoordinates = AnyStores::getLonLat($this->strSearchValue, $this->strCountryValue);
+
+        if ( $arrCoordinates )
+        {
+            $this->Template->anystores_latitude  = $arrCoordinates['latitude'];
+            $this->Template->anystores_longitude = $arrCoordinates['longitude'];
+        }
     }
 
 }
