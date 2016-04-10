@@ -36,7 +36,15 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
     ',
     'anystores_map' => '
         {title_legend},name,headline,type;
-        {config_legend},anystores_categories,jumpTo,anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_mapheight,anystores_streetview,anystores_defaultMarker,anystores_showSearchResults;
+        {config_legend},anystores_categories,jumpTo;
+        {map_legend},anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_mapheight,anystores_streetview,anystores_defaultMarker;
+        {template_legend:hide},customTpl,anystores_detailTpl;
+        {expert_legend:hide},guests,cssID,space
+    ',
+    'anystores_searchmap' => '
+        {title_legend},name,headline,type;
+        {config_legend},anystores_categories,jumpTo,anystores_defaultCountry,anystores_listLimit,anystores_allowEmptySearch,anystores_limitDistance;
+        {map_legend},anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_mapheight,anystores_streetview,anystores_defaultMarker;
         {template_legend:hide},customTpl,anystores_detailTpl;
         {expert_legend:hide},guests,cssID,space
     '
@@ -284,17 +292,6 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
             'extensions' => Config::get('validImageTypes'),
         ),
         'sql' => "binary(16) NULL"
-    ),
-    'anystores_showSearchResults' => array
-    (
-        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_showSearchResults'],
-        'exclude'   => true,
-        'inputType' => 'checkbox',
-        'eval'      => array
-        (
-            'tl_class'  => 'w50 m12'
-        ),
-        'sql' => "char(1) NOT NULL default ''"
     )
 
 ));

@@ -22,6 +22,11 @@ $GLOBALS['TL_LANG']['XPL']['anystores_apiKey'] = array
     ),
     array
     (
+        'Google Maps Geocoding API',
+        'Zum Berechnen der Geokoordinaten aus einer Adresse.'
+    ),
+    array
+    (
         'Google Maps Geolocation API',
         'Zum Berechnen der Geokoordinaten aus einer Adresse.'
     ),

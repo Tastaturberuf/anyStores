@@ -1,0 +1,59 @@
+<script>
+function initialize()
+{
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+        zoom: <?=$this->anystores_zoom?>,
+        center: new google.maps.LatLng(<?=$this->anystores_latitude?>, <?=$this->anystores_longitude?>),
+        streetViewControl: <?=$this->anystores_streetview?>,
+        mapTypeId: "<?=$this->anystores_maptype?>"
+    });
+
+    var test = "&#39";
+
+    var stores = <?=$this->stores?>;
+
+    var markers = [];
+
+    for (var i = 0; i < stores.length; i++)
+    {
+        var store = stores[i];
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(store.latitude, store.longitude),
+            title: store.name
+        });
+
+        if ( store.marker )
+        {
+            marker.setIcon(store.marker);
+        }
+
+        var infowindow = new google.maps.InfoWindow();
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+
+            var html = "<b><a href=\"" + store.href + "\">" + store.name + "</a></b><br>";
+
+            (store.street !="") ? html += store.street  + "<br>" : "";
+            (store.city !="")   ? html += store.postal  + " " +  store.city  + "<br>" : "";
+            (store.phone !="")  ? html += store.phone  + "<br>" : "";
+            (store.url !="")    ? html += "<a href=\"" + store.url  + "\">" + store.url  + "</a><br>" : "";
+            (store.email !="")  ? html += "<a href=\"mailto:" + store.email  + "\">" + store.email  + "</a><br>" : "";
+            (store.href !="")   ? html += "<br><a href=\"" + store.href + "\">Mehr Informationen</a>" : "";
+
+            return function() {
+                infowindow.setContent(html);
+                infowindow.open(map, marker);
+            }
+
+        })(marker, i));
+
+        markers.push(marker);
+    }
+
+    var markerCluster = new MarkerClusterer(map, markers);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<section id="map-canvas" style="height:<?php echo $this->mapHeight['value']; ?><?php echo $this->mapHeight['unit']; ?>" class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>></section>

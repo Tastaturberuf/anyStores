@@ -24,11 +24,12 @@ $GLOBALS['TL_LANG']['MOD']['anystores_settings']  = array('Einstellungen', 'Eins
  */
 array_insert($GLOBALS['TL_LANG']['FMD'], 0, array
 (
-    'anystores'         => 'AnyStores',
-    'anystores_search'  => array('anyStores Suche',   'Suchformular für Standorte.'),
-    'anystores_list'    => array('anyStores Liste',   'Suchergebnisliste oder einfache Liste der Standorte.'),
-    'anystores_details' => array('anyStores Details', 'Zeigt Details zum Standort an. Das Listenmodul muss auf dieses Modul weiterleiten.'),
-    'anystores_map'     => array('anyStores Karte',   'Übersicht der Standorte auf einer Karte.')
+    'anystores'           => 'AnyStores',
+    'anystores_search'    => array('anyStores Suche',   'Suchformular für Standorte.'),
+    'anystores_list'      => array('anyStores Liste',   'Suchergebnisliste oder einfache Liste der Standorte.'),
+    'anystores_details'   => array('anyStores Details', 'Zeigt Details zum Standort an. Das Listenmodul muss auf dieses Modul weiterleiten.'),
+    'anystores_map'       => array('anyStores Karte',   'Übersicht der Standorte auf einer Karte.'),
+    'anystores_searchmap' => array('anyStores Suchergebnis-Karte',   'Zeigt die Suchergebnisse auf der Karte an.')
 ));
 
 

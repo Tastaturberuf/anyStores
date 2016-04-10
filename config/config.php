@@ -76,10 +76,11 @@ $GLOBALS['BE_MOD']['anyStores'] = array
  */
 $GLOBALS['FE_MOD']['anystores'] = array
 (
-    'anystores_search'  => 'ModuleAnyStoresSearch',
-    'anystores_list'    => 'ModuleAnyStoresList',
-    'anystores_details' => 'ModuleAnyStoresDetails',
-    'anystores_map'     => 'ModuleAnyStoresMap'
+    'anystores_search'    => 'ModuleAnyStoresSearch',
+    'anystores_list'      => 'ModuleAnyStoresList',
+    'anystores_details'   => 'ModuleAnyStoresDetails',
+    'anystores_map'       => 'ModuleAnyStoresMap',
+    'anystores_searchmap' => 'ModuleAnyStoresSearchMap'
 );
 
 

@@ -156,10 +156,9 @@ class FrontendAjax extends \Controller
     {
         // get session
         $objSession = \Session::getInstance();
+        $arrTokens  = $objSession->get('anystores_token');
 
         // generate token
-        $arrTokens            = $objSession->get('anystores_token');
-
         if ( empty($arrTokens[$intModuleId]) )
         {
             $arrTokens[$intModuleId] = md5(uniqid(mt_rand(), true));
