@@ -9,8 +9,6 @@
  * @package     anyStores
  */
 
-define('TL_MODE', 'FE');
-require '../../../initialize.php';
 
-$objRunonce = new \Tastaturberuf\AnyStoresRunonce();
+$objRunonce = new AnyStoresRunOnce();
 $objRunonce->run();

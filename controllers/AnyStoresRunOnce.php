@@ -12,7 +12,7 @@
 namespace Tastaturberuf;
 
 
-class AnyStoresRunonce
+class AnyStoresRunOnce
 {
 
     public function run()
@@ -30,10 +30,11 @@ class AnyStoresRunonce
     {
         $objModules = \ModuleModel::findAll();
 
-        if ( !objModules )
+        if ( !$objModules )
         {
             return;
         }
+
 
         while ( $objModules->next() )
         {

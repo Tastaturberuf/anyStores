@@ -121,7 +121,8 @@ class AnyStoresModel extends \Model
         (
             'fields' => array
             (
-                "$t.id",
+                #"$t.id",
+                "id",
                 "( 6371 * acos( cos( radians(?) ) * cos( radians( $t.latitude ) ) * cos( radians( $t.longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( $t.latitude ) ) ) ) AS distance"
             ),
             'table'  => $t,
