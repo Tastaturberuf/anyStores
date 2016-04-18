@@ -118,8 +118,6 @@ class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
             }
         }
 
-        dump($arrStores); die;
-
         //encode json
         $strJson = json_encode($arrStores);
 
