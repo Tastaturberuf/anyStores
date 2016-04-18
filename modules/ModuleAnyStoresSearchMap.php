@@ -72,6 +72,12 @@ class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
                 // encode email
                 $arrStores[$key]['email'] = String::encodeEmail($store['email']);
 
+                // encode logo uuid
+                if ( \Validator::isBinaryUuid($store['logo']['uuid']) )
+                {
+                    $arrStores[$key]['logo'] = $store['logo']['path'];
+                }
+
                 // get marker
                 $objMarker = null;
 
@@ -111,6 +117,8 @@ class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
                 }
             }
         }
+
+        dump($arrStores); die;
 
         //encode json
         $strJson = json_encode($arrStores);
