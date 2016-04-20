@@ -4,11 +4,9 @@ function initialize()
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: <?=$this->anystores_zoom?>,
         center: new google.maps.LatLng(<?=$this->anystores_latitude?>, <?=$this->anystores_longitude?>),
-        streetViewControl: <?=$this->anystores_streetview?>,
+        streetViewControl: <?= $this->anystores_streetview ? 'true' : 'false' ?>,
         mapTypeId: "<?=$this->anystores_maptype?>"
     });
-
-    var test = "&#39";
 
     var stores = <?=$this->stores?>;
 
