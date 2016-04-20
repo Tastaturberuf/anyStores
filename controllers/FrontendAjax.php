@@ -182,7 +182,7 @@ class FrontendAjax extends \Controller
 
     protected static function respond($arrRespond)
     {
-        $strRespose = json_encode($arrRespond);
+        $strRespose = json_encode($arrRespond, JSON_NUMERIC_CHECK | JSON_PARTIAL_OUTPUT_ON_ERROR);
 
         header('Content-Type: application/json');
 

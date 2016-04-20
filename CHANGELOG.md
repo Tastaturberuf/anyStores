@@ -16,8 +16,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - change ajax request to new class FrontendAjax.php
 - save latitude and longitude in float(10,6) instead varchar(10)
 - save map height in map module with InputUnit widget instead of pixel value
+- Use JSON_PARTIAL_OUTPUT_ON_ERROR flag (PHP 5.5+) for json encoding
 
-###Deprecated
 ###Removed
 - deprecated functions
 

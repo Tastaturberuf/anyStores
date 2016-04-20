@@ -73,10 +73,12 @@ class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
                 $arrStores[$key]['email'] = String::encodeEmail($store['email']);
 
                 // encode logo uuid
+                /*
                 if ( \Validator::isBinaryUuid($store['logo']['uuid']) )
                 {
                     $arrStores[$key]['logo'] = $store['logo']['path'];
                 }
+                */
 
                 // get marker
                 $objMarker = null;
@@ -119,7 +121,7 @@ class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
         }
 
         //encode json
-        $strJson = json_encode($arrStores);
+        $strJson = json_encode($arrStores, JSON_NUMERIC_CHECK | JSON_PARTIAL_OUTPUT_ON_ERROR);
 
         if ( !$strJson )
         {
