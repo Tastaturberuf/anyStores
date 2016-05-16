@@ -95,7 +95,9 @@ function initialize()
         markers.push(marker);
     }
 
-    var markerCluster = new MarkerClusterer(map, markers);
+    var markerCluster = new MarkerClusterer(map, markers, {
+        imagePath: 'system/modules/anyStores/assets/js/markerclusterer/images/m'
+    });
 }
 
 google.maps.event.addDomListener(window, 'load', loadMap);

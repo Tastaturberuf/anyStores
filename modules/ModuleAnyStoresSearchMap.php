@@ -56,7 +56,7 @@ class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
         parent::compile();
 
         $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?language=' . $GLOBALS['TL_LANGUAGE'];
-        $GLOBALS['TL_JAVASCRIPT']['markerclusterer'] = 'system/modules/anyStores/assets/js/markerclusterer/markerclusterer_compiled.js';
+        $GLOBALS['TL_JAVASCRIPT']['markerclusterer'] = 'system/modules/anyStores/assets/js/markerclusterer/src/markerclusterer_compiled.js';
 
         // map height
         $this->Template->mapHeight = deserialize($this->anystores_mapheight);

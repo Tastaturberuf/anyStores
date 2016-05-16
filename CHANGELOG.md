@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.8.0 Unreleased]
+## [1.8.0]
 ###Added
 - Google API key support
 - add six free form fields for locations
@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - save latitude and longitude in float(10,6) instead varchar(10)
 - save map height in map module with InputUnit widget instead of pixel value
 - Use JSON_PARTIAL_OUTPUT_ON_ERROR flag (PHP 5.5+) for json encoding
+- load markerclusterer images local
 
 ###Removed
 - deprecated functions
