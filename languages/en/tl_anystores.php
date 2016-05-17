@@ -52,13 +52,15 @@ $GLOBALS['TL_LANG']['tl_anystores'] = array
     'freeField6'      => array('free field 6', 'Access in template with <code style="font-size: 10px"> $this->freeField1</code>.'),
 
     // Legends
-    'common_legend'   => 'Common',
-    'adress_legend'   => 'Address',
-    'geo_legend'      => 'Coordinates',
-    'seo_legend'      => 'SEO settings',
-    'times_legend'    => 'Opening times',
-    'publish_legend'  => 'Publishing',
-    'freeform_legend' => 'Freeform fields',
+    'common_legend'      => 'Common',
+    'adress_legend'      => 'Address',
+    'geo_legend'         => 'Coordinates',
+    'contact_legend'     => 'Contact data',
+    'description_legend' => 'Description',
+    'seo_legend'         => 'SEO settings',
+    'times_legend'       => 'Opening times',
+    'publish_legend'     => 'Publishing',
+    'freeform_legend'    => 'Freeform fields',
 
 
     // Global buttons

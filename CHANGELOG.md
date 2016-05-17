@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.9.0 Unreleased]
+###Added
+
+###Changed
+- sorting backend palettes
+
+###Deprecated
+
+###Removed
+
+###Fixed
+
+###Security
+
 ## [1.8.0]
 ###Added
 - Google API key support
