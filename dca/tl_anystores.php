@@ -911,15 +911,14 @@ class tl_anystores extends Backend
      */
     public function fillCoordinates(DataContainer $dc)
     {
-        // Return if both are numeric
+        // Return if both are set
         if
         (
-            is_numeric($dc->activeRecord->latitude) &&
-            is_numeric($dc->activeRecord->longitude)
+            !empty((float) $dc->activeRecord->latitude) &&
+            !empty((float) $dc->activeRecord->longitude)
         )
         {
             return;
-
         }
         
         // Get country name
