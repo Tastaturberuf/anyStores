@@ -20,6 +20,7 @@ class AnyStoresDcaHelper
      * Get all anyStores categories
      * 
      * @return array
+     * @deprecated 1.8.1 use 'foreignKey' instead
      */
     public static function getCategories()
     {

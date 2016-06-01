@@ -57,11 +57,11 @@ array_insert($GLOBALS['TL_DCA']['tl_form']['fields'], 0, array
     ),
     'anystores_categories' => array
     (
-        'label'     => &$GLOBALS['TL_LANG']['tl_form']['anystores_categories'],
-        'exclude'   => true,
-        'inputType' => 'checkbox',
-        'options'   => AnyStoresDcaHelper::getCategories(),
-        'eval'      => array
+        'label'      => &$GLOBALS['TL_LANG']['tl_form']['anystores_categories'],
+        'exclude'    => true,
+        'inputType'  => 'checkbox',
+        'foreignKey' => 'tl_anystores_category.title',
+        'eval'       => array
         (
             'mandatory' => true,
             'multiple'  => true

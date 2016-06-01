@@ -16,6 +16,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ###Security
 
+## [1.8.2]
+###Fixed
+- fixed error on generating coordinates
+
+## [1.8.1]
+###Fixed
+- database error on install
+
+###Deprecated
+- AnyStoresDcaHelper::getCategories - use foreignKey instead
+
 ## [1.8.0]
 ###Added
 - Google API key support
