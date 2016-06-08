@@ -3,7 +3,7 @@
 /**
  * anyStores for Contao Open Source CMS
  *
- * @copyright   (c) 2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
+ * @copyright   (c) 2014 - 2016 Tastaturberuf <mail@tastaturberuf.de>
  *              (c) 2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
  * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
  *              Benny Born <benny.born@numero2.de>
@@ -105,7 +105,7 @@ class ModuleAnyStoresSearch extends \Module
 
         $this->Template->formId       = $strFormId;
         $this->Template->formAction   = \Environment::get('indexFreeRequest');
-        
+
         $this->Template->searchName   = $strSearchKey;
         $this->Template->searchId     = 'ctrl_search_'.$this->id;
         $this->Template->searchValue  = \Input::get($strSearchKey);
