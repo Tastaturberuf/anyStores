@@ -6,11 +6,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ###Added
 
 ###Changed
-- sorting backend palettes
+- Sorting backend palettes
+- Change ALL(!) templates to Contao 3.3+
 
 ###Deprecated
 
 ###Removed
+- Remove back button in detail template (see #10)
 
 ###Fixed
 

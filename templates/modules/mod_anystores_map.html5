@@ -1,7 +1,9 @@
+<!-- indexer::stop -->
 <script>
 var anystores = {
-    "module": <?php echo $this->id; ?>,
-    "token": "<?php echo $this->anystores_token; ?>"
+    "module": <?php echo $this->id ?>,
+    "token": "<?php echo $this->anystores_token ?>"
 };
 </script>
-<section id="map-canvas" style="height:<?php echo $this->mapHeight['value']; ?><?php echo $this->mapHeight['unit']; ?>" class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>></section>
+<section id="map-canvas" style="height:<?= $this->mapHeight['value'] ?><?= $this->mapHeight['unit'] ?>" class="<?= $this->class ?> block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif ?>></section>
+<!-- indexer::continue -->

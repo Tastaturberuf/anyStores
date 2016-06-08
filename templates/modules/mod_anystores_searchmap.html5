@@ -2,13 +2,13 @@
 function initialize()
 {
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
-        zoom: <?=$this->anystores_zoom?>,
-        center: new google.maps.LatLng(<?=$this->anystores_latitude?>, <?=$this->anystores_longitude?>),
+        zoom: <?= $this->anystores_zoom ?>,
+        center: new google.maps.LatLng(<?= $this->anystores_latitude ?>, <?= $this->anystores_longitude ?>),
         streetViewControl: <?= $this->anystores_streetview ? 'true' : 'false' ?>,
-        mapTypeId: "<?=$this->anystores_maptype?>"
+        mapTypeId: "<?= $this->anystores_maptype ?>"
     });
 
-    var stores = <?=$this->stores?>;
+    var stores = <?= $this->stores ?>;
 
     var markers = [];
 
@@ -56,4 +56,4 @@ function initialize()
 
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-<section id="map-canvas" style="height:<?php echo $this->mapHeight['value']; ?><?php echo $this->mapHeight['unit']; ?>" class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>></section>
+<section id="map-canvas" style="height:<?php echo $this->mapHeight['value']; ?><?php echo $this->mapHeight['unit']; ?>" class="<?= $this->class ?> block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif ?>></section>
