@@ -31,13 +31,22 @@ class AnyStoresModel extends \Model
 
     /**
      * Find all published
+     *
+     * @param array $arrOptions
+     *
+     * @return \Model\Collection|null
      */
-    public static function findAllPublished()
+    public static function findAllPublished(array $arrOptions)
     {
-        $arrOptions = array
+        $arrOptions = array_merge
         (
-            'column' => 'published',
-            'value'  => 1
+            array
+            (
+                'column' => 'published',
+                'value'  => 1
+            ),
+
+            $arrOptions
         );
 
         return static::findAll($arrOptions);
