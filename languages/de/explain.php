@@ -17,7 +17,7 @@ $GLOBALS['TL_LANG']['XPL']['anystores_apiKey'] = array
     array
     (
         'colspan',
-        'Bitte beachten Sie, dass Sie den Key für folgende APIs freischalten müssen.<br>'.
+        'Bitte beachten Sie, dass Sie den <b>Server-Key</b> für folgende APIs freischalten müssen.<br>'.
         'Mehr Informationen finden Sie hier: <a href="https://console.developers.google.com" target="_blank">https://console.developers.google.com</a>'
     ),
     array
