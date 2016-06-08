@@ -1,3 +1,4 @@
+
 <?php $this->extend('block_unsearchable') ?>
 
 <?php $this->block('content') ?>
@@ -7,11 +8,11 @@
             <input type="hidden" name="FORM_SUBMIT" value="<?= $this->formId ?>">
             <input type="hidden" name="REQUEST_TOKEN" value="<?= REQUEST_TOKEN ?>">
 
-            <label for="<?= $this->searchId ?>" class="invisible"><?= $this->searchLabel ?></label>
-            <input type="text" class="text" id="<?= $this->searchId ?>" name="<?= $this->searchName ?>" value="<?= $this->searchValue ?>" placeholder="<?= $this->searchLabel ?>">
+            <label for="<?= $this->searchId ?>" class="invisible">{{label::anystores:postal}}</label>
+            <input type="text" class="text" id="<?= $this->searchId ?>" name="<?= $this->searchName ?>" value="<?= $this->searchValue ?>" placeholder="{{label::anystores:postal}}"<?= $this->anystores_allowEmptySearch ?: ' required' ?>>
 
             <?php if( count($this->countryOptions) > 1 ): ?>
-                <label for="<?= $this->countryId ?>" class="invisible"><?= $this->countryLabel ?></label>
+                <label for="<?= $this->countryId ?>" class="invisible">{{label::anystores:country}}</label>
                 <select id="<?= $this->countryId ?>" name="<?= $this->countryName ?>" class="select">
                     <?php foreach( $this->countryOptions as $key => $name ): ?>
                         <option value="<?= $key ?>" <?php if( $this->countryValue == $key ): ?> selected<?php endif ?>><?= $name ?></option>
@@ -20,8 +21,8 @@
             <?php else: ?>
                 <input type="hidden" name="<?= $this->countryName ?>" value="<?= key($this->countryOptions) ?>">
             <?php endif ?>
-
-            <input type="submit" class="submit" value="<?= $this->submitValue ?>">
+            
+            <button type="submit" class="submit">{{label::anystores:search}}</button>
         </div>
     </form>
 
