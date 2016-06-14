@@ -36,7 +36,7 @@ class AnyStoresModel extends \Model
      *
      * @return \Model\Collection|null
      */
-    public static function findAllPublished(array $arrOptions)
+    public static function findAllPublished(array $arrOptions = array())
     {
         $arrOptions = array_merge
         (
