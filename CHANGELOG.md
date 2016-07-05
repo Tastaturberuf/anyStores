@@ -18,6 +18,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ###Security
 
+## [1.8.3]
+###Fixed
+- fixed copy error for members
+
 ## [1.8.2]
 ###Fixed
 - fixed error on generating coordinates

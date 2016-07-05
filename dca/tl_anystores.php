@@ -740,7 +740,7 @@ class tl_anystores extends Backend
      */
     public function generateCopyButton($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes, $strTable, $arrRootsId, $arrChildrecords, $blnCircularReference, $strPrevious, $strNext, $dc)
     {
-        return $this->User->canEditFieldsOf('tl_anystores') ? '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $strIcon)).' ';
+        return $this->User->canEditFieldsOf('tl_anystores') ? '<a href="'.$this->addToUrl($strHref.'&amp;id='.$arrRow['id'].'&amp;pid='.$arrRow['pid']).'" title="'.specialchars($strTitle).'"'.$strAttributes.'>'.Image::getHtml($strIcon, $strLabel).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $strIcon)).' ';
     }
 
     /**
