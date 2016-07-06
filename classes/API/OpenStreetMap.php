@@ -18,9 +18,11 @@ class OpenStreetMap
 
     /**
      * Find the longitute and latitude from a location string
-     * @param type $strAddress
-     * @param type $strCountry
+     *
+     * @param string $strAddress
+     * @param string $strCountry
      * @example http://wiki.openstreetmap.org/wiki/Nominatim#Examples
+     * @return array|bool
      */
     public static function getLonLat($strAddress, $strCountry = null)
     {

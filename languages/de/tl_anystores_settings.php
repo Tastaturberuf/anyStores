@@ -20,6 +20,7 @@ $GLOBALS['TL_LANG']['tl_anystores_settings'] = array
     // Fields
     'anystores_defaultMarker' => array('Standard-Marker für alle Standorte', 'Kann im Modul, in der Kategorie und am Standort überschrieben werden.'),
     'anystores_geoApi'        => array('API-Anbieter', 'Wählen Sie einen API-Anbieter aus.'),
-    'anystores_apiKey'        => array('API-Key', 'Geben Sie Ihren API-Key ein.')
+    'anystores_apiKey'        => array('Google Maps Server API-Key', 'Wird für die serverseitigen Abfragen verwendet.'),
+    'anystores_apiBrowserKey' => array('Google Maps Browser API-Key', 'Wird zum Einbetten des JS ins HTML verwendet.')
 
 );
