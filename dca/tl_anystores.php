@@ -983,7 +983,7 @@ class tl_anystores extends Backend
             $GLOBALS['TL_LANG']['tl_anystores']['map'][0],
             $strCoords,
             $strCoords,
-            \Config::get('anystores_apiKey')
+            \Config::get('anystores_apiBrowserKey')
         );
     }
 

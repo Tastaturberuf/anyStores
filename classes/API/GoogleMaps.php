@@ -68,8 +68,12 @@ class GoogleMaps
                 case 'REQUEST_DENIED':
                 case 'INVALID_REQUEST':
                 default:
-                    \System::log("Google Maps API return error '{$objResponse->status}' for '{$strAddress}': {$objResponse->error_message}", __METHOD__, TL_ERROR);
-                    return false;
+                \System::log(
+                    "Google Maps API return error '{$objResponse->status}' for '{$strAddress}': {$objResponse->error_message}",
+                    __METHOD__, TL_ERROR
+                );
+
+                return false;
             }
         }
 
@@ -77,4 +81,18 @@ class GoogleMaps
         return false;
     }
 
+    /**
+     * Add Javascript library to HTML output.
+     */
+    static function includeJs()
+    {
+        $params['language'] = $GLOBALS['TL_LANGUAGE'];
+        $apiKey = \Config::get('anystores_apiBrowserKey');
+        if ($apiKey) {
+            $params["key"] = $apiKey;
+        }
+
+        $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?'
+                                                       . http_build_query($params, '', '&');
+    }
 }

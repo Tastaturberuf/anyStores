@@ -52,8 +52,7 @@ class ModuleAnyStoresMap extends \Module
      */
     protected function compile()
     {
-
-        $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?language='.$GLOBALS['TL_LANGUAGE'];
+        GoogleMaps::includeJs();
         $GLOBALS['TL_JAVASCRIPT']['anystores']       = 'system/modules/anyStores/assets/js/anystores.js';
         $GLOBALS['TL_JAVASCRIPT']['markerclusterer'] = 'system/modules/anyStores/assets/js/markerclusterer/src/markerclusterer_compiled.js';
 
