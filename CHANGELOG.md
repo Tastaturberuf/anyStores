@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Remove back button in detail template (see #10)
 
 ###Fixed
+- Use LIMIT in list module without trigger the search
 
 ###Security
 
