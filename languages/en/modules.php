@@ -35,6 +35,9 @@ array_insert($GLOBALS['TL_LANG']['FMD'], 0, array
 
 array_insert($GLOBALS['TL_LANG']['tl_module'], 0, array
 (
+    'map_legend'     => 'Map settings',
+    'map_api_legend' => 'API settings',
+
     'anystores_defaultCountry'   => array('Default country', 'Which country should be used as default if user did not select any?'),
     'anystores_categories'       => array('Choose category', 'From which category should the stores be displayed?'),
     'anystores_listLimit'        => array('Number of results', 'How many results should be shown?'),
@@ -50,5 +53,7 @@ array_insert($GLOBALS['TL_LANG']['tl_module'], 0, array
     'anystores_maptype'          => array('Maptype', 'Default maptype.'),
     'anystores_streetview'       => array('Enable StreetView', 'Switch StreetView on or off.'),
     'anystores_mapheight'        => array('Map height', 'In pixel. Add the style attribute to the template.'),
-    'anystores_defaultMarker'    => array('Default marker', 'Can be overriden by category and location. Overrides global marker from settings.')
+    'anystores_defaultMarker'    => array('Default marker', 'Can be overriden by category and location. Overrides global marker from settings.'),
+    'anystores_signedIn'         => array('Signed in', 'Enable the login for the Google Map.'),
+    'anystores_mapsApi'          => array('Choose an API', '')
 ));

@@ -4,9 +4,7 @@
  * anyStores for Contao Open Source CMS
  *
  * @copyright   (c) 2014 - 2016 Tastaturberuf <mail@tastaturberuf.de>
- *              (c) 2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
  * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
- *              Benny Born <benny.born@numero2.de>
  * @license     http://opensource.org/licenses/lgpl-3.0.html
  * @package     anyStores
  */
@@ -37,14 +35,16 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
     'anystores_map' => '
         {title_legend},name,headline,type;
         {config_legend},anystores_categories,jumpTo;
-        {map_legend},anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_mapheight,anystores_streetview,anystores_defaultMarker;
+        {map_legend},anystores_latitude,anystores_longitude,anystores_mapheight,anystores_defaultMarker;
+        {map_api_legend},anystores_mapsApi;
         {template_legend:hide},customTpl,anystores_detailTpl;
         {expert_legend:hide},guests,cssID,space
     ',
     'anystores_searchmap' => '
         {title_legend},name,headline,type;
         {config_legend},anystores_categories,jumpTo,anystores_defaultCountry,anystores_listLimit,anystores_allowEmptySearch,anystores_limitDistance;
-        {map_legend},anystores_latitude,anystores_longitude,anystores_zoom,anystores_maptype,anystores_mapheight,anystores_streetview,anystores_defaultMarker;
+        {map_legend},anystores_latitude,anystores_longitude,anystores_mapheight,anystores_defaultMarker;
+        {map_api_legend},anystores_mapsApi;
         {template_legend:hide},customTpl,anystores_detailTpl;
         {expert_legend:hide},guests,cssID,space
     '
@@ -54,6 +54,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
 /**
  * Selector
  */
+$GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'][] = 'anystores_mapsApi';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'][] = 'anystores_limitDistance';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'][] = 'anystores_allowEmptySearch';
 
@@ -61,8 +62,9 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'][] = 'anystores_allow
 /**
  * Subpalettes
  */
-$GLOBALS['TL_DCA']['tl_module']['subpalettes']['anystores_allowEmptySearch'] = 'anystores_sortingOrder';
-$GLOBALS['TL_DCA']['tl_module']['subpalettes']['anystores_limitDistance']    = 'anystores_maxDistance';
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['anystores_mapsApi_GoogleMaps'] = 'anystores_zoom,anystores_maptype,anystores_streetview,anystores_signedIn';
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['anystores_allowEmptySearch']   = 'anystores_sortingOrder';
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['anystores_limitDistance']      = 'anystores_maxDistance';
 
 
 /**
@@ -232,7 +234,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
         'eval'      => array
         (
             'default'   => 6,
-            'tl_class'  => 'w50'
+            'tl_class'  => 'clr w50'
         ),
         'sql' => "tinyint(2) unsigned NOT NULL default '6'"
     ),
@@ -290,8 +292,35 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
             'files'      => true,
             'fieldType'  => 'radio',
             'extensions' => Config::get('validImageTypes'),
+            'tl_class'   => 'w50'
         ),
         'sql' => "binary(16) NULL"
+    ),
+    'anystores_mapsApi' => array
+    (
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_mapsApi'],
+        'inputType' => 'select',
+        'options'   => array
+        (
+            'GoogleMaps' => 'Google Maps',
+        ),
+        'eval' => array
+        (
+            'submitOnChange' => true,
+            'tl_class'       => 'w50'
+        ),
+        'sql' => "varchar(32) NOT NULL default 'GoogleMaps'"
+    ),
+    'anystores_signedIn' => array
+    (
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_signedIn'],
+        'exclude'   => true,
+        'inputType' => 'checkbox',
+        'eval'      => array
+        (
+            'tl_class' => 'w50 m12'
+        ),
+        'sql' => "char(1) NOT NULL default ''"
     )
 
 ));

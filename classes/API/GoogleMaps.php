@@ -81,15 +81,12 @@ class GoogleMaps
     /**
      * Add Javascript library to HTML output.
      */
-    public static function includeJs()
+    public static function includeJs(array $arrParams = array())
     {
-        $params['language'] = $GLOBALS['TL_LANGUAGE'];
-        $apiKey = \Config::get('anystores_apiBrowserKey');
-        if ($apiKey) {
-            $params["key"] = $apiKey;
-        }
-        $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?'
-            . http_build_query($params, '', '&');
+        $arrParams['language'] = $GLOBALS['TL_LANGUAGE'];
+        $arrParams['key']      = \Config::get('anystores_apiBrowserKey');
+
+        $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?'.http_build_query($arrParams, '', '&');
     }
 
 }

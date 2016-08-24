@@ -32,3 +32,20 @@ $GLOBALS['TL_LANG']['XPL']['anystores_apiKey'] = array
     )
 
 );
+
+$GLOBALS['TL_LANG']['XPL']['anystores_apiBrowserKey'] = array
+(
+
+    array
+    (
+        'colspan',
+        'Please make sure you’re enable for the <b>browser key</b> the following APIs.<br>'.
+        'More informations: <a href="https://console.developers.google.com" target="_blank">https://console.developers.google.com</a>'
+    ),
+    array
+    (
+        'Google Maps JavaScript API',
+        'Get the geo coordinates from locations.'
+    )
+
+);

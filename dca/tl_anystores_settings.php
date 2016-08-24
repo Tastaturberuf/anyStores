@@ -26,7 +26,7 @@ $GLOBALS['TL_DCA']['tl_anystores_settings'] = array
         'default' =>
         '
             {anystores_common_legend},anystores_defaultMarker;
-            {anystores_api_legend},anystores_geoApi,anystores_apiKey
+            {anystores_api_legend},anystores_geoApi,anystores_apiKey,anystores_apiBrowserKey
         '
     ),
 
@@ -59,13 +59,27 @@ $GLOBALS['TL_DCA']['tl_anystores_settings'] = array
                 'tl_class' => 'w50'
             )
         ),
+        //@todo rename to anystores_apiServerKey
         'anystores_apiKey' => array
         (
-            'label'     => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_apiKey'],
-            'inputType' => 'text',
+            'label'       => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_apiKey'],
+            'inputType'   => 'text',
             'explanation' => 'anystores_apiKey',
-            'eval'      => array
+            'eval'        => array
             (
+                'mandatory'  => true,
+                'helpwizard' => true,
+                'tl_class'   => 'clr w50'
+            )
+        ),
+        'anystores_apiBrowserKey' => array
+        (
+            'label'       => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_apiBrowserKey'],
+            'inputType'   => 'text',
+            'explanation' => 'anystores_apiBrowserKey',
+            'eval'        => array
+            (
+                'mandatory'  => true,
                 'helpwizard' => true,
                 'tl_class'   => 'w50'
             )

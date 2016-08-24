@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.9.0 Unreleased]
 ###Added
+- Add Google Maps API browser key support (fix #60 #61) Thanks to @DanMan
+- Add possibility to login in the dynamic Google map
 
 ###Changed
 - Sorting backend palettes
