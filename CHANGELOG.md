@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ###Added
 - Add Google Maps API browser key support (fix #60 #61) Thanks to @DanMan
 - Add possibility to login in the dynamic Google map
+- Add table header customization at location list view in the backend
 
 ###Changed
 - Sorting backend palettes

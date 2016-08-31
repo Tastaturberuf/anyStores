@@ -54,7 +54,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         ),
         'label' => array
         (
-            'fields'      => array('name', 'street', 'postal', 'city', 'country'),
+            'fields'      => deserialize(\Config::get('anystores_tableHeaders')),
             'showColumns' => true
         ),
         'global_operations' => array
@@ -581,6 +581,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField1'],
             'exclude'   => true,
+            'search'    => true,
+            'sorting'   => true,
+            'filter'    => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -593,6 +596,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField2'],
             'exclude'   => true,
+            'search'    => true,
+            'sorting'   => true,
+            'filter'    => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -605,6 +611,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField3'],
             'exclude'   => true,
+            'search'    => true,
+            'sorting'   => true,
+            'filter'    => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -617,6 +626,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField4'],
             'exclude'   => true,
+            'search'    => true,
+            'sorting'   => true,
+            'filter'    => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -629,6 +641,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField5'],
             'exclude'   => true,
+            'search'    => true,
+            'sorting'   => true,
+            'filter'    => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -641,6 +656,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField6'],
             'exclude'   => true,
+            'search'    => true,
+            'sorting'   => true,
+            'filter'    => true,
             'inputType' => 'text',
             'eval'      => array
             (
