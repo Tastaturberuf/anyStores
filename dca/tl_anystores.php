@@ -1001,7 +1001,7 @@ class tl_anystores extends Backend
             'maptype'  => 'roadmap',
             'markers'  => 'color:red|'.$strCoords,
             'language' => $GLOBALS['TL_LANGUAGE'],
-            'key'      => \Config::get('anystores_apiKey')
+            'key'      => \Config::get('anystores_apiBrowserKey')
         ];
 
         return sprintf(
