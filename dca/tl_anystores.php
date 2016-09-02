@@ -932,11 +932,7 @@ class tl_anystores extends Backend
     public function fillCoordinates(DataContainer $dc)
     {
         // Return if both are set
-        if
-        (
-            !empty((float) $dc->activeRecord->latitude) &&
-            !empty((float) $dc->activeRecord->longitude)
-        )
+        if ( $dc->activeRecord->latitude != '0.000000' && $dc->activeRecord->longitude != '0.000000' )
         {
             return;
         }
