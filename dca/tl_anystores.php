@@ -1016,7 +1016,7 @@ class tl_anystores extends Backend
             $autoAlias = true;
             //@todo make configureable for each category in dca category
             $varValue = $dc->activeRecord->name.'-'.$dc->activeRecord->postal.'-'.$dc->activeRecord->city;
-            $varValue = standardize(String::restoreBasicEntities($varValue));
+            $varValue = standardize(StringUtil::restoreBasicEntities($varValue));
         }
 
         $objAlias = $this->Database->prepare("SELECT id FROM tl_anystores WHERE id=? OR alias=?")
