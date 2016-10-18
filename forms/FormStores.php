@@ -26,6 +26,7 @@ class FormStores extends \FormSelectMenu
 
         $arrCategories = deserialize($this->anystores_categories);
         $arrOptions    = array('order'=>'postal');
+        $strField      = $this->anystores_idField;
 
         $objLocations = AnyStoresModel::findPublishedByCategory($arrCategories, $arrOptions);
 
@@ -36,7 +37,7 @@ class FormStores extends \FormSelectMenu
                 $arrLocations[] = array
                 (
                     'type'  => 'option',
-                    'value' => $objLocations->id,
+                    'value' => $objLocations->$strField,
                     'label' => $objLocations->postal.' '.$objLocations->name
                 );
             }

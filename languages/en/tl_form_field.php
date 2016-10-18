@@ -14,3 +14,9 @@ array_insert($GLOBALS['TL_LANG']['FFL'], 0, array
 (
     'stores' => array('anyStores list', '')
 ));
+
+array_insert($GLOBALS['TL_LANG']['tl_form_field'], 0, array
+(
+    'anystores_idField'    => array('Column for the value', ''),
+    'anystores_categories' => array('Categories', '')
+));
