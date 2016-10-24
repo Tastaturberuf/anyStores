@@ -54,7 +54,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         ),
         'label' => array
         (
-            'fields'      => deserialize(\Config::get('anystores_tableHeaders')),
+            'fields'      => deserialize(\Config::get('anystores_tableHeaders'), true),
             'showColumns' => true
         ),
         'global_operations' => array
