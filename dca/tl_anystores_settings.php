@@ -25,8 +25,8 @@ $GLOBALS['TL_DCA']['tl_anystores_settings'] = array
     (
         'default' =>
         '
-            {anystores_common_legend},anystores_defaultMarker;
-            {anystores_api_legend},anystores_geoApi,anystores_apiKey
+            {anystores_common_legend},anystores_defaultMarker,anystores_tableHeaders;
+            {anystores_api_legend},anystores_geoApi,anystores_apiKey,anystores_apiBrowserKey
         '
     ),
 
@@ -59,17 +59,63 @@ $GLOBALS['TL_DCA']['tl_anystores_settings'] = array
                 'tl_class' => 'w50'
             )
         ),
+        //@todo rename to anystores_apiServerKey
         'anystores_apiKey' => array
         (
-            'label'     => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_apiKey'],
-            'inputType' => 'text',
+            'label'       => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_apiKey'],
+            'inputType'   => 'text',
             'explanation' => 'anystores_apiKey',
-            'eval'      => array
+            'eval'        => array
             (
+                'mandatory'  => true,
+                'helpwizard' => true,
+                'tl_class'   => 'clr w50'
+            )
+        ),
+        'anystores_apiBrowserKey' => array
+        (
+            'label'       => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_apiBrowserKey'],
+            'inputType'   => 'text',
+            'explanation' => 'anystores_apiBrowserKey',
+            'eval'        => array
+            (
+                'mandatory'  => true,
                 'helpwizard' => true,
                 'tl_class'   => 'w50'
+            )
+        ),
+        'anystores_tableHeaders' => array
+        (
+            'label'            => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_tableHeaders'],
+            'inputType'        => 'checkboxWizard',
+            'options_callback' => array('tl_anystores_settings', 'getTableHeader'),
+            'eval'             => array
+            (
+                'multiple' => true,
             )
         )
     )
 
 );
+
+
+class tl_anystores_settings
+{
+
+    public function getTableHeader(\DataContainer $dc)
+    {
+        \System::loadLanguageFile('tl_anystores');
+
+        $arrLabels = array();
+
+        $arrFields = \DcaExtractor::getInstance('tl_anystores')->getFields();
+
+        foreach($arrFields as $key => $value)
+        {
+            $arrLabels[$key] = $GLOBALS['TL_LANG']['tl_anystores'][$key][0] ?: $key;
+        };
+
+        return $arrLabels;
+    }
+
+}

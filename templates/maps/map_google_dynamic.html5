@@ -1,14 +1,9 @@
-<?php
-    // set javascript in header
-    $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?language='.$GLOBALS['TL_LANGUAGE'];
-    // set css in header
-    $GLOBALS['TL_CSS']['anystores'] = 'system/modules/anyStores/assets/css/style.css';
-?>
-<div id="map_canvas_<?php echo $this->id; ?>" class="map-dynamic"></div>
+<?php GoogleMaps::includeJs(); ?>
+<div id="map_canvas_<?= $this->id ?>" class="map-dynamic" style="height:300px"></div>
 <script type="text/javascript">
 function initAnyStoresMap()
 {
-    var latlng = new google.maps.LatLng(<?php echo $this->latitude; ?>, <?php echo $this->longitude; ?>);
+    var latlng = new google.maps.LatLng(<?= $this->latitude ?>, <?= $this->longitude ?>);
 
     var mapOptions = {
         zoom: 15,
@@ -16,12 +11,12 @@ function initAnyStoresMap()
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    var map = new google.maps.Map(document.getElementById("map_canvas_<?php echo $this->id; ?>"), mapOptions);
+    var map = new google.maps.Map(document.getElementById("map_canvas_<?= $this->id ?>"), mapOptions);
 
     var marker = new google.maps.Marker({
         position: latlng,
         map: map,
-        title: "<?php echo $this->name; ?>"
+        title: "<?= $this->name ?>"
     });
 }
 initAnyStoresMap();

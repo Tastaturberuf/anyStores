@@ -1,11 +1,28 @@
-<?php
-    /* You can configure the image here */
+<?php // with ♥ and Contao
 
-    // map zoom
-    $zoom = 15;
-    // image width
-    $width = 400;
-    // image height
-    $height = 220;
+/**
+ * anyStores for Contao Open Source CMS
+ *
+ * @copyright   (c) 2016 Tastaturberuf <mail@tastaturberuf.de>
+ * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
+ * @license     http://opensource.org/licenses/lgpl-3.0.html
+ * @package     anyStores
+ */
+
+
+/**
+ * You can configure the image here
+ *
+ * @see https://developers.google.com/maps/documentation/static-maps/intro
+ */
+$arrParams =
+[
+    // maximum 640x640
+    'size'    => '640x320',
+    'markers' => "color:red|{$this->latitude},{$this->longitude}"
+];
+
+$strImage = sprintf('https://maps.googleapis.com/maps/api/staticmap?%s', http_build_query($arrParams));
+
 ?>
-<img class="map-static" src="https://maps.googleapis.com/maps/api/staticmap?center=<?php echo $this->latitude?>,<?php echo $this->longitude?>&amp;zoom=<?php echo $zoom;?>&amp;size=<?=$width?>x<?=$height?>&amp;maptype=roadmap&amp;markers=color:red|label:|<?php echo $this->latitude;?>,<?php echo $this->longitude;?>" alt="Google Maps"/>
+<img class="map-static" src="<?= $strImage ?>" alt="Google Maps" >

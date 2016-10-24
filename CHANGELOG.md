@@ -2,6 +2,27 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.9.0]
+###Added
+- Add Google Maps API browser key support (fix #60 #61) Thanks to @DanMan
+- Add possibility to login in the dynamic Google map
+- Add table header customization at location list view in the backend
+- Add dynamic value field in form location list
+
+###Changed
+- Sorting backend palettes
+- Change ALL(!) templates to Contao 3.3+
+
+###Deprecated
+
+###Removed
+- Remove back button in detail template (see #10)
+
+###Fixed
+- Use LIMIT in list module without trigger the search
+
+###Security
+
 ## [1.8.3]
 ###Fixed
 - fixed copy error for members

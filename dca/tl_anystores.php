@@ -54,7 +54,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         ),
         'label' => array
         (
-            'fields'      => array('name', 'street', 'postal', 'city', 'country'),
+            'fields'      => deserialize(\Config::get('anystores_tableHeaders'), true),
             'showColumns' => true
         ),
         'global_operations' => array
@@ -138,12 +138,14 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         '__selector__' => array('published'),
         'default' =>
         '
-            {common_legend},pid,name,alias,phone,fax,url,target,email,logo,marker,description;
-            {adress_legend},country,street,street2,postal,city;
-            {times_legend},opening_times;
-            {geo_legend},geo_explain,longitude,map,latitude;
-            {freeform_legend},freeField1,freeField2,freeField3,freeField4,freeField5,freeField6;
-            {seo_legend},metatitle,metadescription;
+            {common_legend},pid;
+            {adress_legend},name,alias,street,street2,postal,city,country;
+            {geo_legend},geo_explain,longitude,map,latitude,marker;
+            {contact_legend},phone,fax,url,target,email;
+            {description_legend:hide},logo,description;
+            {times_legend:hide},opening_times;
+            {freeform_legend:hide},freeField1,freeField2,freeField3,freeField4,freeField5,freeField6;
+            {seo_legend:hide},metatitle,metadescription;
             {publish_legend},published
         '
     ),
@@ -166,6 +168,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             'eval'       => array
             (
                 'mandatory' => true,
+                'chosen'    => true,
                 'tl_class'  => 'clr'
             ),
             'sql' => "int(10) unsigned NOT NULL default '0'"
@@ -364,19 +367,17 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             'inputType' => 'select',
             'exclude'   => true,
             'options'   => System::getCountries(),
-            'default'   => 'de',
             'search'    => true,
             'sorting'   => true,
             'filter'    => true,
             'flag'      => 1,
             'eval'      => array
             (
-                'mandatory' => true,
-                'maxlength' => 64,
-                'chosen'    => true,
-                #'tl_class'  => 'w50'
+                'mandatory'          => true,
+                'includeBlankOption' => true,
+                'chosen'             => true
             ),
-            'sql' => "varchar(2) NOT NULL default 'de'"
+            'sql' => "varchar(2) NOT NULL default ''"
         ),
         'description' => array
         (
@@ -408,7 +409,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                         'search'    => true,
                         'eval'      => array
                         (
-                            'style' => 'width:380px'
+                            'style' => 'width:250px'
                         )
                     ),
                     'from' => array
@@ -572,6 +573,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                 'files'      => true,
                 'fieldType'  => 'radio',
                 'extensions' => Config::get('validImageTypes'),
+                'tl_class'   => 'clr'
             ),
             'sql' => "binary(16) NULL"
         ),
@@ -579,6 +581,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField1'],
             'exclude'   => true,
+            'search'    => true,
+            'sorting'   => true,
+            'filter'    => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -591,6 +596,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField2'],
             'exclude'   => true,
+            'search'    => true,
+            'sorting'   => true,
+            'filter'    => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -603,6 +611,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField3'],
             'exclude'   => true,
+            'search'    => true,
+            'sorting'   => true,
+            'filter'    => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -615,6 +626,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField4'],
             'exclude'   => true,
+            'search'    => true,
+            'sorting'   => true,
+            'filter'    => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -627,6 +641,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField5'],
             'exclude'   => true,
+            'search'    => true,
+            'sorting'   => true,
+            'filter'    => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -639,6 +656,9 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_anystores']['freeField6'],
             'exclude'   => true,
+            'search'    => true,
+            'sorting'   => true,
+            'filter'    => true,
             'inputType' => 'text',
             'eval'      => array
             (
@@ -912,11 +932,7 @@ class tl_anystores extends Backend
     public function fillCoordinates(DataContainer $dc)
     {
         // Return if both are set
-        if
-        (
-            !empty((float) $dc->activeRecord->latitude) &&
-            !empty((float) $dc->activeRecord->longitude)
-        )
+        if ( $dc->activeRecord->latitude != '0.000000' && $dc->activeRecord->longitude != '0.000000' )
         {
             return;
         }
@@ -970,20 +986,27 @@ class tl_anystores extends Backend
      */
     public function showMap(DataContainer $dc)
     {
-        $strCoords = sprintf("%s,%s",
+        $strCoords = sprintf("%f,%f",
             $dc->activeRecord->latitude,
             $dc->activeRecord->longitude
         );
 
+        $arrParams =
+        [
+            'size'     => '404x202',
+            'maptype'  => 'roadmap',
+            'markers'  => 'color:red|'.$strCoords,
+            'language' => $GLOBALS['TL_LANGUAGE'],
+            'key'      => \Config::get('anystores_apiBrowserKey')
+        ];
+
         return sprintf(
             '<div class="w50">
                 <h3><label>%s</label></h3>
-                <img src="http://maps.google.com/maps/api/staticmap?center=%s&zoom=16&size=404x139&maptype=roadmap&markers=color:red|%s&key=%s">
+                <img src="https://maps.google.com/maps/api/staticmap?%s">
             </div>',
             $GLOBALS['TL_LANG']['tl_anystores']['map'][0],
-            $strCoords,
-            $strCoords,
-            \Config::get('anystores_apiKey')
+            http_build_query($arrParams)
         );
     }
 

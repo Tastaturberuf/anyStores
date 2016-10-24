@@ -3,7 +3,7 @@
 /**
  * anyStores for Contao Open Source CMS
  *
- * @copyright   (c) 2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
+ * @copyright   (c) 2014 - 2016 Tastaturberuf <mail@tastaturberuf.de>
  *              (c) 2013 numero2 - Agentur für Internetdienstleistungen <www.numero2.de>
  * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
  *              Benny Born <benny.born@numero2.de>
@@ -54,9 +54,9 @@ class ModuleAnyStoresSearch extends \Module
     protected function compile()
     {
         // unique form id
-        $strFormId = 'anystores_form_'.$this->id;
+        $strFormId = 'anystores_search_'.$this->id;
 
-        // localized url parameter
+        // localize url parameter keys
         $strSearchKey    = $GLOBALS['TL_LANG']['anystores']['url_params']['search'] ?: 'search';
         $strSearchValue  = \Input::post($strSearchKey);
 
@@ -67,16 +67,24 @@ class ModuleAnyStoresSearch extends \Module
         // redirect if form was send
         if ( \Input::post('FORM_SUBMIT') == $strFormId && ($this->anystores_allowEmptySearch || !empty($strSearchValue)) )
         {
-            $intPageId  = $this->jumpTo ?: $GLOBALS['objPage']->id;
-            $objPage    = \PageModel::findByPk($intPageId);
+            $intPageId = $this->jumpTo ?: $GLOBALS['objPage']->id;
+            $objPage   = \PageModel::findByPk($intPageId);
 
-            // @example /search/_term_/country/_de_
-            $strPageUrl = \Controller::generateFrontendUrl($objPage->row(),
-                 "/{$strSearchKey}/".$this->encodeSearchValue($strSearchValue)
-                ."/{$strCountryKey}/".$strCountryValue
-            );
+            if ( $objPage )
+            {
+                /**
+                 * Build url
+                 * @example /search/_term_/country/_de_
+                 */
+                $strPageUrl = $this->generateFrontendUrl($objPage->row(),
+                     "/{$strSearchKey}/".$this->encodeSearchValue($strSearchValue)
+                    ."/{$strCountryKey}/".$strCountryValue
+                );
 
-            \Controller::redirect($strPageUrl, 302);
+                $this->redirect($strPageUrl, 302);
+            }
+
+            $this->log("Can't find redirect page in module ID {$this->id}", __METHOD__, TL_ERROR);
         }
 
         // render countries for the dropdown
@@ -98,17 +106,13 @@ class ModuleAnyStoresSearch extends \Module
         $this->Template->formId       = $strFormId;
         $this->Template->formAction   = \Environment::get('indexFreeRequest');
 
-        $this->Template->searchLabel  = $GLOBALS['TL_LANG']['anystores']['postal'];
         $this->Template->searchName   = $strSearchKey;
         $this->Template->searchId     = 'ctrl_search_'.$this->id;
         $this->Template->searchValue  = \Input::get($strSearchKey);
 
-        $this->Template->countryLabel = $GLOBALS['TL_LANG']['anystores']['country'];
         $this->Template->countryName  = $strCountryKey;
         $this->Template->countryId    = 'ctrl_country_'.$this->id;
         $this->Template->countryValue = \Input::get($strCountryKey) ?: $GLOBALS['TL_LANGUAGE'];
-
-        $this->Template->submitValue  = $GLOBALS['TL_LANG']['anystores']['search'];
     }
 
 

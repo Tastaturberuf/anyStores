@@ -52,13 +52,15 @@ $GLOBALS['TL_LANG']['tl_anystores'] = array
     'freeField6'      => array('Freifeld 6', 'Kann im Template mit <code style="font-size: 10px">$this->freeField6</code> ausgegeben werden.'),
 
     // Legends
-    'common_legend'   => 'Allgemein',
-    'adress_legend'   => 'Adressdaten',
-    'geo_legend'      => 'Koordinaten',
-    'seo_legend'      => 'SEO-Einstellungen',
-    'times_legend'    => 'Öffnungszeiten',
-    'publish_legend'  => 'Veröffentlichen',
-    'freeform_legend' => 'Freitextfelder',
+    'common_legend'      => 'Allgemein',
+    'adress_legend'      => 'Adressdaten',
+    'geo_legend'         => 'Koordinaten',
+    'contact_legend'     => 'Kontaktdaten',
+    'description_legend' => 'Beschreibung',
+    'seo_legend'         => 'SEO-Einstellungen',
+    'times_legend'       => 'Öffnungszeiten',
+    'publish_legend'     => 'Veröffentlichen',
+    'freeform_legend'    => 'Freitextfelder',
 
     // Global buttons
     'importStores' => array('CSV-Import', 'Standorte aus CSV-Datei importieren'),

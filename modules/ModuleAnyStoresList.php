@@ -3,7 +3,7 @@
 /**
  * anyStores for Contao Open Source CMS
  *
- * @copyright   (c) 2014, 2015 Tastaturberuf <mail@tastaturberuf.de>
+ * @copyright   (c) 2014 - 2016 Tastaturberuf <mail@tastaturberuf.de>
  * @author      Daniel Jahnsmüller <mail@jahnsmueller.net>
  * @license     http://opensource.org/licenses/lgpl-3.0.html
  * @package     anyStores
@@ -88,7 +88,10 @@ class ModuleAnyStoresList extends \Module
         if ( !$this->strSearchValue )
         {
             // order
-            $arrOptions = array();
+            $arrOptions =
+            [
+                'limit' => $this->anystores_listLimit
+            ];
 
             if ( strlen($this->anystores_sortingOrder) )
             {

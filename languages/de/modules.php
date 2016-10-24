@@ -35,6 +35,9 @@ array_insert($GLOBALS['TL_LANG']['FMD'], 0, array
 
 array_insert($GLOBALS['TL_LANG']['tl_module'], 0, array
 (
+    'map_legend'     => 'Karteneinstellungen',
+    'map_api_legend' => 'API-Einstellungen',
+
     'anystores_defaultCountry'   => array('Standardland', 'In welchem Land sollen die Ergebnisse gesucht werden (falls der Benutzer kein anderes ausgewählt hat)?'),
     'anystores_categories'       => array('Kategorie auswählen', 'Aus welcher Kategorie sollen Standorte angezeigt werden?'),
     'anystores_listLimit'        => array('Anzahl der Standorte', 'Wieviele Standorte sollen maximal angezeigt werden?'),
@@ -50,5 +53,7 @@ array_insert($GLOBALS['TL_LANG']['tl_module'], 0, array
     'anystores_maptype'          => array('Kartentyp', 'Standard-Kartentyp.'),
     'anystores_streetview'       => array('Streetview aktivieren', 'Streetview an/abschalten.'),
     'anystores_mapheight'        => array('Kartenhöhe', 'Angabe in Pixel. Fügt dem Template das Style-Attribut hinzu.'),
-    'anystores_defaultMarker'    => array('Standard-Marker für dieses Modul', 'Kann in der Kategorie oder im Standort überschrieben werden. Überschreibt den globalen Marker aus den Einstellungen.')
+    'anystores_defaultMarker'    => array('Standard-Marker für dieses Modul', 'Kann in der Kategorie oder im Standort überschrieben werden. Überschreibt den globalen Marker aus den Einstellungen.'),
+    'anystores_signedIn'         => array('Login möglich', 'Man kann sich in die Google-Karte einloggen um sie zu personalisieren.'),
+    'anystores_mapsApi'          => array('Karten API wählen', '')
 ));

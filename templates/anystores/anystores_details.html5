@@ -1,87 +1,81 @@
-<div class="anystores-details anystore-<?php echo $this->id; ?>">
+<div class="anystores-details anystore-<?= $this->id ?>">
 
     <?php if ( $this->distance ): ?>
-  <div class="distance"><span>{{label::anystores:distance}}</span> <?php echo $this->distance; ?>&nbsp;km</div>
-    <?php endif; ?>
+  <div class="distance"><span>{{label::anystores:distance}}</span> <?= $this->distance ?>&nbsp;km</div>
+    <?php endif ?>
 
     <?php if ( $this->logo['found'] ): ?>
         <div class="logo">
-          <img src="<?php echo $this->logo['path']; ?>">
+            <img src="<?= $this->logo['path'] ?>">
         </div>
-    <?php endif; ?>
+    <?php endif ?>
 
     <div class="address">
-        <div class="name"><?php echo $this->name; ?></div>
-        <div class="street"><?php echo $this->street; ?></div>
+        <div class="name"><?= $this->name ?></div>
+        <div class="street"><?= $this->street ?></div>
         <?php if ($this->street2): ?>
-            <div class="street2"><?php echo $this->street2; ?></div>
-        <?php endif; ?>
+            <div class="street2"><?= $this->street2 ?></div>
+        <?php endif ?>
         <div class="postal-city">
-          <span class="postal"><?php echo $this->postal; ?></span> <span class="city"><?php echo $this->city; ?></span>
+          <span class="postal"><?= $this->postal ?></span> <span class="city"><?= $this->city ?></span>
         </div>
-        <div class="country"><?php echo $this->country; ?></div>
+        <div class="country"><?= $this->country ?></div>
     </div>
 
     <div class="contact">
         <?php if ( $this->phone ): ?>
             <div class="phone">
-              <span>{{label::anystores:phone}}:</span> <?php echo $this->phone; ?>
+              <span>{{label::anystores:phone}}:</span> <?= $this->phone ?>
             </div>
-        <?php endif; ?>
+        <?php endif ?>
         <?php if ( $this->fax ): ?>
             <div class="fax">
-              <span>{{label::anystores:fax}}:</span> <?php echo $this->fax; ?>
+              <span>{{label::anystores:fax}}:</span> <?= $this->fax ?>
             </div>
-        <?php endif; ?>
+        <?php endif ?>
         <?php if ( $this->email ): ?>
             <div class="email">
-              <span>{{label::anystores:email}}:</span> {{email::<?php echo $this->email; ?>}}
+              <span>{{label::anystores:email}}:</span> {{email::<?= $this->email ?>}}
             </div>
-        <?php endif; ?>
+        <?php endif ?>
         <?php if ( $this->url ): ?>
             <div class="www">
-              <span>{{label::anystores:www}}:</span> <a href="<?php echo $this->url; ?>"<?php if ( $this->target ): ?> target="_blank"<?php endif; ?> title="<?php echo $this->name; ?>"><?php echo $this->url; ?></a>
+              <span>{{label::anystores:www}}:</span> <a href="<?= $this->url ?>"<?php if ( $this->target ): ?> target="_blank"<?php endif ?> title="<?= $this->name ?>"><?= $this->url ?></a>
             </div>
-        <?php endif; ?>
+        <?php endif ?>
     </div>
 
     <?php if ( !empty($this->opening_times) ): ?>
         <ul class="opening-times">
             <?php foreach( $this->opening_times as $day ): ?>
-                <li class="<?php echo $day['weekday']; ?><?php if ( $day['isClosed'] ):?> closed<?php endif; ?>">
-                    {{label::anystores:days:<?php echo $day['weekday']; ?>}}:
+                <li class="<?= $day['weekday'] ?><?php if ( $day['isClosed'] ):?> closed<?php endif ?>">
+                    {{label::anystores:days:<?php echo $day['weekday'] ?>}}:
                     <?php if ( !$day['isClosed'] ): ?>
-                        <?php echo $day['from']; ?>&ndash;<?php echo $day['to']; ?>{{label::anystores:timePostfix}}
+                        <?= $day['from'] ?>&ndash;<?= $day['to'] ?>{{label::anystores:timePostfix}}
                     <?php else: ?>
                         {{label::anystores:closed}}
                     <?php endif ?>
                 </li>
-            <?php endforeach; ?>
+            <?php endforeach ?>
         </ul>
-    <?php endif; ?>
+    <?php endif ?>
 
     <?php if ( $this->gMap ): ?>
         <div class="map">
-            <?php echo $this->gMap; ?>
+            <?= $this->gMap ?>
         </div>
-    <?php endif; ?>
-
-    <?php if ( $this->href ): ?>
-        <div class="details">
-            <a href="<?php echo $this->href; ?>">{{label::anystores:more}}</a>
-        </div>
-    <?php endif; ?>
+    <?php endif ?>
 
     <?php if ( $this->description ): ?>
         <div class="description">
-            <?php echo $this->description; ?>
+            <?= $this->description ?>
         </div>
-    <?php endif; ?>
+    <?php endif ?>
 
-    <?php if ( $this->referer ): ?>
-        <div class="back">
-            <a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>">{{label::MSC:goBack}}</a>
+    <?php if ( $this->href ): ?>
+        <div class="details">
+            <a href="<?= $this->href ?>">{{label::anystores:more}}</a>
         </div>
-    <?php endif; ?>
+    <?php endif ?>
 
 </div>

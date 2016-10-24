@@ -1,32 +1,29 @@
-<!-- indexer::stop -->
-<section class="<?php echo $this->class ?> block"<?php echo $this->cssID ?><?php if ($this->style): ?> style="<?php echo $this->style ?>"<?php endif ?>>
 
-	<?php if( $this->headline ): ?>
-		<<?php echo $this->hl ?>><?php echo $this->headline ?></<?php echo $this->hl ?>>
-	<?php endif ?>
+<?php $this->extend('block_unsearchable') ?>
 
-	<form method="post"<?php if ($this->formAction): ?> action="<?php echo $this->formAction ?>"<?php endif ?> id="<?php echo $this->formId ?>">
+<?php $this->block('content') ?>
+
+    <form method="post"<?php if ($this->formAction): ?> action="<?= $this->formAction ?>"<?php endif ?> id="<?= $this->formId ?>">
         <div class="formbody">
-            <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId ?>">
-            <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+            <input type="hidden" name="FORM_SUBMIT" value="<?= $this->formId ?>">
+            <input type="hidden" name="REQUEST_TOKEN" value="<?= REQUEST_TOKEN ?>">
 
-            <label for="<?php echo $this->searchId ?>" class="invisible"><?php echo $this->searchLabel ?></label>
-            <input type="text" class="text" id="<?php echo $this->searchId ?>" name="<?php echo $this->searchName ?>" value="<?php echo $this->searchValue ?>" placeholder="<?php echo $this->searchLabel ?>">
+            <label for="<?= $this->searchId ?>" class="invisible">{{label::anystores:postal}}</label>
+            <input type="text" class="text" id="<?= $this->searchId ?>" name="<?= $this->searchName ?>" value="<?= $this->searchValue ?>" placeholder="{{label::anystores:postal}}"<?= $this->anystores_allowEmptySearch ?: ' required' ?>>
 
             <?php if( count($this->countryOptions) > 1 ): ?>
-                <label for="<?php echo $this->countryId ?>" class="invisible"><?php echo $this->countryLabel ?></label>
-                <select id="<?php echo $this->countryId ?>" name="<?php echo $this->countryName ?>" class="select">
+                <label for="<?= $this->countryId ?>" class="invisible">{{label::anystores:country}}</label>
+                <select id="<?= $this->countryId ?>" name="<?= $this->countryName ?>" class="select">
                     <?php foreach( $this->countryOptions as $key => $name ): ?>
-                        <option value="<?php echo $key ?>" <?php if( $this->countryValue == $key ): ?> selected<?php endif ?>><?php echo $name ?></option>
+                        <option value="<?= $key ?>" <?php if( $this->countryValue == $key ): ?> selected<?php endif ?>><?= $name ?></option>
                     <?php endforeach ?>
                 </select>
             <?php else: ?>
-                <input type="hidden" name="<?php echo $this->countryName; ?>" value="<?php echo key($this->countryOptions); ?>">
+                <input type="hidden" name="<?= $this->countryName ?>" value="<?= key($this->countryOptions) ?>">
             <?php endif ?>
-
-            <input type="submit" class="submit" value="<?php echo $this->submitValue ?>">
+            
+            <button type="submit" class="submit">{{label::anystores:search}}</button>
         </div>
-	</form>
+    </form>
 
-</section>
-<!-- indexer::continue -->
+<?php $this->endblock() ?>
