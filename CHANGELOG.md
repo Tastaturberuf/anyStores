@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.10.0]
+###Changed
+- Add PHP7 compatibility
+
 ## [1.9.0]
 ###Added
 - Add Google Maps API browser key support (fix #60 #61) Thanks to @DanMan

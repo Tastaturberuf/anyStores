@@ -76,7 +76,7 @@ class FrontendAjax extends \Controller
             }
 
             // Encode email
-            $objStores->email = \String::encodeEmail($objStores->email);
+            $objStores->email = \StringUtil::encodeEmail($objStores->email);
 
             // Encode opening times
             $objStores->opening_times = deserialize($objStores->opening_times);

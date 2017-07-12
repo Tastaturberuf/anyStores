@@ -13,8 +13,6 @@
 namespace Tastaturberuf;
 
 
-use Contao\String;
-
 class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
 {
 
@@ -73,7 +71,7 @@ class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
                 $arrStores[$key]          = $store;
 
                 // encode email
-                $arrStores[$key]['email'] = String::encodeEmail($store['email']);
+                $arrStores[$key]['email'] = \StringUtil::encodeEmail($store['email']);
 
                 // encode logo uuid
                 /*
