@@ -16,7 +16,7 @@
     "require":
     {
         "php": "^5.5,^7",
-        "contao/core-bundle": "^3.5.5 || ^4.3"
+        "contao/core-bundle": "^3.5.5 || ^4.3",
         "contao-community-alliance/composer-installer": "*",
         "menatwork/contao-multicolumnwizard": "^3.2"
     },
