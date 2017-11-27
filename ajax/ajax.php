@@ -14,7 +14,8 @@
 namespace Tastaturberuf;
 
 define('TL_MODE', 'FE');
+define('TL_SCRIPT', __FILE__);
 
-require '../../../initialize.php';
+require dirname(__DIR__).'/../../../system/initialize.php';
 
 FrontendAjax::run(\Input::get('module'), \Input::get('token'));
