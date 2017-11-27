@@ -236,7 +236,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
             'default'   => 6,
             'tl_class'  => 'clr w50'
         ),
-        'sql' => "tinyint(2) unsigned NOT NULL default '6'"
+        'sql' => "smallint(2) unsigned NOT NULL default '6'"
     ),
     'anystores_streetview' => array
     (
