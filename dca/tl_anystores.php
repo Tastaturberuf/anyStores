@@ -375,7 +375,8 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             (
                 'mandatory'          => true,
                 'includeBlankOption' => true,
-                'chosen'             => true
+                'chosen'             => true,
+                'tl_class'           => 'w50'
             ),
             'sql' => "varchar(2) NOT NULL default ''"
         ),
