@@ -56,9 +56,10 @@ class AnyStoresHooks extends \Controller
      *
      * @param array $arrSubmitted
      * @param array $arrLabels
+     * @param array $arrFields
      * @param object $objForm
      */
-    public function prepareFormData(&$arrSubmitted, $arrLabels, $objForm)
+    public function prepareFormData(&$arrSubmitted, $arrLabels, $arrFields, $objForm)
     {
         if ( !strlen($objForm->anystores_sendEmail) )
         {
