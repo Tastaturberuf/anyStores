@@ -77,7 +77,7 @@ class ModuleAnyStoresSearch extends \Module
                  * @example /search/_term_/country/_de_
                  */
                 $strPageUrl = $this->generateFrontendUrl($objPage->row(),
-                     "/{$strSearchKey}/".$this->encodeSearchValue($strSearchValue)
+                     "/{$strSearchKey}/".$strSearchValue
                     ."/{$strCountryKey}/".$strCountryValue
                 );
 
@@ -113,17 +113,6 @@ class ModuleAnyStoresSearch extends \Module
         $this->Template->countryName  = $strCountryKey;
         $this->Template->countryId    = 'ctrl_country_'.$this->id;
         $this->Template->countryValue = \Input::get($strCountryKey) ?: $GLOBALS['TL_LANGUAGE'];
-    }
-
-
-    /**
-     * Encode the search value
-     * @param string $strValue
-     * @return string The encoded search value
-     */
-    protected function encodeSearchValue($strValue)
-    {
-        return rawurlencode(str_replace(array('?', '/', '#'), '', $strValue));
     }
 
 }

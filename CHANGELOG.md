@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.11.2]
+###Fixed
+- remove url encoding in search module because of double encoding
+
 ## [1.10.0]
 ###Changed
 - Add PHP7 compatibility
