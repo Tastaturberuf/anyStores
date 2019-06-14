@@ -175,7 +175,8 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
         ),
         'tstamp' => array
         (
-            'sql' => "int(10) unsigned NOT NULL default '0'"
+            'sorting' => true,
+            'sql'     => "int(10) unsigned NOT NULL default '0'"
         ),
         'name' => array
         (
@@ -937,7 +938,7 @@ class tl_anystores extends Backend
         {
             return;
         }
-        
+
         // Get country name
         $arrCountries = \System::getCountries();
 
