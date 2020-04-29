@@ -15,10 +15,10 @@
     ],
     "require":
     {
-        "php": "^5.5|^7.0",
-        "contao/core-bundle": "^4.3",
+        "php": "^7.2",
+        "contao/core-bundle": "^4.4",
         "contao-community-alliance/composer-plugin": "~3.0",
-        "menatwork/contao-multicolumnwizard": "^3.2"
+        "menatwork/contao-multicolumnwizard-bundle": "^3.4"
     },
     "replace": {
         "contao-legacy/anystores": "self.version"
