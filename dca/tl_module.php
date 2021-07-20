@@ -209,7 +209,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
             'maxlength' => 64,
             'tl_class'  => 'w50'
         ),
-        'sql' => "float(10,6) NOT NULL"
+        'sql' => "float(10,6) NOT NULL default 0"
     ),
     'anystores_longitude' => array
     (
@@ -223,7 +223,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
             'maxlength' => 64,
             'tl_class'  => 'w50'
         ),
-        'sql' => "float(10,6) NOT NULL"
+        'sql' => "float(10,6) NOT NULL default 0"
     ),
     'anystores_zoom' => array
     (
