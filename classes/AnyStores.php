@@ -15,7 +15,7 @@ namespace Tastaturberuf;
 
 class AnyStores
 {
-    
+
     /**
      * Wrap the different geo APIs
      *
@@ -33,7 +33,7 @@ class AnyStores
             $arrCoordinates = $strClassName::getLonLat($strAddress, $strCountry);
 
             // set licence hint
-            $GLOBALS['ANYSTORES_GEODATA_LICENCE_HINT'] = $arrCoordinates['licence'];
+            $GLOBALS['ANYSTORES_GEODATA_LICENCE_HINT'] = $arrCoordinates['licence'] ?? '';
 
             return $arrCoordinates;
         }
