@@ -112,8 +112,8 @@ class tl_anystores_settings
 
         foreach($arrFields as $key => $value)
         {
-            $arrLabels[$key] = $GLOBALS['TL_LANG']['tl_anystores'][$key][0] ?: $key;
-        };
+            $arrLabels[$key] = $GLOBALS['TL_LANG']['tl_anystores'][$key][0] ?? $key;
+        }
 
         return $arrLabels;
     }
