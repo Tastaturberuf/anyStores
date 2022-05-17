@@ -25,7 +25,7 @@ $GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'][] = 'anystores_sitemap
 /**
  * Subpalettes
  */
-$GLOBALS['TL_DCA']['tl_page']['subpalettes']['anystores_sitemap'] .= 'anystores_detailPage,anystores_categories';
+$GLOBALS['TL_DCA']['tl_page']['subpalettes']['anystores_sitemap'] = 'anystores_detailPage,anystores_categories';
 
 
 /**
