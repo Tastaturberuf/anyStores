@@ -46,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_anystores_settings'] = array
         ),
         'anystores_geoApi' => array
         (
-            'label'     => $GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_geoApi'],
+            'label'     => &$GLOBALS['TL_LANG']['tl_anystores_settings']['anystores_geoApi'],
             'inputType' => 'select',
             //@todo get Classnames from API folder
             'options'   => array
