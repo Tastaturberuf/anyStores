@@ -40,7 +40,10 @@ class AnyStoresHooks extends \Controller
         $arrItems[$intLastKey] = array
         (
             'isActive' => 1,
-            'title'    => $objLocation->name
+            'title'    => $objLocation->name,
+            'class' => '',
+            'link' => $objLocation->name,
+            'href' => ''
         );
 
         return $arrItems;
