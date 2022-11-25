@@ -12,6 +12,7 @@
 
 namespace Tastaturberuf;
 
+use Contao\Form;
 
 class AnyStoresHooks extends \Controller
 {
@@ -62,7 +63,7 @@ class AnyStoresHooks extends \Controller
      * @param array $arrFields
      * @param object $objForm
      */
-    public function prepareFormData(&$arrSubmitted, $arrLabels, $arrFields, $objForm)
+    public function prepareFormData(array &$arrSubmitted, array $arrLabels, array $arrFields, Form $objForm)
     {
         if ( !strlen($objForm->anystores_sendEmail) )
         {
@@ -91,7 +92,7 @@ class AnyStoresHooks extends \Controller
      * @param type $arrLabels
      * @param type $objForm
      */
-    public function emailNearestStore(&$arrSubmitted, $arrLabels, $objForm)
+    public function emailNearestStore(array &$arrSubmitted, array $arrLabels, array $arrFields, Form $objForm)
     {
         if ( $objForm->anystores_emailNearestStore == 1 )
         {
