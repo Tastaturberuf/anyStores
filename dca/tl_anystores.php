@@ -456,7 +456,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                 'maxlength' => 64,
                 'tl_class'  => 'w50'
             ),
-            'sql' => "float(10,6) NOT NULL default '0.00'"
+            'sql' => "float(10,6) NOT NULL default '0'"
         ),
         'latitude' => array
         (
@@ -470,7 +470,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                 'maxlength' => 64,
                 'tl_class'  => 'w50'
             ),
-            'sql' => "float(10,6) NOT NULL default '0.00'"
+            'sql' => "float(10,6) NOT NULL default '0'"
         ),
         'map' => array
         (
