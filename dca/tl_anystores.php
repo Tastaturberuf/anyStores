@@ -37,8 +37,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             'keys' => array
             (
                 'id'  => 'primary',
-                'pid' => 'index',
-                'pid,name,street,postal,city,country' => 'unique'
+                'pid' => 'index'
             )
         )
     ),
