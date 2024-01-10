@@ -10,7 +10,7 @@
  */
 
 
-array_insert($GLOBALS['TL_LANG']['tl_page'], 0, array
+$GLOBALS['TL_LANG']['tl_page'] = array_replace($GLOBALS['TL_LANG']['tl_page'] ?? [], array
 (
     'anystores_legend'     => 'anyStores-Einstellungen',
     'anystores_sitemap'    => array('Zur Sitemap hinzufügen', 'Aktivieren um definierte Standorte in der Sitemap anzuzeigen.'),

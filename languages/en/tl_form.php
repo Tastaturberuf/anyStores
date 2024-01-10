@@ -10,7 +10,7 @@
  */
 
 
-array_insert($GLOBALS['TL_LANG']['tl_form'], 0, array
+$GLOBALS['TL_LANG']['tl_form'] = array_replace($GLOBALS['TL_LANG']['tl_form'] ?? [], array
 (
     'anystores_legend'    => 'AnyStores settings',
     'anystores_sendEmail' => array

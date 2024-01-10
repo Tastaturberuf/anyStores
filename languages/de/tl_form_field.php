@@ -10,12 +10,12 @@
  */
 
 
-array_insert($GLOBALS['TL_LANG']['FFL'], 0, array
+$GLOBALS['TL_LANG']['FFL'] = array_replace($GLOBALS['TL_LANG']['FFL'] ?? [], array
 (
     'stores' => array('anyStores Liste', '')
 ));
 
-array_insert($GLOBALS['TL_LANG']['tl_form_field'], 0, array
+$GLOBALS['TL_LANG']['tl_form_field'] = array_replace($GLOBALS['TL_LANG']['tl_form_field'] ?? [], array
 (
     'anystores_idField'    => array('Spalte für den Value-Wert', ''),
     'anystores_categories' => array('Kategorien', '')

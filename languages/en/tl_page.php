@@ -10,7 +10,7 @@
  */
 
 
-array_insert($GLOBALS['TL_LANG']['tl_page'], 0, array
+$GLOBALS['TL_LANG']['tl_page'] = array_replace($GLOBALS['TL_LANG']['tl_page'] ?? [], array
 (
     'anystores_legend'     => 'anyStores settings',
     'anystores_sitemap'    => array('Add to sitemap', 'Check to integrate locations to the sitemap.'),

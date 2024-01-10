@@ -22,7 +22,7 @@ $GLOBALS['TL_LANG']['MOD']['anystores_settings']  = array('Settings', 'Manage se
 /**
  * Front end modules
  */
-array_insert($GLOBALS['TL_LANG']['FMD'], 0, array
+$GLOBALS['TL_LANG']['FMD'] = array_replace($GLOBALS['TL_LANG']['FMD'] ?? [], array
 (
     'anystores'           => 'AnyStores',
     'anystores_search'    => array('anyStores Search',  'Searchform for locations.'),
@@ -33,7 +33,7 @@ array_insert($GLOBALS['TL_LANG']['FMD'], 0, array
 ));
 
 
-array_insert($GLOBALS['TL_LANG']['tl_module'], 0, array
+$GLOBALS['TL_LANG']['tl_module'] = array_replace($GLOBALS['TL_LANG']['tl_module'] ?? [], array
 (
     'map_legend'     => 'Map settings',
     'map_api_legend' => 'API settings',

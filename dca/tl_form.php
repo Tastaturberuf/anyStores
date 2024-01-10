@@ -29,7 +29,7 @@ $GLOBALS['TL_DCA']['tl_form']['subpalettes']['sendViaEmail'] .= ',anystores_send
 /**
  * Fields
  */
-array_insert($GLOBALS['TL_DCA']['tl_form']['fields'], 0, array
+$GLOBALS['TL_DCA']['tl_form']['fields'] = array_replace_recursive($GLOBALS['TL_DCA']['tl_form']['fields'] ?? [], array
 (
     'anystores_sendEmail' => array
     (
@@ -76,6 +76,8 @@ class tl_form_anystores
 
     public function getFormFields(DataContainer $dc)
     {
+        $arrFields = [];
+
         $arrOptions = array
         (
             'column' => array("type='stores'")
@@ -89,9 +91,9 @@ class tl_form_anystores
             {
                 $arrFields[$objFields->name] = $objFields->label;
             }
-
-            return $arrFields;
         }
+
+        return $arrFields;
     }
 
 }

@@ -183,11 +183,8 @@ $GLOBALS['TL_FFL']['stores'] = 'FormStores';
  *
  * You can register your mappings in the config.php file of your extension.
  */
-array_insert($GLOBALS['TL_MODELS'], 0, array
-(
-    'tl_anystores_category' => 'Tastaturberuf\AnyStoresCategoryModel',
-    'tl_anystores'          => 'Tastaturberuf\AnyStoresModel'
-));
+$GLOBALS['TL_MODELS']['tl_anystores_category'] = Tastaturberuf\AnyStoresCategoryModel::class;
+$GLOBALS['TL_MODELS']['tl_anystores'] = Tastaturberuf\AnyStoresModel::class;
 
 
 /**

@@ -10,7 +10,7 @@
  */
 
 
-array_insert($GLOBALS['TL_LANG']['tl_user_group'], 0, array
+$GLOBALS['TL_LANG']['tl_user_group'] = array_replace($GLOBALS['TL_LANG']['tl_user_group'] ?? [], array
 (
 
     'anystores_legend' => 'anyStores-Rechte',

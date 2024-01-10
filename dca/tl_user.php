@@ -20,7 +20,7 @@ $GLOBALS['TL_DCA']['tl_user']['palettes']['custom'] .= ';{anystores_legend},anys
 /**
  * Fields
  */
-array_insert($GLOBALS['TL_DCA']['tl_user']['fields'], 0, array
+$GLOBALS['TL_DCA']['tl_user']['fields'] = array_replace_recursive($GLOBALS['TL_DCA']['tl_user']['fields'] ?? [], array
 (
     'anystores_categories' => array
     (

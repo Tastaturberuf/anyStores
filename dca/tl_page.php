@@ -13,6 +13,9 @@
 /**
  * Palettes
  */
+
+use Tastaturberuf\AnyStoresCategoryModel;
+
 $GLOBALS['TL_DCA']['tl_page']['palettes']['root'] .= ';{anystores_legend},anystores_sitemap';
 
 
@@ -31,7 +34,7 @@ $GLOBALS['TL_DCA']['tl_page']['subpalettes']['anystores_sitemap'] = 'anystores_d
 /**
  * Fields
  */
-array_insert($GLOBALS['TL_DCA']['tl_page']['fields'], 0, array
+$GLOBALS['TL_DCA']['tl_page']['fields'] = array_replace_recursive($GLOBALS['TL_DCA']['tl_page']['fields'] ?? [], array
 (
     'anystores_sitemap' => array
     (
@@ -69,7 +72,7 @@ array_insert($GLOBALS['TL_DCA']['tl_page']['fields'], 0, array
 
             if ( $objCategories === null )
             {
-                return;
+                return [];
             }
 
             return $objCategories->fetchEach('title');

@@ -13,7 +13,7 @@
 /**
  * Add palettes to tl_module
  */
-array_insert($GLOBALS['TL_DCA']['tl_module']['palettes'], 1337, array
+$GLOBALS['TL_DCA']['tl_module']['palettes'] = array_replace_recursive($GLOBALS['TL_DCA']['tl_module']['palettes'] ?? [], array
 (
     'anystores_search' => '
         {title_legend},name,headline,type;
@@ -70,7 +70,7 @@ $GLOBALS['TL_DCA']['tl_module']['subpalettes']['anystores_limitDistance']      =
 /**
  * Add fields to tl_module
  */
-array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
+$GLOBALS['TL_DCA']['tl_module']['fields'] = array_replace_recursive($GLOBALS['TL_DCA']['tl_module']['fields'] ?? [], array
 (
     'anystores_defaultCountry' => array
     (
@@ -118,9 +118,9 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], 0, array
     'anystores_allowEmptySearch' => array
     (
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['anystores_allowEmptySearch'],
-        'exclude'   => true,    
-        'inputType' => 'checkbox', 
-        'default'   => true, 
+        'exclude'   => true,
+        'inputType' => 'checkbox',
+        'default'   => true,
         'eval'      => array
         (
             'submitOnChange' => true,
