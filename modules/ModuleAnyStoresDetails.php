@@ -15,6 +15,7 @@
 namespace Tastaturberuf;
 
 
+use Contao\CoreBundle\Exception\PageNotFoundException;
 use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
 use Contao\System;
 
@@ -117,34 +118,10 @@ class ModuleAnyStoresDetails extends \Module
             $this->Template->store = $objDetailTemplate->parse();
         }
         // store not found? throw 404
-        //@todo make 404 sexy
         else
         {
-            $this->_redirect404();
+            throw new PageNotFoundException('Page not found: ' . Environment::get('uri'));
         }
     }
 
-
-    /**
-     * Redirect to 404 page if entry not found
-     * @deprecated
-     */
-    private function _redirect404()
-    {
-        $obj404 = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE type='error_404' AND published=1 AND pid=?")->limit(1)->execute($this->getRootIdFromUrl());
-        $arr404 = $obj404->fetchAssoc();
-
-        if ( !empty($arr404) ) {
-
-            $this->redirect( $this->generateFrontendUrl($arr404), 404);
-            return;
-
-        }
-        else
-        {
-            // @todo make it sexy
-            #header('HTTP/1.1 404 Not Found');
-            #die('Page not found');
-        }
-    }
 }
