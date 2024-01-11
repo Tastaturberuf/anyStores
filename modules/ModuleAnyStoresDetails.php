@@ -15,6 +15,9 @@
 namespace Tastaturberuf;
 
 
+use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
+use Contao\System;
+
 class ModuleAnyStoresDetails extends \Module
 {
 
@@ -88,16 +91,21 @@ class ModuleAnyStoresDetails extends \Module
                 $objStore->gMap = $objMapTemplate->parse();
             }
 
-            // set meta title
-            if ( $objStore->metatitle )
-            {
-                $GLOBALS['objPage']->title = $objStore->metatitle;
-            }
+            $responseContext = System::getContainer()?->get('contao.routing.response_context_accessor')->getResponseContext();
 
-            // set meta description
-            if ( $objStore->metadescription )
-            {
-                $GLOBALS['objPage']->description = $objStore->metadescription;
+            if ($responseContext?->has(HtmlHeadBag::class)) {
+                /** @var HtmlHeadBag $htmlHeadBag */
+                $htmlHeadBag = $responseContext->get(HtmlHeadBag::class);
+
+                // set meta title
+                if ($objStore->metatitle) {
+                    $htmlHeadBag->setTitle($objStore->metatitle);
+                }
+
+                // set meta description
+                if ($objStore->metadescription) {
+                    $htmlHeadBag->setMetaDescription($objStore->metadescription);
+                }
             }
 
             // Template
