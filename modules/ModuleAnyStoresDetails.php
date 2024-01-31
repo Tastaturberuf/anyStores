@@ -17,6 +17,7 @@ namespace Tastaturberuf;
 
 use Contao\CoreBundle\Exception\PageNotFoundException;
 use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
+use Contao\Environment;
 use Contao\System;
 
 class ModuleAnyStoresDetails extends \Module
