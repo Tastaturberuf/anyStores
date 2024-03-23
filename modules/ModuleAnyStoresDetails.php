@@ -70,6 +70,10 @@ class ModuleAnyStoresDetails extends \Module
             // load all details
             $objStore->loadDetails();
 
+            // split description
+            $objStore->shortDescription = $objStore->description;
+            $objStore->content = '';
+
             // generate description
             $objDescription = \ContentModel::findPublishedByPidAndTable($objStore->id, $objStore->getTable());
 
@@ -77,7 +81,10 @@ class ModuleAnyStoresDetails extends \Module
             {
                 while ($objDescription->next())
                 {
-                	$objStore->description .= \Controller::getContentElement($objDescription->current());
+                    $content = \Controller::getContentElement($objDescription->current());
+                    
+                    $objStore->content .= $content;
+                	$objStore->description .= $content;
                 }
             }
 
