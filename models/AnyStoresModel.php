@@ -249,7 +249,7 @@ class AnyStoresModel extends \Model
             if ( ($objLogo = \FilesModel::findByUuid($this->logo)) !== null )
             {
                 $arrLogo = $objLogo->row();
-                $arrMeta = deserialize($arrLogo['meta']);
+                $arrMeta = deserialize($arrLogo['meta'], true);
                 $arrLogo['meta'] = $arrMeta[$GLOBALS['TL_LANGUAGE']];
 
                 $this->logo = $arrLogo;
