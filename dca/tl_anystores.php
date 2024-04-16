@@ -84,7 +84,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
                 'icon'            => 'edit.gif',
                 'button_callback' => array('tl_anystores', 'generateEditButton')
             ),
-            'content' => array
+            'edit_content' => array
             (
                 'label'           => &$GLOBALS['TL_LANG']['tl_anystores']['content'],
                 'href'            => 'table=tl_content',
