@@ -211,7 +211,7 @@ $GLOBALS['TL_DCA']['tl_anystores'] = array
             (
                 array('tl_anystores', 'generateAlias')
             ),
-            'sql' => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
+            'sql' => "varchar(128) COLLATE utf8mb4_bin NOT NULL default ''"
         ),
         'email' => array
         (
