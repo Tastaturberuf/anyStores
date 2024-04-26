@@ -129,7 +129,7 @@ class AnyStoresModel extends \Model
 
 
     public static function findPublishedByAdressAndCountryAndCategory(
-        $strSearch, $strCountry = null, array $arrCategories, $intLimit=null, $intMaxDistance=null)
+        $strSearch, $strCountry, array $arrCategories, $intLimit = null, $intMaxDistance = null)
     {
         $t = static::$strTable;
 
