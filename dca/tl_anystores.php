@@ -1115,19 +1115,12 @@ class tl_anystores extends Backend
         $objVersions->initialize();
 
         // Trigger the save_callback
-        if (is_array($GLOBALS['TL_DCA']['tl_anystores']['fields']['published']['save_callback']))
-        {
-            foreach ($GLOBALS['TL_DCA']['tl_anystores']['fields']['published']['save_callback'] as $callback)
-            {
-                if (is_array($callback))
-                {
-                    $this->import($callback[0]);
-                    $blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
-                }
-                elseif (is_callable($callback))
-                {
-                    $blnVisible = $callback($blnVisible, ($dc ?: $this));
-                }
+        foreach ($GLOBALS['TL_DCA']['tl_anystores']['fields']['published']['save_callback'] ?? [] as $callback) {
+            if (is_array($callback)) {
+                $this->import($callback[0]);
+                $blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
+            } elseif (is_callable($callback)) {
+                $blnVisible = $callback($blnVisible, ($dc ?: $this));
             }
         }
 

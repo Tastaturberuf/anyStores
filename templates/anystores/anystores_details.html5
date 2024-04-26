@@ -4,7 +4,7 @@
   <div class="distance"><span>{{label::anystores:distance}}</span> <?= $this->distance ?>&nbsp;km</div>
     <?php endif ?>
 
-    <?php if ( $this->logo['found'] ): ?>
+    <?php if ($this->logo): ?>
         <div class="logo">
             <img src="<?= $this->logo['path'] ?>">
         </div>
