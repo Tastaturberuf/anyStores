@@ -13,6 +13,8 @@
 namespace Tastaturberuf;
 
 
+use Contao\Model\Collection;
+
 class AnyStoresModel extends \Model
 {
 
@@ -36,8 +38,12 @@ class AnyStoresModel extends \Model
      *
      * @return \Model\Collection|null
      */
-    public static function findAllPublished(array $arrOptions = array())
+    public static function findAllPublished(array $arrOptions = array()): ?Collection
     {
+        if (static::isPreviewMode($arrOptions)) {
+            return static::findAll($arrOptions);
+        }
+
         $arrOptions = array_merge
         (
             array
@@ -65,7 +71,10 @@ class AnyStoresModel extends \Model
         $t = static::$strTable;
 
         $arrColumns   = is_numeric($varId) ? array("$t.id=?") : array("$t.alias=?");
-        $arrColumns[] = "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1";
+
+        if (!static::isPreviewMode($arrOptions)) {
+            $arrColumns[] = "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1";
+        }
 
         return static::findOneBy($arrColumns, $varId, $arrOptions);
     }
@@ -82,7 +91,10 @@ class AnyStoresModel extends \Model
         $t = static::$strTable;
 
         $arrColumns   = array("$t.pid IN(".implode(',', array_map('intval', $arrCategories)).")");
-        $arrColumns[] = "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1";
+
+        if (!static::isPreviewMode($arrOptions)) {
+            $arrColumns[] = "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1";
+        }
 
         return static::findBy($arrColumns, null, $arrOptions);
     }
@@ -100,9 +112,12 @@ class AnyStoresModel extends \Model
         $t = static::$strTable;
 
         $arrColumns   = array("$t.pid IN(".implode(',', array_map('intval', $arrCategories)).")");
-        $arrColumns[] = "($t.start='' OR $t.start<UNIX_TIMESTAMP())";
-        $arrColumns[] = "($t.stop='' OR $t.stop>UNIX_TIMESTAMP())";
-        $arrColumns[] = "$t.published=1";
+
+        if (!static::isPreviewMode($arrOptions)) {
+            $arrColumns[] = "($t.start='' OR $t.start<UNIX_TIMESTAMP())";
+            $arrColumns[] = "($t.stop='' OR $t.stop>UNIX_TIMESTAMP())";
+            $arrColumns[] = "$t.published=1";
+        }
 
         if ( $strCountry )
         {
@@ -138,12 +153,14 @@ class AnyStoresModel extends \Model
             'column' => array
             (
                 // Categories
-                "$t.pid IN(".implode(',', array_map('intval', $arrCategories)).")",
-                // Published
-                "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1"
+                "$t.pid IN(" . implode(',', array_map('intval', $arrCategories)) . ")"
             ),
             'order' => "distance"
         );
+
+        if (!static::isPreviewMode([])) {
+            $arrOptions['column'][] = "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1";
+        }
 
         // Country
         if ( $strCountry )
@@ -200,11 +217,13 @@ class AnyStoresModel extends \Model
      */
     public static function countAllPublished()
     {
-        $arrColumns[] = "(start='' OR start<UNIX_TIMESTAMP())";
-        $arrColumns[] = "(stop='' OR stop>UNIX_TIMESTAMP())";
-        $arrColumns[] = "published=1";
+        if (!static::isPreviewMode([])) {
+            $arrColumns[] = "(start='' OR start<UNIX_TIMESTAMP())";
+            $arrColumns[] = "(stop='' OR stop>UNIX_TIMESTAMP())";
+            $arrColumns[] = "published=1";
+        }
 
-        return static::countBy($arrColumns);
+        return static::countBy($arrColumns ?? []);
     }
 
 
@@ -215,12 +234,14 @@ class AnyStoresModel extends \Model
      */
     public static function countPublishedByPid($intPid)
     {
-        $arrColumns[] = "(start='' OR start<UNIX_TIMESTAMP())";
-        $arrColumns[] = "(stop='' OR stop>UNIX_TIMESTAMP())";
-        $arrColumns[] = "published=1";
-        $arrColumns[] = "pid=?";
+        if (!static::isPreviewMode([])) {
+            $arrColumns[] = "(start='' OR start<UNIX_TIMESTAMP())";
+            $arrColumns[] = "(stop='' OR stop>UNIX_TIMESTAMP())";
+            $arrColumns[] = "published=1";
+            $arrColumns[] = "pid=?";
+        }
 
-        return static::countBy($arrColumns, $intPid);
+        return static::countBy($arrColumns ?? [], $intPid);
     }
 
 
@@ -250,7 +271,7 @@ class AnyStoresModel extends \Model
             {
                 $arrLogo = $objLogo->row();
                 $arrMeta = deserialize($arrLogo['meta'], true);
-                $arrLogo['meta'] = $arrMeta[$GLOBALS['TL_LANGUAGE']];
+                $arrLogo['meta'] = $arrMeta[$GLOBALS['TL_LANGUAGE']] ?? [];
 
                 $this->logo = $arrLogo;
             }
