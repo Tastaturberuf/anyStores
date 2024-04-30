@@ -13,6 +13,7 @@
 namespace Tastaturberuf;
 
 
+use Contao\Date;
 use Contao\Model\Collection;
 
 class AnyStoresModel extends \Model
@@ -73,7 +74,8 @@ class AnyStoresModel extends \Model
         $arrColumns   = is_numeric($varId) ? array("$t.id=?") : array("$t.alias=?");
 
         if (!static::isPreviewMode($arrOptions)) {
-            $arrColumns[] = "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1";
+            $time = Date::floorToMinute();
+            $arrColumns[] = "($t.start='' OR $t.start<=$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
         }
 
         return static::findOneBy($arrColumns, $varId, $arrOptions);
@@ -93,7 +95,8 @@ class AnyStoresModel extends \Model
         $arrColumns   = array("$t.pid IN(".implode(',', array_map('intval', $arrCategories)).")");
 
         if (!static::isPreviewMode($arrOptions)) {
-            $arrColumns[] = "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1";
+            $time = Date::floorToMinute();
+            $arrColumns[] = "($t.start='' OR $t.start<=$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
         }
 
         return static::findBy($arrColumns, null, $arrOptions);
@@ -114,8 +117,9 @@ class AnyStoresModel extends \Model
         $arrColumns   = array("$t.pid IN(".implode(',', array_map('intval', $arrCategories)).")");
 
         if (!static::isPreviewMode($arrOptions)) {
-            $arrColumns[] = "($t.start='' OR $t.start<UNIX_TIMESTAMP())";
-            $arrColumns[] = "($t.stop='' OR $t.stop>UNIX_TIMESTAMP())";
+            $time = Date::floorToMinute();
+            $arrColumns[] = "($t.start='' OR $t.start<=$time)";
+            $arrColumns[] = "($t.stop='' OR $t.stop>$time)";
             $arrColumns[] = "$t.published=1";
         }
 
@@ -159,7 +163,8 @@ class AnyStoresModel extends \Model
         );
 
         if (!static::isPreviewMode([])) {
-            $arrOptions['column'][] = "($t.start='' OR $t.start<UNIX_TIMESTAMP()) AND ($t.stop='' OR $t.stop>UNIX_TIMESTAMP()) AND $t.published=1";
+            $time = Date::floorToMinute();
+            $arrOptions['column'][] = "($t.start='' OR $t.start<=$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
         }
 
         // Country
@@ -218,8 +223,9 @@ class AnyStoresModel extends \Model
     public static function countAllPublished()
     {
         if (!static::isPreviewMode([])) {
-            $arrColumns[] = "(start='' OR start<UNIX_TIMESTAMP())";
-            $arrColumns[] = "(stop='' OR stop>UNIX_TIMESTAMP())";
+            $time = Date::floorToMinute();
+            $arrColumns[] = "(start='' OR start<=$time)";
+            $arrColumns[] = "(stop='' OR stop>$time)";
             $arrColumns[] = "published=1";
         }
 
@@ -235,8 +241,9 @@ class AnyStoresModel extends \Model
     public static function countPublishedByPid($intPid)
     {
         if (!static::isPreviewMode([])) {
-            $arrColumns[] = "(start='' OR start<UNIX_TIMESTAMP())";
-            $arrColumns[] = "(stop='' OR stop>UNIX_TIMESTAMP())";
+            $time = Date::floorToMinute();
+            $arrColumns[] = "(start='' OR start<=$time)";
+            $arrColumns[] = "(stop='' OR stop>$time)";
             $arrColumns[] = "published=1";
             $arrColumns[] = "pid=?";
         }
