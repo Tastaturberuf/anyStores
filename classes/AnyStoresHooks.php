@@ -13,6 +13,9 @@
 namespace Tastaturberuf;
 
 use Contao\Form;
+use Contao\PageModel;
+use Contao\StringUtil;
+use Contao\System;
 
 class AnyStoresHooks extends \Controller
 {
@@ -215,73 +218,49 @@ class AnyStoresHooks extends \Controller
     }
 
 
-    public function getSearchablePages($arrPages, $intRootId=null, $bln=true, $strLanguage=null)
+    public function getSearchablePages(array $pages, int $intRootId = 0, bool $isSitemap = true, ?string $strLanguage = null): array
     {
-        if ( !$intRootId )
-        {
-            $objRoots = \PageModel::findPublishedRootPages();
-
-            if ( !$objRoots )
-            {
-                \System::log("Can't get any root page", __METHOD__, TL_ERROR);
-                return $arrPages;
+        if (0 === $intRootId) {
+            if (null === $rootPages = \PageModel::findPublishedRootPages()) {
+                System::log("Can't get any root page", __METHOD__, TL_ERROR);
+                return $pages;
             }
 
-            while ( $objRoots->next() )
-            {
-                $arrPages = $this->getSearchablePages($arrPages, $objRoots->id, $bln, $objRoots->language );
+            foreach($rootPages as $rootPage) {
+                $pages = $this->getSearchablePages($pages, $rootPage->id, $isSitemap, $rootPage->language);
             }
 
-            return $arrPages;
+            return $pages;
         }
 
         // get the root page object
-        $objRoot = \PageModel::findByPk($intRootId);
-
-        if ( !$objRoot )
-        {
-            \System::log("Can't get the root page", __METHOD__, TL_ERROR);
-            return $arrPages;
+        if (null === $rootPage = PageModel::findByPk($intRootId)) {
+            System::log("Can't get the root page", __METHOD__, TL_ERROR);
+            return $pages;
         }
-
 
         // check for sitemap enabled
-        if ( !$objRoot->anystores_sitemap )
-        {
-            return $arrPages;
+        if ( !$rootPage->anystores_sitemap ) {
+            return $pages;
         }
-
-
-        // get the domain
-        $strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . ($objRoot->dns ?: \Environment::get('host')) . TL_PATH . '/';
-
 
         // get the details page
-        $objPage = \PageModel::findByPk($objRoot->anystores_detailPage);
-
-        if ( !$objPage )
-        {
-            \System::log("Can't find the details page", __METHOD__, TL_ERROR);
-            return $arrPages;
+        if (null === $detailPage = PageModel::findWithDetails($rootPage->anystores_detailPage)) {
+            System::log("Can't find the details page", __METHOD__, TL_ERROR);
+            return $pages;
         }
-
 
         // get the locations
-        $objLocations = AnyStoresModel::findPublishedByCategory(deserialize($objRoot->anystores_categories));
-
-        if ( !$objLocations )
-        {
-            \System::log("Can't get the published locations", __METHOD__, TL_ERROR);
-            return $arrPages;
+        if (null === $stores = AnyStoresModel::findPublishedByCategory(StringUtil::deserialize($rootPage->anystores_categories, true))) {
+            System::log("Can't get the published locations", __METHOD__, TL_ERROR);
+            return $pages;
         }
 
-        while ( $objLocations->next() )
-        {
-            $strAlias = \Controller::generateFrontendUrl($objLocations->row(), null, $strLanguage);
-            $arrPages[] = $strDomain.$objPage->alias.'/'.$strAlias;
+        foreach ( $stores as $store ) {
+            $pages[] = $detailPage->getAbsoluteUrl('/'.$store->alias);
         }
 
-        return $arrPages;
+        return $pages;
     }
 
 }
