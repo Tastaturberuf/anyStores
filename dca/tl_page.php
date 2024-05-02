@@ -17,6 +17,7 @@
 use Tastaturberuf\AnyStoresCategoryModel;
 
 $GLOBALS['TL_DCA']['tl_page']['palettes']['root'] .= ';{anystores_legend},anystores_sitemap';
+$GLOBALS['TL_DCA']['tl_page']['palettes']['rootfallback'] .= ';{anystores_legend},anystores_sitemap';
 
 
 /**
