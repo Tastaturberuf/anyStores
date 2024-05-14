@@ -121,6 +121,9 @@ class ModuleAnyStoresList extends \Module
             return;
         }
 
+        $arrStores = [];
+        $arrRawStores = [];
+
         while( $objStore->next() )
         {
             $objTemplate = new \Contao\FrontendTemplate($this->anystores_detailTpl);
