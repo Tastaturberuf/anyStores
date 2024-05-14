@@ -70,6 +70,9 @@ class ModuleAnyStoresList extends \Module
             return;
         }
 
+        // initialize stores array
+        $this->Template->stores = [];
+
         // localized url parameter
         //@todo use $GLOBALS['TL_URL_PARAMS']...
         $this->strSearchKey    = $GLOBALS['TL_LANG']['anystores']['url_params']['search'] ?: 'search';
