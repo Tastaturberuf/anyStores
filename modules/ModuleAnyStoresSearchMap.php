@@ -64,7 +64,7 @@ class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
 
         $arrStores = array();
 
-        if ( count($this->Template->rawstores) )
+        if ( count($this->Template->rawstores ?? []) )
         {
             foreach ( $this->Template->rawstores as $key => $store )
             {

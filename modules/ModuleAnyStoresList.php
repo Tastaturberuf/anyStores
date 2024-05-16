@@ -63,15 +63,15 @@ class ModuleAnyStoresList extends \Module
      */
     protected function compile()
     {
+        // initialize stores array
+        $this->Template->stores = [];
+
         // hide list when details shown
         //@todo make optinonal in module
         if ( strlen(\Input::get('auto_item')) || strlen(\Input::get('store')) )
         {
             return;
         }
-
-        // initialize stores array
-        $this->Template->stores = [];
 
         // localized url parameter
         //@todo use $GLOBALS['TL_URL_PARAMS']...
