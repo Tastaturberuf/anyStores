@@ -15,6 +15,9 @@
 namespace Tastaturberuf;
 
 
+use Contao\Input;
+use Contao\PageModel;
+
 class ModuleAnyStoresSearch extends \Module
 {
 
@@ -65,26 +68,28 @@ class ModuleAnyStoresSearch extends \Module
 
 
         // redirect if form was send
-        if ( \Input::post('FORM_SUBMIT') == $strFormId && ($this->anystores_allowEmptySearch || !empty($strSearchValue)) )
-        {
+        if (($this->anystores_allowEmptySearch || !empty($strSearchValue)) && Input::post('FORM_SUBMIT') === $strFormId) {
             $intPageId = $this->jumpTo ?: $GLOBALS['objPage']->id;
-            $objPage   = \PageModel::findByPk($intPageId);
+            $objPage   = PageModel::findByPk($intPageId);
 
             if ( $objPage )
             {
+                $url = '/'.$strSearchKey.'/'.$strSearchValue;
+
+                if ( $strCountryValue !== '') {
+                    $url .= '/'.$strCountryKey.'/'.$strCountryValue;
+                }
+
                 /**
                  * Build url
                  * @example /search/_term_/country/_de_
                  */
-                $strPageUrl = $this->generateFrontendUrl($objPage->row(),
-                     "/{$strSearchKey}/".$strSearchValue
-                    ."/{$strCountryKey}/".$strCountryValue
-                );
+                $strPageUrl = self::generateFrontendUrl($objPage->row(), $url);
 
-                $this->redirect($strPageUrl, 302);
+                self::redirect($strPageUrl, 302);
             }
 
-            $this->log("Can't find redirect page in module ID {$this->id}", __METHOD__, TL_ERROR);
+            self::log("Can't find redirect page in module ID {$this->id}", __METHOD__, TL_ERROR);
         }
 
         // render countries for the dropdown
