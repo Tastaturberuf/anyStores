@@ -76,7 +76,7 @@ class ModuleAnyStoresSearch extends \Module
             {
                 $url = '/'.$strSearchKey.'/'.$strSearchValue;
 
-                if ( $strCountryValue !== '') {
+                if ($strCountryValue) {
                     $url .= '/'.$strCountryKey.'/'.$strCountryValue;
                 }
 
