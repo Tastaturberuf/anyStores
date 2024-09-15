@@ -9,9 +9,11 @@
  * @package     anyStores
  */
 
-
 namespace Tastaturberuf;
 
+
+use Contao\Config;
+use function http_build_query;
 
 class GoogleMaps
 {
@@ -81,12 +83,13 @@ class GoogleMaps
     /**
      * Add Javascript library to HTML output.
      */
-    public static function includeJs(array $arrParams = array())
+    public static function includeJs(array $params = []): void
     {
-        $arrParams['language'] = $GLOBALS['TL_LANGUAGE'];
-        $arrParams['key']      = \Config::get('anystores_apiBrowserKey');
+        $params['language'] ??= $GLOBALS['TL_LANGUAGE'];
+        $params['key'] ??= Config::get('anystores_apiBrowserKey');
+        $params['callback'] ??= 'initialize';
 
-        $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?'.http_build_query($arrParams, '', '&');
+        $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?' . http_build_query($params, '', '&') . '|async';
     }
 
 }
