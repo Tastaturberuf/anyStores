@@ -89,7 +89,7 @@ class GoogleMaps
         $params['key'] ??= Config::get('anystores_apiBrowserKey');
         $params['callback'] ??= 'initialize';
 
-        $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?' . http_build_query($params, '', '&') . '|async';
+        $GLOBALS['TL_JAVASCRIPT']['googleapis-maps'] = 'https://maps.googleapis.com/maps/api/js?' . http_build_query($params, '', '&');
     }
 
 }
