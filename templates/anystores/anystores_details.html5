@@ -6,7 +6,7 @@
 
     <?php if ($this->logo): ?>
         <div class="logo">
-            <img src="<?= $this->logo['path'] ?>">
+            <img src="<?= $this->logo['path'] ?? $this->logo ?>">
         </div>
     <?php endif ?>
 
