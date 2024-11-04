@@ -16,6 +16,17 @@ namespace Tastaturberuf;
 define('TL_MODE', 'FE');
 define('TL_SCRIPT', __FILE__);
 
-require dirname(__DIR__).'/../../../system/initialize.php';
+$file = dirname(__DIR__) . 'initialize.php';
+
+$remove = 'modules' . DIRECTORY_SEPARATOR . 'anyStores';
+
+$file = str_replace($remove, '', $file);
+
+if (!file_exists($file)) {
+    http_response_code(404);
+    die('404 Not Found. Have you renamed the module folder? MUST be `anyStores`.');
+}
+
+require $file;
 
 FrontendAjax::run(\Input::get('module'), \Input::get('token'));
