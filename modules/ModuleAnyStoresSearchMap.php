@@ -134,6 +134,11 @@ class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
             $this->Template->stores = $strJson;
         }
 
+        // prevent the following API call to center the map
+        if ($this->strSearchValue === null) {
+            return;
+        }
+
         // center the map
         $arrCoordinates = AnyStores::getLonLat($this->strSearchValue, $this->strCountryValue);
 
