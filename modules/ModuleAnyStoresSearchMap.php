@@ -122,7 +122,7 @@ class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
         }
 
         //encode json
-        $strJson = json_encode($arrStores, JSON_NUMERIC_CHECK | JSON_PARTIAL_OUTPUT_ON_ERROR);
+        $strJson = json_encode($arrStores, JSON_PARTIAL_OUTPUT_ON_ERROR);
 
         if ( !$strJson )
         {

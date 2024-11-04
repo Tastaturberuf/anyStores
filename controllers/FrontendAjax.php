@@ -10,198 +10,166 @@
  * @since       1.8.0
  */
 
+declare(strict_types=1);
 
 namespace Tastaturberuf;
 
 
+use Contao\Config;
+use Contao\Controller;
+use Contao\FilesModel;
+use Contao\FrontendTemplate;
+use Contao\ModuleModel;
 use Contao\PageModel;
+use Contao\Session;
+use Contao\StringUtil;
+use Contao\System;
+use Contao\Validator;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use function str_replace;
 
-class FrontendAjax extends \Controller
+class FrontendAjax
 {
 
-    /**
-     * FrontendAjax constructor.
-     *
-     * @param int $intModuleId
-     */
-    public static function run($intModuleId, $strToken)
+    public static function run(int $moduleId, string $token): string
     {
-        if ( !static::validateRequestToken($intModuleId, $strToken) )
-        {
+        if (!static::validateRequestToken($moduleId, $token)) {
             static::respond(array('status' => 'error', 'message' => 'Invalid request token'));
         }
 
-        $objModule = \ModuleModel::findByPk($intModuleId);
+        $module = ModuleModel::findByPk($moduleId);
 
-        if (!$objModule || $objModule->type !== 'anystores_map')
-        {
+        if (!$module || $module->type !== 'anystores_map') {
             static::respond(array('status' => 'error', 'message' => 'Invalid module'));
         }
 
         // Hook to manipulate the module
-        if (isset($GLOBALS['TL_HOOKS']['anystores_getAjaxModule']) && is_array($GLOBALS['TL_HOOKS']['anystores_getAjaxModule']))
-        {
-            foreach ($GLOBALS['TL_HOOKS']['anystores_getAjaxModule'] as $callback)
-            {
-                \System::importStatic($callback[0])->{$callback[1]}($objModule);
+        if (isset($GLOBALS['TL_HOOKS']['anystores_getAjaxModule']) && is_array($GLOBALS['TL_HOOKS']['anystores_getAjaxModule'])) {
+            foreach ($GLOBALS['TL_HOOKS']['anystores_getAjaxModule'] as $callback) {
+                System::importStatic($callback[0])->{$callback[1]}($module);
             }
         }
 
-        if (\Validator::isBinaryUuid($objModule->anystores_defaultMarker))
-        {
-            $objFile = \FilesModel::findByPk($objModule->anystores_defaultMarker);
-
-            $objModule->anystores_defaultMarker = ($objFile) ? $objFile->path : null;
+        if (Validator::isBinaryUuid($module->anystores_defaultMarker)) {
+            $module->anystores_defaultMarker = FilesModel::findByPk($module->anystores_defaultMarker)?->path;
         }
 
         // Find stores
-        $objStores = AnyStoresModel::findPublishedByCategory(deserialize($objModule->anystores_categories));
+        $stores = AnyStoresModel::findPublishedByCategory(StringUtil::deserialize($module->anystores_categories));
 
-        if (!$objStores)
-        {
+        if (!$stores) {
             static::respond(array('status'  => 'error', 'message' => 'No stores found'));
         }
 
-        while ($objStores->next())
+        while ($stores->next())
         {
             // generate jump to
-            if ($objModule->jumpTo)
-            {
+            if ($module->jumpTo) {
                 /** @var PageModel $objLocation */
-                if (($objLocation = PageModel::findByPk($objModule->jumpTo)) !== null)
-                {
+                if (($objLocation = PageModel::findByPk($module->jumpTo)) !== null) {
                     //@todo language parameter
                     $strStoreKey   = !$GLOBALS['TL_CONFIG']['useAutoItem'] ? '/store/' : '/';
-                    $strStoreValue = $objStores->alias;
+                    $strStoreValue = $stores->alias;
 
                     $href = $objLocation->getFrontendUrl($strStoreKey . $strStoreValue);
 
-                    $objStores->href = str_replace('ajax.php', '', $href);
+                    $stores->href = str_replace('ajax.php', '', $href);
 
                 }
             }
 
             // Encode email
-            $objStores->email = \StringUtil::encodeEmail($objStores->email);
+            $stores->email = StringUtil::encodeEmail($stores->email);
 
             // Encode opening times
-            $objStores->opening_times = deserialize($objStores->opening_times);
+            $stores->opening_times = StringUtil::deserialize($stores->opening_times);
 
             // decode logo
-            if (\Validator::isBinaryUuid($objStores->logo))
-            {
-                $objFile = \FilesModel::findByPk($objStores->logo);
-
-                $objStores->logo = ($objFile) ? $objFile->path : null;
+            if (Validator::isBinaryUuid($stores->logo)) {
+                $stores->logo = FilesModel::findByPk($stores->logo)?->path;
             }
 
             // decode marker
-            if (\Validator::isBinaryUuid($objStores->marker))
-            {
-                $objFile = \FilesModel::findByPk($objStores->marker);
-
-                $objStores->marker = ($objFile) ? $objFile->path : null;
+            if (Validator::isBinaryUuid($stores->marker)) {
+                $stores->marker = FilesModel::findByPk($stores->marker)?->path;
             }
 
             // add category marker
-            $objStores->categoryMarker = null;
+            $stores->categoryMarker = null;
 
-            if (($objCategory = AnyStoresCategoryModel::findByPk($objStores->pid)) !== null)
-            {
-                if (\Validator::isBinaryUuid($objCategory->defaultMarker))
-                {
-                    $objFile = \FilesModel::findByPk($objCategory->defaultMarker);
+            if ((($objCategory = AnyStoresCategoryModel::findByPk($stores->pid)) !== null) && Validator::isBinaryUuid($objCategory->defaultMarker)) {
+                $objFile = FilesModel::findByPk($objCategory->defaultMarker);
 
-                    if ($objFile)
-                    {
-                        $objStores->categoryMarker = $objFile->path;
-                    }
+                if ($objFile) {
+                    $stores->categoryMarker = $objFile->path;
                 }
             }
 
             // render html
-            $strTemplate = $objModule->anystores_detailTpl ?: 'anystores_details';
-            $objTemplate = new \FrontendTemplate($strTemplate);
-            $objTemplate->setData($objStores->current()->row());
+            $strTemplate = $module->anystores_detailTpl ?: 'anystores_details';
+            $objTemplate = new FrontendTemplate($strTemplate);
+            $objTemplate->setData($stores->current()->row());
 
-            $objStores->tiphtml = static::replaceInsertTags($objTemplate->parse());
+            $stores->tiphtml = Controller::replaceInsertTags($objTemplate->parse());
         }
 
-        $arrRespond = array
-        (
+        $arrRespond = [
             'status' => 'success',
-            'count'  => (int) $objStores->count(),
-            'module' => array
-            (
-                'latitude'      => (float) $objModule->anystores_latitude,
-                'longitude'     => (float) $objModule->anystores_longitude,
-                'zoom'          => (int) $objModule->anystores_zoom,
-                'streetview'    => (bool) $objModule->anystores_streetview,
-                'maptype'       => (string) $objModule->anystores_maptype,
-                'defaultMarker' => (string) $objModule->anystores_defaultMarker
-            ),
-            'stores' => $objStores->fetchAll()
-        );
+            'count' => $stores->count(),
+            'module' => [
+                'latitude' => (float)$module->anystores_latitude,
+                'longitude' => (float)$module->anystores_longitude,
+                'zoom' => (int)$module->anystores_zoom,
+                'streetview' => (bool)$module->anystores_streetview,
+                'maptype' => (string)$module->anystores_maptype,
+                'defaultMarker' => (string)$module->anystores_defaultMarker
+            ],
+            'stores' => $stores->fetchAll()
+        ];
 
         // decode global default marker
         $arrRespond['global']['defaultMarker'] = null;
 
-        if (\Validator::isUuid(\Config::get('anystores_defaultMarker')))
-        {
-            if (($objFile = \FilesModel::findByPk(\Config::get('anystores_defaultMarker'))) !== null)
-            {
-                $arrRespond['global']['defaultMarker'] = $objFile->path;
-            }
+        if (Validator::isUuid(Config::get('anystores_defaultMarker')) && ($objFile = FilesModel::findByPk(Config::get('anystores_defaultMarker'))) !== null) {
+            $arrRespond['global']['defaultMarker'] = $objFile->path;
         }
 
         static::respond($arrRespond);
     }
 
 
-    public static function generateRequestToken($intModuleId)
+    public static function generateRequestToken(int $moduleId): string
     {
         // get session
-        $objSession = \Session::getInstance();
-        $arrTokens  = $objSession->get('anystores_token');
+        $session = Session::getInstance();
+        $tokens = $session->get('anystores_token');
 
         // generate token
-        if ( empty($arrTokens[$intModuleId]) )
-        {
-            $arrTokens[$intModuleId] = md5(uniqid(mt_rand(), true));
+        if (empty($tokens[$moduleId])) {
+            $tokens[$moduleId] = md5(uniqid((string)mt_rand(), true));
 
-            $objSession->set('anystores_token', $arrTokens);
+            $session->set('anystores_token', $tokens);
         }
 
-        return $arrTokens[$intModuleId];
+        return $tokens[$moduleId];
     }
 
 
-    protected static function validateRequestToken($intModuleId, $strToken)
+    private static function validateRequestToken(int $moduleId, string $token): bool
     {
-        $objSession = \Session::getInstance();
+        $session = Session::getInstance();
 
-        $arrTokens = $objSession->get('anystores_token');
+        $tokens = $session->get('anystores_token');
 
-        return ($arrTokens[$intModuleId] === $strToken);
+        return ($tokens[$moduleId] === $token);
     }
 
 
-    protected static function respond($arrRespond)
+    private static function respond(array $json): never
     {
-        $strRespose = json_encode($arrRespond, JSON_NUMERIC_CHECK | JSON_PARTIAL_OUTPUT_ON_ERROR);
-
         header('Content-Type: application/json');
-
-        if ( $strRespose )
-        {
-            echo $strRespose;
-        }
-        else
-        {
-            echo json_encode(array('status' => 'error', 'message' => json_last_error_msg()));
-        }
-
-        exit;
+        echo (new JsonResponse($json))->getContent();
+        exit();
     }
 
 }
