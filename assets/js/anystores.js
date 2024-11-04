@@ -1,4 +1,4 @@
-function loadMap()
+function loadMap(id, token)
 {
     var oReq = new XMLHttpRequest();
 
@@ -7,7 +7,7 @@ function loadMap()
     oReq.addEventListener("error", transferFailed);
     oReq.addEventListener("abort", transferCanceled);
 
-    oReq.open("GET", "system/modules/anyStores/ajax/ajax.php?module="+anystores.module+'&token='+anystores.token);
+    oReq.open("GET", "system/modules/anyStores/ajax/ajax.php?module=" + id + '&token=' + token);
     oReq.send();
 
     // progress on transfers from the server to the client (downloads)
@@ -21,8 +21,8 @@ function loadMap()
     }
 
     function transferComplete(evt) {
-        anystores = JSON.parse(this.responseText);
-        initialize();
+        let anystores = JSON.parse(this.responseText);
+        initialize(id, anystores);
     }
 
     function transferFailed(evt) {
@@ -35,9 +35,9 @@ function loadMap()
 }
 
 
-function initialize()
+function initialize(id, anystores)
 {
-    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+    var map = new google.maps.Map(document.getElementById('map-canvas-' + id), {
         zoom: anystores.module.zoom,
         center: new google.maps.LatLng(anystores.module.latitude, anystores.module.longitude),
         streetViewControl: anystores.module.streetview,
@@ -99,5 +99,3 @@ function initialize()
         imagePath: 'system/modules/anyStores/assets/js/markerclusterer/images/m'
     });
 }
-
-google.maps.event.addDomListener(window, 'load', loadMap);

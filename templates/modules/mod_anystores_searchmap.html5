@@ -1,59 +1,62 @@
+<section id="map-canvas-<?= $this->id ?>"
+         style="height:<?php echo $this->mapHeight['value']; ?><?php echo $this->mapHeight['unit']; ?>"
+         class="<?= $this->class ?> block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif ?>></section>
 <script>
-function initialize()
-{
-    var map = new google.maps.Map(document.getElementById('map-canvas'), {
-        zoom: <?= $this->anystores_zoom ?>,
-        center: new google.maps.LatLng(<?= $this->anystores_latitude ?>, <?= $this->anystores_longitude ?>),
-        streetViewControl: <?= $this->anystores_streetview ? 'true' : 'false' ?>,
-        mapTypeId: "<?= $this->anystores_maptype ?>"
-    });
-
-    var stores = <?= $this->stores ?>;
-
-    var markers = [];
-
-    for (var i = 0; i < stores.length; i++)
-    {
-        var store = stores[i];
-
-        var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(store.latitude, store.longitude),
-            title: store.name
+    function initialize_map(id) {
+        var map = new google.maps.Map(document.getElementById('map-canvas-' + id), {
+            zoom: <?= $this->anystores_zoom ?>,
+            center: new google.maps.LatLng(<?= $this->anystores_latitude ?>, <?= $this->anystores_longitude ?>),
+            streetViewControl: <?= $this->anystores_streetview ? 'true' : 'false' ?>,
+            mapTypeId: "<?= $this->anystores_maptype ?>"
         });
 
-        if ( store.marker )
-        {
-            marker.setIcon(store.marker);
-        }
+        var stores = <?= $this->stores ?>;
 
-        var infowindow = new google.maps.InfoWindow();
+        var markers = [];
 
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        for (var i = 0; i < stores.length; i++) {
+            var store = stores[i];
 
-            var html = "<b><a href=\"" + store.href + "\">" + store.name + "</a></b><br>";
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(store.latitude, store.longitude),
+                title: store.name
+            });
 
-            (store.street !="") ? html += store.street  + "<br>" : "";
-            (store.city !="")   ? html += store.postal  + " " +  store.city  + "<br>" : "";
-            (store.phone !="")  ? html += store.phone  + "<br>" : "";
-            (store.url !="")    ? html += "<a href=\"" + store.url  + "\">" + store.url  + "</a><br>" : "";
-            (store.email !="")  ? html += "<a href=\"mailto:" + store.email  + "\">" + store.email  + "</a><br>" : "";
-            (store.href !="")   ? html += "<br><a href=\"" + store.href + "\">Mehr Informationen</a>" : "";
-
-            return function() {
-                infowindow.setContent(html);
-                infowindow.open(map, marker);
+            if (store.marker) {
+                marker.setIcon(store.marker);
             }
 
-        })(marker, i));
+            var infowindow = new google.maps.InfoWindow();
 
-        markers.push(marker);
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+
+                var html = "<b><a href=\"" + store.href + "\">" + store.name + "</a></b><br>";
+
+                (store.street != "") ? html += store.street + "<br>" : "";
+                (store.city != "") ? html += store.postal + " " + store.city + "<br>" : "";
+                (store.phone != "") ? html += store.phone + "<br>" : "";
+                (store.url != "") ? html += "<a href=\"" + store.url + "\">" + store.url + "</a><br>" : "";
+                (store.email != "") ? html += "<a href=\"mailto:" + store.email + "\">" + store.email + "</a><br>" : "";
+                (store.href != "") ? html += "<br><a href=\"" + store.href + "\">Mehr Informationen</a>" : "";
+
+                return function () {
+                    infowindow.setContent(html);
+                    infowindow.open(map, marker);
+                }
+
+            })(marker, i));
+
+            markers.push(marker);
+        }
+
+        var markerCluster = new MarkerClusterer(map, markers, {
+            imagePath: 'system/modules/anyStores/assets/js/markerclusterer/images/m'
+        });
     }
 
-    var markerCluster = new MarkerClusterer(map, markers, {
-        imagePath: 'system/modules/anyStores/assets/js/markerclusterer/images/m'
-    });
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => initialize_map(<?= $this->id ?>));
+    } else {
+        initialize_map(<?= $this->id ?>);
+    }
 </script>
-<section id="map-canvas" style="height:<?php echo $this->mapHeight['value']; ?><?php echo $this->mapHeight['unit']; ?>" class="<?= $this->class ?> block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif ?>></section>

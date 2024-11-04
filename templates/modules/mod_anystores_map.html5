@@ -1,9 +1,12 @@
 <!-- indexer::stop -->
+<div id="map-canvas-<?= $this->id ?>" style="height:<?= $this->mapHeight['value'] ?><?= $this->mapHeight['unit'] ?>"
+     class="<?= $this->class ?> block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif ?>>
+</div>
 <script>
-var anystores = {
-    "module": <?php echo $this->id ?>,
-    "token": "<?php echo $this->anystores_token ?>"
-};
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => loadMap(<?= $this->id ?>, '<?= $this->anystores_token ?>'));
+    } else {
+        loadMap(<?= $this->id ?>, '<?= $this->anystores_token ?>');
+    }
 </script>
-<section id="map-canvas" style="height:<?= $this->mapHeight['value'] ?><?= $this->mapHeight['unit'] ?>" class="<?= $this->class ?> block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif ?>></section>
 <!-- indexer::continue -->
