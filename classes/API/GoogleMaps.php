@@ -32,8 +32,7 @@ class GoogleMaps
 
         $arrParams = array
         (
-            'address'  => $strAddress,
-            'language' => $GLOBALS['TL_LANGUAGE']
+            'address' => $strAddress
         );
 
         if ( \Config::get('anystores_apiKey') )
