@@ -14,6 +14,8 @@
 namespace Tastaturberuf;
 
 
+use Contao\PageModel;
+
 class FrontendAjax extends \Controller
 {
 
@@ -48,7 +50,7 @@ class FrontendAjax extends \Controller
         if (\Validator::isBinaryUuid($objModule->anystores_defaultMarker))
         {
             $objFile = \FilesModel::findByPk($objModule->anystores_defaultMarker);
-            
+
             $objModule->anystores_defaultMarker = ($objFile) ? $objFile->path : null;
         }
 
@@ -65,13 +67,17 @@ class FrontendAjax extends \Controller
             // generate jump to
             if ($objModule->jumpTo)
             {
-                if (($objLocation = \PageModel::findByPk($objModule->jumpTo)) !== null)
+                /** @var PageModel $objLocation */
+                if (($objLocation = PageModel::findByPk($objModule->jumpTo)) !== null)
                 {
                     //@todo language parameter
                     $strStoreKey   = !$GLOBALS['TL_CONFIG']['useAutoItem'] ? '/store/' : '/';
                     $strStoreValue = $objStores->alias;
 
-                    $objStores->href = \Controller::generateFrontendUrl($objLocation->row(), $strStoreKey.$strStoreValue);
+                    $href = $objLocation->getFrontendUrl($strStoreKey . $strStoreValue);
+
+                    $objStores->href = str_replace('ajax.php', '', $href);
+
                 }
             }
 
@@ -85,7 +91,7 @@ class FrontendAjax extends \Controller
             if (\Validator::isBinaryUuid($objStores->logo))
             {
                 $objFile = \FilesModel::findByPk($objStores->logo);
-                
+
                 $objStores->logo = ($objFile) ? $objFile->path : null;
             }
 
@@ -93,7 +99,7 @@ class FrontendAjax extends \Controller
             if (\Validator::isBinaryUuid($objStores->marker))
             {
                 $objFile = \FilesModel::findByPk($objStores->marker);
-                
+
                 $objStores->marker = ($objFile) ? $objFile->path : null;
             }
 
@@ -105,7 +111,7 @@ class FrontendAjax extends \Controller
                 if (\Validator::isBinaryUuid($objCategory->defaultMarker))
                 {
                     $objFile = \FilesModel::findByPk($objCategory->defaultMarker);
-                    
+
                     if ($objFile)
                     {
                         $objStores->categoryMarker = $objFile->path;
