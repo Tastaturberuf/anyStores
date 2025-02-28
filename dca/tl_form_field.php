@@ -57,7 +57,7 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['anystores_idField'] = array
         {
             if ( $arrField['type'] !== 'index' )
             {
-                $arrFields[$arrField['name']] = $GLOBALS['TL_LANG']['tl_anystores'][$arrField['name']][0] ?: $arrField['name'];
+                $arrFields[$arrField['name']] = $GLOBALS['TL_LANG']['tl_anystores'][$arrField['name']][0] ?? $arrField['name'];
             }
         }
 
