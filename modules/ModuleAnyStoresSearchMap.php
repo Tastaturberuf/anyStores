@@ -134,8 +134,8 @@ class ModuleAnyStoresSearchMap extends ModuleAnyStoresList
             $this->Template->stores = $strJson;
         }
 
-        // prevent the following API call to center the map
-        if ($this->strSearchValue === null) {
+        // prevent the following API call to center the map if the search value is empty
+        if (empty(trim($this->strSearchValue ?? ''))) {
             return;
         }
 
